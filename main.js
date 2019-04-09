@@ -6,8 +6,6 @@ let filmIDS = []
 let filmId = ''
 
 function pretragaFilm() {
-  // http://www.omdbapi.com/ je veza sa apijem. ?t=(da tražim po nazivu filma. u varijabli mi je value text polja. &apikey=${key} dodajem svoj api key) 
-
   fetch(`http://www.omdbapi.com/?s=${search.value}&apikey=${key}`)
     .then((res) => res.json())
     .then((data) => {
