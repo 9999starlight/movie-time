@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  /*inherit border-box da ga imaju svi elementi*/
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+body {
+  background-color: #333333;
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: white;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container,
+.film {
+  align-items: center;
+}
+
+.film {
+  /*
+  border: 2px inset; 
+  border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
+  border-image-slice: 1;
+  */
+  border: 2px inset whitesmoke;
+  padding: 0.5em;
+  text-align: center;
+  margin: 1em 0.5em;
+  width: 220px;
+}
+
+.film img {
+  height: 200px;
+  max-width: 100%;
+  display: block;
+  margin: 0.5 auto;
+}
+
+input[type="text"] {
+  width: 200px;
+  padding: 0.8em;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  background: lightgrey;
+  margin-top: 0.5em;
+}
+.shadow {
+  box-shadow: 3px 2px 5px rgb(124, 123, 123);
+}
+.more-info {
+  display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  border: 1px solid #888888;
+  background-color: rgba(18, 19, 18, 0.973);
+  max-width: 95vw;
+  max-height: 95vh;
+  font-size: 0.8em;
+}
+
+.more-info .film {
+  min-width: 200px;
+  padding: 0.5em;
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+@keyframes modalopen {
+  from {transform:scale(0)}
+  to { transform:scale(1)}
+  from {opacity: 0;}
+  to {opacity: 1;}
+  }
+
+i {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #f0e6e6;
+  font-size: 40px;
+  font-weight: bold;
+  display: block;
+}
+
+.info-poster {
+align-items: center;
+width: 95%;
+}
+.info-poster div img {
+  max-height: 180px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  img {
+    max-height: 300px;
+  }
+  .more-info {
+    min-width: 650px;
+    max-width: 900px;
+    max-height: 90vh;
+    font-size: 1em;
+  }
+  .more-info .film {
+    min-width: 650px;
+  }
+.info-poster {
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 550px;
+  max-width: 80%;
+  margin: 1em;
+  padding: 2em;
+  background: radial-gradient(circle at top left, rgba(66, 65, 63, 0.833), rgba(26, 23, 20, 0.675));
+  font-size: 1.2em;
+}
+.info-poster div img {
+  height: 250px;
+}
+  i:hover {
+    background-color: black;
+    transform: scale(1.2);
+    transition: 0.5s;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    background: linear-gradient(rgba(27, 24, 21, 0.833), rgba(26, 23, 20, 0.675)), url("./img/cinema-film.jpg") no-repeat fixed center;
+    background-size: cover;
+  }
+  .container {
+    max-width: 80vw;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: #333333;
+  }
+  .content {
+    max-width: 1300px;
+  }
+  .more-info {
+    max-width: 900px;
+  }
+  .more-info .film {
+    width: 800px;
+  }
+  .info-poster {
+    min-width: 700px;
+  }
+  .info-poster div img {
+    min-height: 250px;
+  }
+}
