@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  color: white;
+}
+.container{
+  box-sizing: border-box;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container, .film {
+  align-items: center;
+}
+.film {
+  border: 2px inset whitesmoke;
+  padding:1em;
+  text-align: center;
+  margin: 1em;
+  width: 220px;
+}
+
+.film div {
+  width: 200px;
+}
+img {
+max-height:200px;
+max-width: 100%;
+}
+
+@media (min-width: 768px){
+  .content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  img {
+    height: 300px;
+  
+  }
+  
+}
