@@ -7,20 +7,64 @@
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/search.css">
   <title>Movies</title>
 </head>
 <body>
   <div class="container flex">
-  <div class="search">  
+    <nav class = "flex">
+      <div class="public flex row">
+      <a href="index.html">Home</a>
+      <a href="#">Search</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="#">Popular</a>
+    </div>
+      <div class="private flex row">
+        <a href="list.html">My List</a>
+        <a href="#" id = "loginLink">Login</a>
+        <a href="#" id = "signUpLink">Sign up</a>
+        <a href="#" id = "logoutLink">Logout</a>
+      </div>
+    </nav>
+    <div class="main-container flex">  
+    <aside class = "flex">
+        <div class="login relative flex">
+            <i class="fas fa-window-close" id = "loginX"></i>
+          <h2>Login</h2>
+          <form id="login-form" class = "flex">
+              <label for="login-email" class = "block">Email</label>
+              <input type="email" id="login-email" class = "radius block" placeholder="Enter your email" required />
+              <label for="login-password" class = "block">Password</label>
+              <input type="password" id="login-password" class = "radius block" placeholder="Enter your password" required />  
+            <button class="btn-logIn block radius">Login</button>
+            <p class="error"></p>
+          </form>
+        </div>
+        <div class="signup relative flex">
+            <i class="fas fa-window-close" id = "signupX"></i>
+            <h2>Sign up</h2>
+            <form id="signup-form" class = "flex">
+                <label for="signup-email" class = "block">Email address</label>
+                <input type="email" id="signup-email" class = "radius block" required placeholder="Enter your email" title = "Enter email address in valid email form like: abc@abc.abc"/>
+                <label for="signup-password" class = "block">Choose password</label>
+                <input type="password" id="signup-password" class = "radius block" placeholder="Enter your password" required title = "Enter password at least 6 characters long" />     
+                <button class="btn-signUp block radius">Sign up</button>
+              <p class="error"></p>
+            </form>
+        </div>
+    </aside>
+    <main class = "flex relative">
+  <div class="search flex">  
     <p>Start typing to search</p>
-    <input type="text" id = "search" class = "shadow">
+    <input type="text" id = "search" class = "radius shadow">
   </div>
-
-  <div class="more-info shadow">
-  </div>
-  <div class="content flex"></div>
+  <div class="more-info shadow"></div>
+  <div class="content flex row"></div>
+</main>
 </div>
-  <script src="main.js"></script>
-</body>
+</div>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/functions.js"></script>
+  <script src="scripts/list.js"></script>
+</body> 
 </html>
