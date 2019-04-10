@@ -11,22 +11,22 @@
   <title>Movies</title>
 </head>
 <body>
-  <div class="container flex">
-    <nav class = "flex">
-      <div class="public flex row">
+  <div class="container flex fullWidth">
+    <nav class = "flex fullWidth">
+      <div class="public flex row fullWidth">
       <a href="index.html">Home</a>
       <a href="#">Search</a>
       <a href="quiz.html">Quiz</a>
       <a href="#">Popular</a>
     </div>
-      <div class="private flex row">
+      <div class="private flex row fullWidth">
         <a href="list.html">My List</a>
         <a href="#" id = "loginLink">Login</a>
         <a href="#" id = "signUpLink">Sign up</a>
         <a href="#" id = "logoutLink">Logout</a>
       </div>
     </nav>
-    <div class="main-container flex">  
+    <div class="main-container flex fullWidth">  
     <aside class = "flex">
         <div class="login relative flex">
             <i class="fas fa-window-close" id = "loginX"></i>
@@ -52,8 +52,31 @@
               <p class="error"></p>
             </form>
         </div>
+        <div id = "add-new" class = "add-new relative flex">
+          <i class="fas fa-window-close" id = "add-newX"></i>
+          <h2>Add to my list</h2>
+            <form id = "create-form" class = "flex">
+            <label for="inputTitle">Title</label>
+            <input type="text" id = "inputTitle" readonly>
+            <label for="inputType">Type</label>
+            <input type="text" id = "inputType" readonly>
+            <label for="inputYear">Year</label>
+            <input type="text" id = "inputYear" readonly>
+            <label for="inputGenre">Genre</label>
+            <input type="text" id = "inputGenre" readonly>
+            <label for="inputImdbRate">IMDB rating</label>
+            <input type="text" id = "inputImdbRate" readonly>
+            <label for="inputFilmId">Movie ID</label>
+            <input type="text" id = "inputFilmId" readonly>
+            <label for="myRating">My Rating</label>
+            <input type="text" id = "myRating" placeholder = "Enter your rating">
+            <label for="comment">Comment</label>
+            <textarea id="comment" placeholder = "Add your comment here"></textarea>
+            <button class="btn-create">Create</button>
+          </form>
+          </div>
     </aside>
-    <main class = "flex relative">
+    <main class = "flex relative fullWidth">
   <div class="search flex">  
     <p>Start typing to search</p>
     <input type="text" id = "search" class = "radius shadow">

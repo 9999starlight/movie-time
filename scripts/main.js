@@ -1,6 +1,7 @@
 const search = document.querySelector('#search')
-search.addEventListener('keyup', pretragaFilm)
+search.addEventListener('keyup', movieSearch)
 const key = '94c8d066'
+const proxy = 'https://cors-anywhere.herokuapp.com'
 const content = document.querySelector('.content')
 let filmIDS = []
 let filmId = ''
@@ -10,10 +11,10 @@ const closeModal = (element) => {
   element.innerHTML = ''
   close(element)
 }
-function pretragaFilm() {
+function movieSearch() {
   // http://www.omdbapi.com/ je veza sa apijem. ?t=(da tražim po nazivu filma. u varijabli mi je value text polja. &apikey=${key} dodajem svoj api key) 
 
-  fetch(`http://www.omdbapi.com/?s=${search.value}&apikey=${key}`)
+  fetch(`${proxy}/http://www.omdbapi.com/?s=${search.value}&apikey=${key}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data)
@@ -30,7 +31,7 @@ function pretragaFilm() {
           <a href = 'https://www.imdb.com/title/${film.imdbID}' target = '_blank'><img src = '${film.Poster}' alt = 'film poster'/></a>
           <div class = 'data flex'>
           <h3>${film.Title}</h3><h5>Year: ${film.Year}</h5><h5>Type: ${film.Type}</h5>
-          <input type = 'button' onclick = 'prikazFilma("${filmId}")' class = 'infoBtn' value = 'More Info'>
+          <input type = 'button' onclick = 'movieDetails("${filmId}")' class = 'infoBtn' value = 'More Info'>
           </div></div>`
           filmIDS.push(film.imdbID)
         });
@@ -43,17 +44,40 @@ function pretragaFilm() {
   }
 }
 //let moreInfo
+/*
+class Movie {
+  constructor(title, type, year, genre, imdbRating, plot, imdbID) {
+    this.title = title;
+    this.type = type;
+    this.year = year;
+    this.genre = genre;
+    this.imdbRating = imdbRating;
+    this.plot = plot;
+    this.imdbID = imdbID;
+  }
+}*/
+let movie = {}
+
 let info = ''
-function prikazFilma(filmId) {
+function movieDetails(filmId) {
   for (let i = 0; i < filmIDS.length; i++) {
     if (filmIDS[i] == filmId) filmId = filmIDS[i]
   }
-  fetch(`http://www.omdbapi.com/?i=${filmId}&apikey=${key}`)
+  fetch(`${proxy}/http://www.omdbapi.com/?i=${filmId}&apikey=${key}`)
     .then((res) => res.json())
     .then((data) => {
       if (data.Response !== "False") {
         if (data.Poster == "N/A" || data.Poster.startsWith('http://'))
           data.Poster = 'img/noimage.jpg'
+        movie = {
+          title: data.Title,
+          type: data.Type,
+          year: data.Year,
+          genre: data.Genre,
+          imdbRating: data.imdbRating,
+          movieID: filmId
+        }
+        console.log(movie)
         info = `<i class="fas fa-window-close" id = "movieX"></i>
         <div class = 'film flex shadow'>
         <div class = "info-poster flex shadow">
@@ -76,10 +100,14 @@ function prikazFilma(filmId) {
       open(moreInfo)
       close(content)// da se ne vidi content odnosno onemogući biranje još modal info-a. dodaj neku boju ili nešto
       document.querySelector('#movieX').addEventListener('click', function(){closeModal(moreInfo)
-    , open(content)});
+        , open(content)
+      });
+      document.querySelector('.addMovieBtn').addEventListener('click',
+      function(){addMovieToList(movie)})
     })
+  //console.log(filmId)
 }
-
+//console.log(filmId)
 //nekadašnji za zatvaranje ali ne valja
 /*
       const closeModal = (e) => {
