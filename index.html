@@ -11,23 +11,25 @@
   <title>Movies</title>
 </head>
 <body>
-  <div class="container flex">
-    <nav class = "flex">
-      <div class="public flex row">
+  <div class="container flex fullWidth">
+    <nav class = "flex fullWidth">
+      <div class="public flex row fullWidth">
       <a href="index.html">Home</a>
       <a href="#">Search</a>
       <a href="quiz.html">Quiz</a>
       <a href="#">Popular</a>
     </div>
-      <div class="private flex row">
-        <a href="list.html">My List</a>
-        <a href="#" id = "loginLink">Login</a>
-        <a href="#" id = "signUpLink">Sign up</a>
-        <a href="#" id = "logoutLink">Logout</a>
+      <div class="private flex row fullWidth">
+        <a href="#list">My List</a>
+        <a href="#" id = "loginLink" class = "logged-out">Login</a>
+        <a href="#" id = "signUpLink" class = "logged-out">Sign up</a>
+        <a href="#" id = "logoutLink" class = "logged-in">Logout</a>
       </div>
     </nav>
-    <div class="main-container flex">  
+    <div class = "account"></div>
+    <div class="main-container flex fullWidth">  
     <aside class = "flex">
+      
         <div class="login relative flex">
             <i class="fas fa-window-close" id = "loginX"></i>
           <h2>Login</h2>
@@ -47,24 +49,70 @@
                 <label for="signup-email" class = "block">Email address</label>
                 <input type="email" id="signup-email" class = "radius block" required placeholder="Enter your email" title = "Enter email address in valid email form like: abc@abc.abc"/>
                 <label for="signup-password" class = "block">Choose password</label>
-                <input type="password" id="signup-password" class = "radius block" placeholder="Enter your password" required title = "Enter password at least 6 characters long" />     
+                <input type="password" id="signup-password" class = "radius block" placeholder="Enter your password" required title = "Enter password at least 6 characters long" />
+                <input type="text" id="shortComment" class = "radius block" placeholder="Enter short comment" required title = "Enter  comment max 20 characters" min="1" max="20"/>     
                 <button class="btn-signUp block radius">Sign up</button>
               <p class="error"></p>
             </form>
         </div>
+        
     </aside>
-    <main class = "flex relative">
+    <main class = "flex relative fullWidth">
   <div class="search flex">  
     <p>Start typing to search</p>
     <input type="text" id = "search" class = "radius shadow">
   </div>
   <div class="more-info shadow"></div>
   <div class="content flex row"></div>
+  
 </main>
 </div>
 </div>
+<div id = "add-new" class = "add-new relative flex radius">
+  <h2>Add to my list</h2>
+    <form id = "create-form" class = "flex">
+    <label for="inputTitle">Title</label>
+    <input type="text" id = "inputTitle" readonly>
+    <label for="inputType">Type</label>
+    <input type="text" id = "inputType" readonly>
+    <label for="inputYear">Year</label>
+    <input type="text" id = "inputYear" readonly>
+    <label for="inputGenre">Genre</label>
+    <input type="text" id = "inputGenre" readonly>
+    <label for="inputImdbRate">IMDB rating</label>
+    <input type="text" id = "inputImdbRate" readonly>
+    <label for="inputFilmId">Movie ID</label>
+    <input type="text" id = "inputFilmId" readonly>
+    <label for="myRating">My Rating</label>
+    <input type="number" id = "myRating" placeholder = "Enter your rating" title = "Enter number between 0 and 10" min="0" max="10">
+    <label for="comment">Comment</label>
+    <textarea id="comment" placeholder = "Add your comment here"></textarea>
+    <button class="btn-create radius">Add Movie to my list</button>
+    <button class="btnCancel radius" id = "cancelCreate">Cancel</button>
+  </form>
+  </div>
+  <ul id = "list"></ul>
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA7GNvPEIFYuJla-M0d41mIXmKMe1yXA4M",
+    authDomain: "movie-time-1259d.firebaseapp.com",
+    databaseURL: "https://movie-time-1259d.firebaseio.com",
+    projectId: "movie-time-1259d"
+  };
+  firebase.initializeApp(config);
+  // make auth and firestore references
+  const auth = firebase.auth();
+    const db = firebase.firestore();
+    // update firestore settings realtime
+    db.settings({ timestampsInSnapshots: true });
+</script>
   <script src="scripts/main.js"></script>
   <script src="scripts/functions.js"></script>
-  <script src="scripts/list.js"></script>
+  <script src="scripts/display.js"></script>
 </body> 
 </html>
