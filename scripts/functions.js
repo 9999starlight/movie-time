@@ -1,30 +1,142 @@
-// open and close functions
-const open = (item) => item.style.display = 'flex';
-const close = (item) => item.style.display = 'none';
+// create form
 
-const loginLink = document.querySelector('#loginLink')
-const signUpLink = document.querySelector('#signUpLink')
-const loginForm = document.querySelector('.login')
-const signUpForm = document.querySelector('.signup')
+const inputTitle = document.querySelector('#inputTitle');
+const inputType = document.querySelector('#inputType');
+const inputYear = document.querySelector('#inputYear');
+const inputGenre = document.querySelector('#inputGenre');
+const inputImdbRate = document.querySelector('#inputImdbRate');
+const inputFilmId = document.querySelector('#inputFilmId');
+//const inputPlot = document.querySelector('#inputPlot');
+const myRating = document.querySelector('#myRating');
+const comment = document.querySelector('#comment');
+const loginForm = document.querySelector('#login-form')
+const signupForm = document.querySelector('#signup-form');
+const createForm = document.querySelector('#create-form');
 
-// opening-closing login & signup form
-const openLogin = (e) => {
-    e.preventDefault();
-    open(loginForm);
-    close(signUpForm);
+/*adding firebase auth*/
+
+auth.onAuthStateChanged(user => {
+    // kada je loged in
+    if (user) {
+        db.collection('movies').onSnapshot(snapshot => {
+            //zovem ovo da renderuje ako je user logovan, tj. poziva setUpmovies funkciju iz display.js
+            setupMovies(snapshot.docs);
+            setupUI(user); // poziva funkciju iz display.js šta da prikaže od linkova
+        }, err => console.log(err.message)); // da uhvati grešku u konzoli
+        //console.log('user logged in: ', user);
+    } else { // kada nije logovan da bude prazan data array iz funkcije setUpmovies()
+        setupUI(); // poziva funkciju iz display.js šta da prikaže od linkova, ovde bez parametra jer nije logovan
+        setupMovies([]);
+        //console.log('user logged out');
+    }
+})
+
+function addMovieToList() {
+    open(addNew);
+    container.classList.add('darken') //zatamni sliku na open
+    //close(content);
+    //close(moreInfo)
+    inputTitle.value = movie.title;
+    inputType.value = movie.type;
+    inputYear.value = movie.year;
+    inputGenre.value = movie.genre;
+    inputImdbRate.value = movie.imdbRating;
+    inputFilmId.value = movie.movieID;
 }
 
-const openSignup = (e) => {
+// CREATE NEW MOVIE
+// funkcija za submit form u db.
+createForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    open(signUpForm);
-    close(loginForm);
-}
-loginLink.addEventListener('click', openLogin);
-signUpLink.addEventListener('click', openSignup);
-document.querySelector('#loginX').addEventListener('click', function(){close(loginForm)
+    // idem na kolekciju koja mi treba, metod add() u koji stavljam objekat koji dodajem. Ovde su values iz forme. Ukoliko je ime key objekta sa crticom ili više reči stavi u [] npr. title: createForm['title-hello'].value
+    db.collection('movies').add({
+        title: inputTitle.value,
+        type: inputType.value,
+        year: inputYear.value,
+        genre: inputGenre.value,
+        imdbRate: inputImdbRate.value,
+        filmID: inputFilmId.value,
+        myRating: myRating.value,
+        comment: comment.value
+    }).then(() => { // ne treba parametar jer dodajem
+        // resetovanje forme
+        inputTitle.value = '';
+        inputType.value = '';
+        inputYear.value = '';
+        inputGenre.value = '';
+        inputImdbRate.value = '';
+        inputFilmId.value = '';
+        myRating.value = '';
+        comment.value = '';
+        container.classList.remove('darken');
+        open(content);
+        close(addNew);
+        closeModal(moreInfo);
+    }).catch(err => {
+        console.log(err.message);
+        alert('You have to login or signup to add movie to your list!')
+    });
 });
-document.querySelector('#signupX').addEventListener('click', function(){close(signUpForm)
+
+// SIGNUP
+// hvatam FORMU u const gore
+// listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu i time bi nestao modal. 
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // get user info. Hvatam polja upisane e-mail adrese i passworda. hvatam value iz input polja iz signup forme. Pasword mora biti minimum 6 karaktera da bi radio!
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value;
+
+    // sign up the user. Metod sa auth constantom - createUser....(ovde parametri šta uzimam: varijable za email i password). Ovo je asinhrono, vraća promise zato .then i u njegov parametar user credential (cred). 
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        console.log(cred.user);
+        //kada se reši dobijam token za usera. U konzoli je user objekat sa podacima(samo sa cred. Sa cred.user pokaže odmah). Na konzoli u ff stoje podaci za tog usera i ff generiše user id. Dodajem return... da pravim novu collection automatski sa doc(user id koji je autocreated).setI({setujem property bio: hvatanje podatka iz forme na submit - signupForm['signup-bio'].value}). Dakle kreiram usera, hvatam id i stavljam usera u user collection
+        return db.collection('users').doc(cred.user.uid).set({
+            comm: signupForm['shortComment'].value
+        });
+    }).then(() => {
+        // close the signup modal & reset form. 
+        close(signUpFormM)
+        // resetovanje forme, čišćenje polja
+        signupForm.reset();
+        // ukoliko je greška u unosu
+        signupForm.querySelector('.error').innerHTML = ''
+    }).catch(err => {
+        signupForm.querySelector('.error').innerHTML = err.message;
+    });
 });
 
+// LOGOUT. Klik na link logout okida funkciju.. Hvatam a iz navbara:
+const logout = document.querySelector('#logoutLink');
+//kačim listener klik
+logout.addEventListener('click', (e) => {
+    e.preventDefault(); // zbog reseta
+    //opeth auth const metod signOut() ne mora da se ubacuje user parametar jer je već sign up i on automatski logout usera koji je logovan. Opet je asinc pa vraća promise .then u koji stavljam poruku da je user logout, naravno mogu popup u vezi toga ili span koji se pojavi i nestane za nekoliko sekundi. posle signOut() se sve može i izbrisati jer funkcija onAuthChanged() kontroliše da li je user in ili out
+    alert('user logged out');
+    auth.signOut().then(() => {
+        console.log('user signed out');
+    })
+});
 
+// login
+// hvatam formu za login i kačim submit listener:
+// const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // get user info. Iz dva inputa u formi hvatam podatke. const su lokalne u svojim funkcijama da ne zbrkam sa onim gore
+    const email = loginForm['login-email'].value;
+    const password = loginForm['login-password'].value;
 
+    // log the user in. Opet auth const metod signIn....(parametri za login email i password). Isto kao i prethodni metodi async. cred za user info.
+    auth.signInWithEmailAndPassword(email, password).then((cred) => {
+        console.log(cred.user);
+        // close the signup modal & reset form.
+        close(loginFormM)
+        loginForm.reset();
+        // ukoliko je greška u unosu
+        loginForm.querySelector('.error').innerHTML = '';
+    }).catch(err => {
+        loginForm.querySelector('.error').innerHTML = err.message;
+    });
+});
