@@ -7,16 +7,16 @@
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>Movies</title>
 </head>
 <body>
-  <div class="container flex fullWidth">
-    <nav class = "flex fullWidth">
+  <div class="container flex center fullWidth">
+    <nav class = "flex center fullWidth">
       <div class="public flex row fullWidth">
       <a href="index.html">Home</a>
-      <a href="#">Search</a>
       <a href="quiz.html">Quiz</a>
+      <a href="#">Galery</a>
       <a href="#">Popular</a>
     </div>
       <div class="private flex row fullWidth">
@@ -29,9 +29,8 @@
     <div class = "account"></div>
     <div class="main-container flex fullWidth">  
     <aside class = "flex">
-      
-        <div class="login relative flex">
-            <i class="fas fa-window-close" id = "loginX"></i>
+        <div class="login relative flex center">
+            <i class="fas fa-window-close block" id = "loginX"></i>
           <h2>Login</h2>
           <form id="login-form" class = "flex">
               <label for="login-email" class = "block">Email</label>
@@ -42,8 +41,8 @@
             <p class="error"></p>
           </form>
         </div>
-        <div class="signup relative flex">
-            <i class="fas fa-window-close" id = "signupX"></i>
+        <div class="signup relative flex center">
+            <i class="fas fa-window-close block" id = "signupX"></i>
             <h2>Sign up</h2>
             <form id="signup-form" class = "flex">
                 <label for="signup-email" class = "block">Email address</label>
@@ -57,13 +56,13 @@
         </div>
         
     </aside>
-    <main class = "flex relative fullWidth">
-  <div class="search flex">  
+    <main class = "flex relative center fullWidth">
+  <div class="search flex center">  
     <p>Start typing to search</p>
     <input type="text" id = "search" class = "radius shadow">
   </div>
   <div class="more-info shadow"></div>
-  <div class="content flex row"></div>
+  <div class="content flex row center"></div>
   
 </main>
 </div>

@@ -29,11 +29,11 @@ function movieSearch() {
           if (film.Poster == "N/A" || film.Poster.startsWith('http://'))
             film.Poster = 'img/noimage.jpg'
           filmId = film.imdbID
-          lista += `<div class = 'film flex shadow'>
-          <a href = 'https://www.imdb.com/title/${film.imdbID}' target = '_blank'><img src = '${film.Poster}' alt = 'film poster'/></a>
-          <div class = 'data flex'>
-          <h3>${film.Title}</h3><h5>Year: ${film.Year}</h5><h5>Type: ${film.Type}</h5>
-          <input type = 'button' onclick = 'movieDetails("${filmId}")' class = 'infoBtn' value = 'More Info'>
+          lista += `<div class = 'film flex shadow center'>
+          <a href = 'https://www.imdb.com/title/${film.imdbID}' target = '_blank'><img src = '${film.Poster}' alt = 'film poster' class = "block" /></a>
+          <div class = 'data flex center'>
+          <h3>${film.Title}</h3><h5><span>Year:</span> ${film.Year}</h5><h5><span>Type:</span> ${film.Type}</h5>
+          <input type = 'button' onclick = 'movieDetails("${filmId}")' class = 'infoBtn radius' value = 'More Info'>
           </div></div>`
           filmIDS.push(film.imdbID)
         });
@@ -88,9 +88,9 @@ function movieDetails(filmId) {
           movieID: filmId
         }
         console.log(movie)
-        info = `<div class = 'film flex'>
-        <div class = "info-poster flex shadow radius">
-        <a href = 'https://www.imdb.com/title/${data.imdbID}' target = '_blank'><img src = '${data.Poster}' alt = 'film poster' /></a>
+        info = `<div class = 'film flex center'>
+        <div class = "info-poster flex shadow center radius">
+        <a href = 'https://www.imdb.com/title/${data.imdbID}' target = '_blank'><img src = '${data.Poster}' alt = 'film poster' class = "block" /></a>
         <div class = 'data flex'>
         <h2>${data.Title}</h2>
         <h3>Year: ${data.Year}</h3>

@@ -48,6 +48,8 @@ function addMovieToList() {
 // funkcija za submit form u db.
 createForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    let user = firebase.auth().currentUser;// da se doda id dole, ko je dodao film
+
     // idem na kolekciju koja mi treba, metod add() u koji stavljam objekat koji dodajem. Ovde su values iz forme. Ukoliko je ime key objekta sa crticom ili više reči stavi u [] npr. title: createForm['title-hello'].value
     db.collection('movies').add({
         title: inputTitle.value,
@@ -57,7 +59,8 @@ createForm.addEventListener('submit', (e) => {
         imdbRate: inputImdbRate.value,
         filmID: inputFilmId.value,
         myRating: myRating.value,
-        comment: comment.value
+        comment: comment.value,
+        usersid: user.uid // dodala da se identify ko je dodao
     }).then(() => { // ne treba parametar jer dodajem
         // resetovanje forme
         inputTitle.value = '';
@@ -140,3 +143,4 @@ loginForm.addEventListener('submit', (e) => {
         loginForm.querySelector('.error').innerHTML = err.message;
     });
 });
+
