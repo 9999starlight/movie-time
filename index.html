@@ -1,118 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>Movies</title>
 </head>
+
 <body>
-  <div class="container flex fullWidth">
-    <nav class = "flex fullWidth">
+  <div class="container flex center fullWidth">
+    <nav class="flex center fullWidth">
       <div class="public flex row fullWidth">
-      <a href="index.html">Home</a>
-      <a href="#">Search</a>
-      <a href="quiz.html">Quiz</a>
-      <a href="#">Popular</a>
-    </div>
+        <a href="index.html">Home</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="#">Galery</a>
+        <a href="#">Popular</a>
+      </div>
       <div class="private flex row fullWidth">
-        <a href="#list">My List</a>
-        <a href="#" id = "loginLink" class = "logged-out">Login</a>
-        <a href="#" id = "signUpLink" class = "logged-out">Sign up</a>
-        <a href="#" id = "logoutLink" class = "logged-in">Logout</a>
+        <span class="account"></span>
+        <a href="#list" class="hoverTr">My List</a>
+        <a href="#" id="loginLink" class="logged-out hoverTr">Login</a>
+        <a href="#" id="signUpLink" class="logged-out hoverTr">Sign up</a>
+        <a href="#" id="logoutLink" class="logged-in hoverTr">Logout</a>
       </div>
     </nav>
-    <div class = "account"></div>
-    <div class="main-container flex fullWidth">  
-    <aside class = "flex">
-      
-        <div class="login relative flex">
-            <i class="fas fa-window-close" id = "loginX"></i>
+
+    <div class="main-container flex fullWidth">
+      <aside class="flex">
+        <div class="login relative flex center">
+          <i class="fas fa-window-close block hoverTr" id="loginX"></i>
           <h2>Login</h2>
-          <form id="login-form" class = "flex">
-              <label for="login-email" class = "block">Email</label>
-              <input type="email" id="login-email" class = "radius block" placeholder="Enter your email" required />
-              <label for="login-password" class = "block">Password</label>
-              <input type="password" id="login-password" class = "radius block" placeholder="Enter your password" required />  
-            <button class="btn-logIn block radius">Login</button>
+          <form id="login-form" class="flex">
+            <label for="login-email" class="block">Email</label>
+            <input type="email" id="login-email" class="radius block" placeholder="Enter your email" required />
+            <label for="login-password" class="block">Password</label>
+            <input type="password" id="login-password" class="radius block" placeholder="Enter your password"
+              required />
+            <button class="btn-logIn block radius hoverTr">Login</button>
             <p class="error"></p>
           </form>
         </div>
-        <div class="signup relative flex">
-            <i class="fas fa-window-close" id = "signupX"></i>
-            <h2>Sign up</h2>
-            <form id="signup-form" class = "flex">
-                <label for="signup-email" class = "block">Email address</label>
-                <input type="email" id="signup-email" class = "radius block" required placeholder="Enter your email" title = "Enter email address in valid email form like: abc@abc.abc"/>
-                <label for="signup-password" class = "block">Choose password</label>
-                <input type="password" id="signup-password" class = "radius block" placeholder="Enter your password" required title = "Enter password at least 6 characters long" />
-                <input type="text" id="shortComment" class = "radius block" placeholder="Enter short comment" required title = "Enter  comment max 20 characters" min="1" max="20"/>     
-                <button class="btn-signUp block radius">Sign up</button>
-              <p class="error"></p>
-            </form>
+        <div class="signup relative flex center">
+          <i class="fas fa-window-close block hoverTr" id="signupX"></i>
+          <h2>Sign up</h2>
+          <form id="signup-form" class="flex">
+            <label for="signup-email" class="block">Email address</label>
+            <input type="email" id="signup-email" class="radius block" required placeholder="Enter your email"
+              title="Enter email address in valid email form like: abc@abc.abc" />
+              <span class = "validEmailError inputError">Invalid email entry!</span>
+            <label for="signup-password" class="block">Choose password</label>
+            <input type="password" id="signup-password" class="radius block" placeholder="Enter your password" required
+              title="Enter at least 6 characters long password" />
+              <!--<span class = "validPassError inputError">Please enter at least 6 characters long password!</span>-->
+            <input type="text" id="shortComment" class="radius block" placeholder="Enter short comment" required
+              title="Enter comment max 20 characters" min="1" max="20" />
+              <!--<span class = "validsignupComm inputError">Enter 20 maximum characters!</span>-->
+            <button class="btn-signUp block radius hoverTr">Sign up</button>
+            <p class="error"></p>
+          </form>
         </div>
-        
-    </aside>
-    <main class = "flex relative fullWidth">
-  <div class="search flex">  
-    <p>Start typing to search</p>
-    <input type="text" id = "search" class = "radius shadow">
+      </aside>
+      <main class="flex relative center fullWidth">
+        <div class="search flex center">
+          <p>Start typing to search</p>
+          <input type="text" id="search" class="radius shadow">
+        </div>
+        <div id="spinner"></div> 
+        <div class="more-info shadow"></div>
+        <div class="content flex row center"></div>
+      </main>
+    </div>
+    <div class = "list flex center">
+      <ul id="list" class = "flex"></ul>
+    </div>
   </div>
-  <div class="more-info shadow"></div>
-  <div class="content flex row"></div>
-  
-</main>
-</div>
-</div>
-<div id = "add-new" class = "add-new relative flex radius">
-  <h2>Add to my list</h2>
-    <form id = "create-form" class = "flex">
-    <label for="inputTitle">Title</label>
-    <input type="text" id = "inputTitle" readonly>
-    <label for="inputType">Type</label>
-    <input type="text" id = "inputType" readonly>
-    <label for="inputYear">Year</label>
-    <input type="text" id = "inputYear" readonly>
-    <label for="inputGenre">Genre</label>
-    <input type="text" id = "inputGenre" readonly>
-    <label for="inputImdbRate">IMDB rating</label>
-    <input type="text" id = "inputImdbRate" readonly>
-    <label for="inputFilmId">Movie ID</label>
-    <input type="text" id = "inputFilmId" readonly>
-    <label for="myRating">My Rating</label>
-    <input type="number" id = "myRating" placeholder = "Enter your rating" title = "Enter number between 0 and 10" min="0" max="10">
-    <label for="comment">Comment</label>
-    <textarea id="comment" placeholder = "Add your comment here"></textarea>
-    <button class="btn-create radius">Add Movie to my list</button>
-    <button class="btnCancel radius" id = "cancelCreate">Cancel</button>
-  </form>
+  <div id="add-new" class="add-new relative radius">
+    <h2>Add to my list</h2>
+    <form id="create-form" class="create-form flex">
+      <label for="inputTitle">Title</label>
+      <input type="text" id="inputTitle" readonly>
+      <label for="inputType">Type</label>
+      <input type="text" id="inputType" readonly>
+      <label for="inputYear">Year</label>
+      <input type="text" id="inputYear" readonly>
+      <label for="inputGenre">Genre</label>
+      <input type="text" id="inputGenre" readonly>
+      <label for="inputImdbRate">IMDB rating</label>
+      <input type="text" id="inputImdbRate" readonly>
+      <label for="moviePoster">Poster</label>
+      <input type="text" id="moviePoster" readonly>
+      <label for="imdbLink">IMDB</label>
+      <input type="text" id="imdbLink" readonly>
+      <label for="inputFilmId">Movie ID</label>
+      <input type="text" id="inputFilmId" readonly>
+      <label for="myRating">My Rating</label>
+      <input type="number" id="myRating" placeholder="Enter your rating" title="Enter number between 1 and 10" min="1"
+        max="10">
+      <label for="comment">Comment</label>
+      <textarea id="comment" placeholder="Add your comment here, up to 200 characters" maxlength="200"></textarea>
+      <button class="btn-create radius hoverTr">Add Movie to my list</button>
+      <input type="reset" class="btnCancel radius hoverTr" id="cancelCreate" value = "Cancel" />
+    </form>
   </div>
-  <ul id = "list"></ul>
+
 
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyA7GNvPEIFYuJla-M0d41mIXmKMe1yXA4M",
-    authDomain: "movie-time-1259d.firebaseapp.com",
-    databaseURL: "https://movie-time-1259d.firebaseio.com",
-    projectId: "movie-time-1259d"
-  };
-  firebase.initializeApp(config);
-  // make auth and firestore references
-  const auth = firebase.auth();
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyA7GNvPEIFYuJla-M0d41mIXmKMe1yXA4M",
+      authDomain: "movie-time-1259d.firebaseapp.com",
+      databaseURL: "https://movie-time-1259d.firebaseio.com",
+      projectId: "movie-time-1259d"
+    };
+    firebase.initializeApp(config);
+    // auth and firestore references
+    const auth = firebase.auth();
     const db = firebase.firestore();
-    // update firestore settings realtime
-    db.settings({ timestampsInSnapshots: true });
-</script>
+    // realtime firestore settings
+    db.settings({
+      timestampsInSnapshots: true
+    });
+  </script>
   <script src="scripts/main.js"></script>
   <script src="scripts/functions.js"></script>
   <script src="scripts/display.js"></script>
-</body> 
+</body>
+
 </html>

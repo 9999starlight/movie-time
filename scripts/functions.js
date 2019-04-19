@@ -6,7 +6,7 @@ const inputYear = document.querySelector('#inputYear');
 const inputGenre = document.querySelector('#inputGenre');
 const inputImdbRate = document.querySelector('#inputImdbRate');
 const inputFilmId = document.querySelector('#inputFilmId');
-//const inputPlot = document.querySelector('#inputPlot');
+const imdbLink = document.querySelector('#imdbLink');
 const myRating = document.querySelector('#myRating');
 const comment = document.querySelector('#comment');
 const loginForm = document.querySelector('#login-form')
@@ -31,59 +31,83 @@ auth.onAuthStateChanged(user => {
     }
 })
 
-function addMovieToList() {
-    open(addNew);
-    container.classList.add('darken') //zatamni sliku na open
-    //close(content);
-    //close(moreInfo)
-    inputTitle.value = movie.title;
-    inputType.value = movie.type;
-    inputYear.value = movie.year;
-    inputGenre.value = movie.genre;
-    inputImdbRate.value = movie.imdbRating;
-    inputFilmId.value = movie.movieID;
-}
+function addMovieToList(movie) {
+    let user = firebase.auth().currentUser;
+    if (!user) {
+        alert('You have to login or signup to add movie to your list!')
+    }
+    // check if movie has already added and display form
+    checkIds = true;
+    const movieIds = document.querySelectorAll('.film-id');
+    for (var i = 0; i < movieIds.length; i++) {
+        if (movieIds[i].innerText == movie.movieID) {
+            checkIds = false;
+        }
+    }
+    console.log(checkIds)
+    if (checkIds == false) { 
+        alert('you have already added that item to your list')
+        return;
+    }
+    checkIds = false;
+    if (checkIds = true && user) {
+        open(addNew)
+        container.classList.add('darken')
+        inputTitle.value = movie.title;
+        inputType.value = movie.type;
+        inputYear.value = movie.year;
+        inputGenre.value = movie.genre;
+        inputImdbRate.value = movie.imdbRating;
+        inputFilmId.value = movie.movieID;
+        imdbLink.value = movie.imdbLink;
+    } 
+    }
 
 // CREATE NEW MOVIE
 // funkcija za submit form u db.
-createForm.addEventListener('submit', (e) => {
+function saveNewMovie(e) {
     e.preventDefault();
-    // idem na kolekciju koja mi treba, metod add() u koji stavljam objekat koji dodajem. Ovde su values iz forme. Ukoliko je ime key objekta sa crticom ili više reči stavi u [] npr. title: createForm['title-hello'].value
-    db.collection('movies').add({
-        title: inputTitle.value,
-        type: inputType.value,
-        year: inputYear.value,
-        genre: inputGenre.value,
-        imdbRate: inputImdbRate.value,
-        filmID: inputFilmId.value,
-        myRating: myRating.value,
-        comment: comment.value
-    }).then(() => { // ne treba parametar jer dodajem
-        // resetovanje forme
-        inputTitle.value = '';
-        inputType.value = '';
-        inputYear.value = '';
-        inputGenre.value = '';
-        inputImdbRate.value = '';
-        inputFilmId.value = '';
-        myRating.value = '';
-        comment.value = '';
-        container.classList.remove('darken');
-        open(content);
-        close(addNew);
-        closeModal(moreInfo);
-    }).catch(err => {
-        console.log(err.message);
-        alert('You have to login or signup to add movie to your list!')
-    });
-});
+    let user = firebase.auth().currentUser;// da se doda id dole, ko je dodao film
+        // idem na kolekciju koja mi treba, metod add() u koji stavljam objekat koji dodajem. Ovde su values iz forme. Ukoliko je ime key objekta sa crticom ili više reči stavi u [] npr. title: createForm['title-hello'].value
+        db.collection('movies').add({
+            title: inputTitle.value,
+            type: inputType.value,
+            year: inputYear.value,
+            genre: inputGenre.value,
+            imdbRate: inputImdbRate.value,
+            filmID: inputFilmId.value,
+            myRating: myRating.value,
+            comment: comment.value,
+            imdbLink: imdbLink.value,
+            usersid: user.uid // dodala da se identify ko je dodao
+        }).then(() => { // ne treba parametar jer dodajem
+            // resetovanje forme
+            inputTitle.value = '';
+            inputType.value = '';
+            inputYear.value = '';
+            inputGenre.value = '';
+            inputImdbRate.value = '';
+            inputFilmId.value = '';
+            myRating.value = '';
+            comment.value = '';
+            imdbLink.value = '';
+            container.classList.remove('darken');
+            open(content);
+            close(addNew);
+            closeModal(moreInfo);
+            alert('added to your list')
+        }).catch(err => {
+            console.log(err.message);
+        });
+}
+createForm.addEventListener('submit', saveNewMovie)
+   
 
 // SIGNUP
 // hvatam FORMU u const gore
 // listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu i time bi nestao modal. 
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     // get user info. Hvatam polja upisane e-mail adrese i passworda. hvatam value iz input polja iz signup forme. Pasword mora biti minimum 6 karaktera da bi radio!
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
@@ -119,7 +143,7 @@ logout.addEventListener('click', (e) => {
     })
 });
 
-// login
+// LOGIN
 // hvatam formu za login i kačim submit listener:
 // const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
