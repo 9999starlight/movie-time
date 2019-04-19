@@ -5,9 +5,25 @@ const signUpFormM = document.querySelector('.signup')
 const addNew = document.querySelector('.add-new')
 const movieList = document.querySelector('#list');
 const accountDetails = document.querySelector('.account');
+
+const spinner = document.querySelector('#spinner');
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 60000);
+}
+
+ function hideSpinner() {
+ spinner.className = spinner.className.replace("show", "");
+ }
+
+
 // open and close functions
 const open = (item) => item.style.display = 'flex';
 const close = (item) => item.style.display = 'none';
+
 // opening-closing login, signup & create forms
 const openLogin = (e) => {
     e.preventDefault();
@@ -20,6 +36,7 @@ const openSignup = (e) => {
     open(signUpFormM);
     close(loginFormM);
 }
+
 loginLink.addEventListener('click', openLogin);
 signUpLink.addEventListener('click', openSignup);
 document.querySelector('#loginX').addEventListener('click', function(){close(loginFormM)
@@ -32,6 +49,9 @@ const closeAddNew = () => {
     container.classList.remove('darken');
 }
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
+
+
+
 
 // DOM - hvatam ul gde ću renderovati li: movieList gore
 // šta da mi prikazuje u zavisnosti od statusa. Selektujem sve gde je prikaz za linkove u meniju za login i logout da se prikažu ili ne. Sve linkove po defaultu staviti da se display none u style da se ne bi pojavljivali na refresh. kada je logged in ili out za funkciju setupUI():
@@ -61,25 +81,89 @@ const setupUI = (user) => {
 
 
 // SETUP MOVIES. uzima data koje dobija iz funkcije u auth.js i render ga u ul. Ovu funkciju bih morala verovatno da zovem da doda film iz api i da prikaže poruku ako user nije logovan.
+
+// OVDE STAVITI DA SE PRIKAZUJU SAMO USERS'S LIST?
+
 const setupMovies = (data) => {
+  let user = firebase.auth().currentUser;// da se doda id dole, ko je dodao film
   // ako ima data tj. ako je logovan user prikaži:
   if (data.length) {
-    let output = '';
-    data.forEach(doc => {
-      // hvatam doc iz baze. konstanta za svaki item. šaljem pre toga podatke u bazu iz apija koji je added.
-      const film = doc.data();
-      const li = `
-      <li>
-        <div class="movieLiDiv"><h3>${film.title}</h3><h4>${film.type}</h4><h4>${film.year}</h4></div>
-        <div class="show-more"><h4>${film.genre}</h4><h4>${film.imdbRate}
-        <h4>${film.filmID}</h4><h4>${film.myRating}</h4><p>${film.comment}</p></div>
+      let output = '';
+      data.forEach(doc => {
+        // hvatam doc iz baze. konstanta za svaki item. šaljem pre toga podatke u bazu iz apija koji je added.
+        const film = doc.data();
+        // dodala sam ovaj if da vidi samo svoju listu
+        if (film.usersid == user.uid) {
+          const li = `
+      <li id = '${doc.id}'>
+        <div class="movieLiDiv flex">
+        <h3>${film.title}</h3><h4>type: ${film.type}</h4><h4>year: ${film.year}</h4><h4>genre: ${film.genre}</h4>
+        </div>
+        <div class="show-more">
+        <span>My rating:</span>
+        <input type="number" value="${film.myRating}" id="ratingLi" title="Enter number between 1 and 10" min="1" max="10" placeholder = "0">
+        <h4>IMDB rating: ${film.imdbRate}</h4>
+        <a href = ${film.imdbLink} target = '_blank' class = "block hoverTr">IMDB details</a>
+        <h4 class = "film-id">${film.filmID}</h4>
+        </div>
+        <div class = "text flex">
+        <textarea id = "commentLi" placeholder = "Edit yor comment and click save icon to change it" title = "Edit yor comment and click save icon to change it" maxlength="200">${film.comment}</textarea>
+        </div>
+        <div>
+        <i class="far fa-save hoverTr" title = "SAVE CHANGES"></i>
+        <i class="far fa-trash-alt hoverTr" title = "DELETE"></i>
+        </div>
       </li>
     `;
-      output += li;
-    });
+          output += li;
+        }
+      });
     movieList.innerHTML = output
-  } else {// ako nema data tj. ako nije logovan user prikaži poruku:
-      movieList.innerHTML = '<h5 class="flex">Login to view movies</h5>';
-  }
+    // delete movie function
+    const dlt = document.querySelectorAll('.fa-trash-alt')
+    dlt.forEach(dl => {
+      dl.addEventListener('click', (e) => {
+        //e.stopPropagation();
+        let id = e.target.parentElement.parentElement.getAttribute('id');
+        db.collection('movies').doc(id).delete();
+        alert('deleted!')
+      })
+    });
+   
+    //SAVE COMMENT CHANGES
+    const saveIcon = document.querySelectorAll('.fa-save')
+    saveIcon.forEach(si => {
+      si.addEventListener('click', (e) => {
+        let id = e.target.parentElement.parentElement.getAttribute('id');
+        let commentEdit = e.target.parentElement.previousElementSibling.childNodes[1]
+        let ratingLi = e.target.parentElement.previousElementSibling.previousElementSibling.childNodes[3]
+        let numTest = /^(?:[1-9]|0[1-9]|10)$/
+        if (!numTest.test(ratingLi.value)) {
+          alert('please enter rating between 0 and 10')
+        } else {
+          db.collection('movies').doc(id).update({
+            comment: commentEdit.value,
+            myRating: ratingLi.value
+          })
+          alert('saved')
+        }
+    })
+  })
+    } 
+    else {// ako nema data tj. ako nije logovan user prikaži poruku:
+      movieList.innerHTML = '<h5 class="flex">Login to see your list</h5>';
+    }
 };
 console.log(movieList)
+
+/*
+funkcija za alert messages da se prikazuje sa timeout:
+const infoMessage = document.querySelector('.infoMessage');
+open(infoMessage);
+setTimeout(function(){
+  close(infoMessage);
+}, 3000);
+
+*/
+
+

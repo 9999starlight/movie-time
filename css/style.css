@@ -1,0 +1,494 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*inherit border-box*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #333333;
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: white;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.relative {
+  position: relative;
+}
+
+.block {
+  display: block;
+}
+
+.radius {
+  border-radius: 8px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.center {
+  align-items: center;
+}
+
+.container {
+  min-height: 100vh;
+  max-height: 100%;
+}
+.public {
+box-shadow: 0px -15px 30px -5px #c986d7;
+animation: shine 20s infinite;
+}
+
+@keyframes shine {
+0% {box-shadow: 0px -15px 30px -5px #c986d7;}
+40% {box-shadow: 0px -5px 55px -1px #c986d7;}
+75% {box-shadow: 0px 5px 55px -1px #c986d7;}
+100% {box-shadow: 0px -15px 30px -5px #c986d7;}
+}
+
+a {
+  text-decoration: none;
+}
+
+.private a, .private span {
+  background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.public a {
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+main {
+  margin-top: 2em;
+}
+
+.content .film {
+  /*
+  border: 2px inset; 
+  border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
+  border-image-slice: 1;
+  */
+  border: 2px inset whitesmoke;
+  padding: 0.5em;
+  text-align: center;
+  margin: 1em 0.5em;
+  width: 220px;
+  height: 400px;
+}
+
+.film img {
+  max-height: 200px;
+  /*width: 100%;*/
+  margin: 0.5 auto;
+  max-width: 100%;
+}
+/*
+.data {
+  align-content: space-around;
+}
+*/
+.search input[type="text"] {
+  width: 200px;
+  padding: 0.8em;
+  border: none;
+  font-size: 1.1em;
+  background: lightgrey;
+  margin-top: 0.5em;
+}
+
+.shadow {
+  box-shadow: 3px 2px 5px rgb(124, 123, 123);
+}
+/* .logged-in, .logged-out */
+.more-info, .add-new, .login, .signup, .film-id {
+  display: none;
+}
+
+.more-info, .add-new {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  background-color: #333333;
+  min-width: 95vw;
+  max-height: 100vh;
+  overflow: auto; /*scroll*/
+}
+
+.more-info .film {
+  min-width: 95vw;
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+.add-new form {
+  animation-name: fadein;
+  animation-duration: 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalopen {
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.darken {
+  background: linear-gradient( rgba(17, 17, 17, 0.833), rgba(20, 19, 17, 0.863)); 
+  filter: blur(4px);   
+}
+
+i.fas, i.far, i.fa-edit {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+i.fa-save {
+  color: yellowgreen;
+}
+
+i.fa-trash-alt {
+  color: crimson;
+  margin: 10px;
+}
+
+i.fas {
+  color: #f0e6e6;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.info-poster {
+  width: 95%;
+  background: radial-gradient(circle at top left, rgba(66, 65, 63, 0.833), rgba(26, 23, 20, 0.675));
+  text-align: center;
+}
+
+.info-poster, .data {
+  padding: 10px;
+}
+
+.data {
+line-height: 2em;
+}
+
+button {
+  margin: 30px auto 0 auto;
+}
+
+.data button {
+  padding: 15px 40px;
+}
+
+aside {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+.login,
+.signup,
+.add-new {
+  background-color: rgb(87, 85, 85);
+  box-shadow: 0 0 3px 2px rgba(189, 186, 186, 0.342);
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.login, .signup {
+  max-width: 95vw;
+  margin: 1em auto;
+  border-radius: 10px;
+  padding: 1.4em;
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+
+aside div h2, .add-new h2 {
+  margin: 0 auto;
+}
+
+aside div form label, .add-new form label {
+  margin-top: 20px;
+}
+
+aside div form button, .add-new form button, .film input {
+  padding: 10px 25px;
+}
+
+aside div form input, .add-new form input {
+  width: 180px;
+  height: 22px;
+  padding: 2px;
+  margin-top: 0.5em;
+}
+
+/*styling list*/
+
+ul {
+  max-width: 500px;
+}
+
+li {
+  border: 1px solid white;
+  border-radius: 10px 40px 10px 40px;
+  margin: 0.5rem;
+  background: -webkit-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(102,102,102,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,0.97) 12%, rgba(17,17,17,0.86) 54%, rgba(43,43,43,0.8) 76%, rgba(44,44,44,0.79) 82%, rgba(28,28,28,0.76) 91%, rgba(19,19,19,0.74) 100%);
+  background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(102,102,102,1) 0%, rgba(102,102,102,1) 0%, rgba(89,89,89,0.97) 12%, rgba(17,17,17,0.86) 54%, rgba(43,43,43,0.8) 76%, rgba(44,44,44,0.79) 82%, rgba(28,28,28,0.76) 91%, rgba(19,19,19,0.74) 100%);
+}
+
+li div {
+  padding: 12px;
+  text-align: center;
+  align-items: center;
+}
+li div a {
+  color: rgb(240, 240, 9);
+}
+
+li div textarea, li div input {
+    border: 1px solid rgba(109, 107, 107, 0.719);
+    background: rgb(49, 49, 49);
+    color: white;
+    padding: 10px;
+    resize: none;
+    outline: yellowgreen;
+    width: 190px;
+    height: 125px;
+}
+#ratingLi {
+  width: 50px;
+  height: 18px;
+  margin: 0.5em;
+}
+
+/* spinner */
+#spinner{
+  visibility: hidden;
+  width: 80px;
+  height: 80px;
+  margin: 3em 0;
+  border: 2px solid #41f24a;
+  border-top: 2px ridge #1b4e1d;
+  border-radius: 100%;
+/*
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right: 0;
+  margin: auto;
+*/
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  } to {
+      transform: rotate(360deg);
+  }
+}
+
+#spinner.show {
+  visibility: visible;
+}
+
+
+
+@media (min-width: 768px) {
+
+  .row {
+    flex-direction: row;
+  }
+
+  nav {
+    height: 150px;
+  }
+  nav div {
+    margin-top: 0;
+  }
+
+  nav a, nav span {
+    padding: 1.2em;
+  }
+
+.public a {
+  width: 25%;
+  text-align: center;
+}
+
+  .private {
+    justify-content: flex-end;
+    margin-right: 1em;
+  }
+
+  .main-container {
+    height: 100%;
+    margin-top: 1.2em;
+  }
+
+  main {
+    margin-top: 1.5em;
+  }
+.search input[type=text]{
+  transition: width 0.5s ease-in-out;
+}
+  .search input[type=text]:focus {
+    width: 400px;
+  }
+
+  .content {
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+  }
+
+  .more-info, .add-new {
+    min-width: 650px;
+    max-width: 900px;
+    max-height: 90vh;
+    font-size: 1em;
+  }
+
+  .info-poster {
+    flex-direction: row;
+    justify-content: space-around;
+    min-width: 550px;
+    max-width: 80%;
+    margin: 1em;
+    padding: 2em;
+    font-size: 1.2em;
+  }
+
+  .info-poster img {
+    max-height: 250px;
+  }
+
+  ul {
+    max-width: 1000px;
+  }
+
+
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+li div {
+  width: 25%;
+}
+
+/*hover effects*/
+  i:hover {
+    opacity: 0.5;
+  }
+
+.hoverTr:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+  cursor: pointer;
+}
+.public a:hover {
+  background: linear-gradient(90deg, #ae96c74d 0%, #7bc7c366 25%, #80addc66 50%, #a37ec754 75%, #b277a566 100%);
+  text-shadow: 2px 2px 4px #000000;
+  mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    -webkit-mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+}
+.private a:hover {
+  text-shadow: 2px 2px 4px #e2e0e0;
+}
+}
+@media (min-width: 992px) {
+  aside {
+    order: 2;
+    margin-right: 1.5em;
+  }
+
+  .login,
+  .signup {
+    width: 220px;
+    min-height: 300px;
+    max-height: 350px;
+    padding: 20px;
+  }
+
+  aside div input {
+    width: 220px;
+    height: 22px;
+    padding: 5px;
+  }
+
+  .container {
+    margin: 0 auto;
+    background-color: #333333;
+  }
+
+  .main-container {
+    flex-direction: row;
+  }
+
+  .content {
+    width: 80%;
+  }
+
+  .content .film {
+    width: 250px;
+  }
+
+  .more-info {
+    max-width: 1000px;/*bilo 900px*/
+  }
+
+  .more-info .film {
+    min-width: 800px;
+    max-width: 1000px;/*bilo 850px*/
+  }
+
+  .info-poster {
+    min-width: 700px;
+  }
+}
