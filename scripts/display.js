@@ -5,9 +5,8 @@ const signUpFormM = document.querySelector('.signup')
 const addNew = document.querySelector('.add-new')
 const movieList = document.querySelector('#list');
 const accountDetails = document.querySelector('.account');
-
 const spinner = document.querySelector('#spinner');
-
+const listDiv = document.querySelector('.list');
 function showSpinner() {
   spinner.className = "show";
   setTimeout(() => {
@@ -19,16 +18,36 @@ function showSpinner() {
  spinner.className = spinner.className.replace("show", "");
  }
 
-
 // open and close functions
 const open = (item) => item.style.display = 'flex';
 const close = (item) => item.style.display = 'none';
+
+//alerts
+const alertWarn = document.querySelector('.alertWarn');
+const alertSuccess = document.querySelector('.alertSuccess');
+const warnInfo = document.querySelector('#warnInfo')
+const succInfo = document.querySelector('#succInfo')
+
+function openWarn(){
+  open(alertWarn);
+  setTimeout(function(){
+    close(alertWarn);
+    warnInfo.innerText = '';
+  }, 4000);
+}
+function openSuccess(){
+  open(alertSuccess);
+  setTimeout(function(){
+    close(alertSuccess);
+    succInfo.innerText = '';
+  }, 4000);
+}
 
 // opening-closing login, signup & create forms
 const openLogin = (e) => {
     e.preventDefault();
     open(loginFormM);
-    close(signUpFormM);
+  close(signUpFormM);
 }
 
 const openSignup = (e) => {
@@ -44,14 +63,17 @@ document.querySelector('#loginX').addEventListener('click', function(){close(log
 document.querySelector('#signupX').addEventListener('click', function(){close(signUpFormM)
 });
 
+document.querySelector('#okWarn').addEventListener('click', function(){close(alertWarn)
+});
+document.querySelector('#okSuccess').addEventListener('click', function(){close(alertSuccess)
+});
+
+
 const closeAddNew = () => {
     close(addNew);
     container.classList.remove('darken');
 }
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
-
-
-
 
 // DOM - hvatam ul gde ću renderovati li: movieList gore
 // šta da mi prikazuje u zavisnosti od statusa. Selektujem sve gde je prikaz za linkove u meniju za login i logout da se prikažu ili ne. Sve linkove po defaultu staviti da se display none u style da se ne bi pojavljivali na refresh. kada je logged in ili out za funkciju setupUI():
@@ -67,6 +89,7 @@ const setupUI = (user) => {
       `;
       accountDetails.innerHTML = detailsInfo;
     });
+    open(listDiv)
     // toggle user UI elements. Za svaki item:
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
@@ -116,9 +139,12 @@ const setupMovies = (data) => {
       </li>
     `;
           output += li;
+
         }
       });
     movieList.innerHTML = output
+
+
     // delete movie function
     const dlt = document.querySelectorAll('.fa-trash-alt')
     dlt.forEach(dl => {
@@ -126,11 +152,12 @@ const setupMovies = (data) => {
         //e.stopPropagation();
         let id = e.target.parentElement.parentElement.getAttribute('id');
         db.collection('movies').doc(id).delete();
-        alert('deleted!')
+        openSuccess()
+        succInfo.innerText = `List item removed!`
       })
     });
    
-    //SAVE COMMENT CHANGES
+    //SAVE COMMENT & rating CHANGES
     const saveIcon = document.querySelectorAll('.fa-save')
     saveIcon.forEach(si => {
       si.addEventListener('click', (e) => {
@@ -139,13 +166,15 @@ const setupMovies = (data) => {
         let ratingLi = e.target.parentElement.previousElementSibling.previousElementSibling.childNodes[3]
         let numTest = /^(?:[1-9]|0[1-9]|10)$/
         if (!numTest.test(ratingLi.value)) {
-          alert('please enter rating between 0 and 10')
+          openWarn()
+          warnInfo.innerText = `Please enter rating between 1 and 10`
         } else {
           db.collection('movies').doc(id).update({
             comment: commentEdit.value,
             myRating: ratingLi.value
           })
-          alert('saved')
+          openSuccess()
+          succInfo.innerText = `List item updated!`
         }
     })
   })
@@ -157,13 +186,18 @@ const setupMovies = (data) => {
 console.log(movieList)
 
 /*
-funkcija za alert messages da se prikazuje sa timeout:
-const infoMessage = document.querySelector('.infoMessage');
-open(infoMessage);
-setTimeout(function(){
-  close(infoMessage);
-}, 3000);
+          class movieLi {
+            constructor(titleLi, imdbRtLi, yearLi) {
+              this.titleLi = titleLi
+              this.imdbRtLi = imdbRtLi
+              this.yearLi = yearLi
+            }
 
+          }
+          listItem = new movieLi(film.title, film.imdbRate, film.year)
+          listLi.push(listItem)
+          document.querySelector('#btnAbc').addEventListener('click', function () {
+            listLi.sort((a, b) => a.yearLi.localeCompare(b.yearLi))
+            console.log(listLi)
+          })
 */
-
-

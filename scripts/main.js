@@ -7,7 +7,7 @@ let filmIDS = []
 let filmId = ''
 const container = document.querySelector('.container')
 const moreInfo = document.querySelector('.more-info')
-
+const main = document.querySelector('.main-content')
 const closeModal = (element) => {
   element.innerHTML = ''
   close(element)
@@ -97,10 +97,10 @@ function movieDetails(filmId) {
       }
       moreInfo.innerHTML += info
       open(moreInfo)
-      close(content)// da se ne vidi content odnosno onemogući biranje još modal info-a. dodaj neku boju ili nešto
-      //close(list) zatvori div list da ne ide preko nje
+      close(main)// da se ne vidi main odnosno onemogući biranje još modal info-a.
+
       document.querySelector('.back').addEventListener('click', function(){closeModal(moreInfo)
-        , open(content);
+        , open(main);
       });
       action = false; // vrati event listener sa btnDetails
       document.querySelector('.addMovieBtn').addEventListener('click',
