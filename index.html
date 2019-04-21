@@ -15,7 +15,7 @@
 
 <body>
   <div class="container flex center fullWidth">
-    <nav class="flex center fullWidth">
+    <nav class="flex center fullWidth" id="nav">
       <div class="public flex row fullWidth">
         <a href="index.html">Home</a>
         <a href="quiz.html">Quiz</a>
@@ -24,7 +24,7 @@
       </div>
       <div class="private flex row fullWidth">
         <span class="account"></span>
-        <a href="#list" class="hoverTr">My List</a>
+        <a href="#list" class="logged-in hoverTr">My List</a>
         <a href="#" id="loginLink" class="logged-out hoverTr">Login</a>
         <a href="#" id="signUpLink" class="logged-out hoverTr">Sign up</a>
         <a href="#" id="logoutLink" class="logged-in hoverTr">Logout</a>
@@ -33,7 +33,7 @@
 
     <div class="main-container flex fullWidth">
       <aside class="flex">
-        <div class="login relative flex center">
+        <div class="login relative flex center mg1auto">
           <i class="fas fa-window-close block hoverTr" id="loginX"></i>
           <h2>Login</h2>
           <form id="login-form" class="flex">
@@ -46,21 +46,19 @@
             <p class="error"></p>
           </form>
         </div>
-        <div class="signup relative flex center">
+        <div class="signup relative flex center mg1auto">
           <i class="fas fa-window-close block hoverTr" id="signupX"></i>
           <h2>Sign up</h2>
           <form id="signup-form" class="flex">
             <label for="signup-email" class="block">Email address</label>
             <input type="email" id="signup-email" class="radius block" required placeholder="Enter your email"
               title="Enter email address in valid email form like: abc@abc.abc" />
-              <span class = "validEmailError inputError">Invalid email entry!</span>
             <label for="signup-password" class="block">Choose password</label>
             <input type="password" id="signup-password" class="radius block" placeholder="Enter your password" required
               title="Enter at least 6 characters long password" />
-              <!--<span class = "validPassError inputError">Please enter at least 6 characters long password!</span>-->
-            <input type="text" id="shortComment" class="radius block" placeholder="Enter short comment" required
-              title="Enter comment max 20 characters" min="1" max="20" />
-              <!--<span class = "validsignupComm inputError">Enter 20 maximum characters!</span>-->
+            <label for="shortComment" class="block">Alias/Comment</label>
+            <input type="text" id="shortComment" class="radius block" placeholder="Enter alias or comment" required
+              title="Enter comment max 25 characters" min="1" max="20" />
             <button class="btn-signUp block radius hoverTr">Sign up</button>
             <p class="error"></p>
           </form>
@@ -71,41 +69,65 @@
           <p>Start typing to search</p>
           <input type="text" id="search" class="radius shadow">
         </div>
-        <div id="spinner"></div> 
+        <div id="spinner"></div>
         <div class="more-info shadow"></div>
-        <div class="content flex row center"></div>
+        <div class="main-content flex center">
+          <div class="content flex row center"></div>
+          <div class="list flex center shadow mg1auto">
+            <h1 class="mg1auto">MY LIST</h1>
+            <div class="buttons flex center fullWidth mg1auto">
+              <a href="#nav"><button class="mg1auto radius">Back to top</button></a>
+              <button id="btnAbc" class="mg1auto radius">Sort alfabetically</button>
+              <button id="btnRate" class="mg1auto radius">Sort by IMDB rating</button>
+              <button id="btnYear" class="mg1auto radius">Sort by year</button>
+            </div>
+            <ul id="list" class="flex center"></ul>
+          </div>
+        </div>
       </main>
     </div>
-    <div class = "list flex center">
-      <ul id="list" class = "flex"></ul>
+
+    <div class="alert alertWarn center radius" id="warn">
+      <h4 id="warnInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto" id="okWarn">OK</button>
+    </div>
+    <div class="alert alertSuccess center radius" id="success">
+      <h4 id="succInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto" id="okSuccess">OK</button>
     </div>
   </div>
-  <div id="add-new" class="add-new relative radius">
+  <div id="add-new" class="add-new relative center radius">
     <h2>Add to my list</h2>
-    <form id="create-form" class="create-form flex">
-      <label for="inputTitle">Title</label>
-      <input type="text" id="inputTitle" readonly>
-      <label for="inputType">Type</label>
-      <input type="text" id="inputType" readonly>
-      <label for="inputYear">Year</label>
-      <input type="text" id="inputYear" readonly>
-      <label for="inputGenre">Genre</label>
-      <input type="text" id="inputGenre" readonly>
-      <label for="inputImdbRate">IMDB rating</label>
-      <input type="text" id="inputImdbRate" readonly>
-      <label for="moviePoster">Poster</label>
-      <input type="text" id="moviePoster" readonly>
-      <label for="imdbLink">IMDB</label>
-      <input type="text" id="imdbLink" readonly>
-      <label for="inputFilmId">Movie ID</label>
-      <input type="text" id="inputFilmId" readonly>
-      <label for="myRating">My Rating</label>
-      <input type="number" id="myRating" placeholder="Enter your rating" title="Enter number between 1 and 10" min="1"
-        max="10">
-      <label for="comment">Comment</label>
-      <textarea id="comment" placeholder="Add your comment here, up to 200 characters" maxlength="200"></textarea>
-      <button class="btn-create radius hoverTr">Add Movie to my list</button>
-      <input type="reset" class="btnCancel radius hoverTr" id="cancelCreate" value = "Cancel" />
+    <form id="create-form" class="create-form flex mg1auto">
+
+      <div class="flex"><span>Title:</span>
+        <p id="inputTitle" class="transparent"></p>
+      </div>
+      <div class="flex"><span>Type:</span>
+        <p id="inputType" class="transparent"></p>
+      </div>
+      <div class="flex"><span>Year:</span>
+        <p id="inputYear" class="transparent"></p>
+      </div>
+      <div class="flex"><span>Genre:</span>
+        <p id="inputGenre" class="transparent"></p>
+      </div>
+      <div class="flex"><span>IMDB rating:</span>
+        <p id="inputImdbRate" class="transparent"></p>
+      </div>
+      <div class="flex"><span>IMDB link:</span>
+        <p id="imdbLink" class="transparent"></p>
+      </div>
+      <div class="flex"><span>Movie ID:</span>
+        <p id="inputFilmId" class="transparent"></p>
+      </div>
+      <div class="flex"><span>My Rating:</span><input type="number" id="myRating" class="radius"
+          placeholder="Enter your rating" title="Enter number between 1 and 10" min="1" max="10"></div>
+      <div class="flex">
+      <span>Comment:</span>
+      <textarea id="comment" class="radius" placeholder="Add your comment here, up to 200 characters"
+        maxlength="200"></textarea>
+      </div>
+      <button class="btn-create radius hoverTr mg1auto">Add Movie to my list</button>
+      <input type="reset" class="btnCancel radius hoverTr mg1auto" id="cancelCreate" value="Cancel" />
     </form>
   </div>
 
