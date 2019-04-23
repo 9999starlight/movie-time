@@ -9,6 +9,8 @@ const main = document.querySelector('.main-content')
 let movie = {}
 let info = '';
 let action = false;
+const search = document.querySelector('#search')
+search.addEventListener('keyup', movieSearch)
 
 const closeModal = (element) => {
   element.innerHTML = ''
@@ -17,8 +19,6 @@ const closeModal = (element) => {
 
 // fetch movies from search. show/hide spinner. Get movie ID for movieDetals()
 function movieSearch() {
-  const search = document.querySelector('#search')
-  search.addEventListener('keyup', movieSearch)
   showSpinner()
   fetch(`${proxy}/http://www.omdbapi.com/?s=${search.value}&apikey=${key}`)
     .then((res) => res.json())
