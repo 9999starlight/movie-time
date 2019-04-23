@@ -5,12 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+  <meta name="description"
+    content="Search for your favorite movies or series and enjoy our quiz. Create your wathchlist with comments and ratings">
+  <meta name="keywords" content="movies, search, watchlist, database">
+  <meta name="author" content="sestakirena@gmail.com">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Metal+Mania" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <title>Movies</title>
+  <title>Movie Time search</title>
 </head>
 
 <body>
@@ -20,7 +23,7 @@
       <div class="public flex row">
         <a href="index.html" class="white ctText">Home</a>
         <a href="search.html" class="white ctText">Search</a>
-        <a href="quiz.html" target="_blank" class="white ctText">Quiz</a>
+        <a href="quiz.html" class="white ctText">Quiz</a>
       </div>
       <div class="private flex row">
         <span class="account logged-in"></span>
@@ -28,10 +31,8 @@
         <a href="#" id="loginLink" class="logged-out hoverTr">Login</a>
         <a href="#" id="signUpLink" class="logged-out hoverTr">Sign up</a>
         <a href="#" id="logoutLink" class="logged-in hoverTr">Logout</a>
-
       </div>
     </nav>
-
     <div class="main-container flex fullWidth">
       <aside class="flex">
         <div class="login relative flex center mg1auto">
@@ -82,7 +83,6 @@
             <h1 class="mg1auto">MY LIST</h1>
             <div class="buttons flex center fullWidth mg1auto">
               <a href="#nav" class="mg1auto"><button class="mg1auto radius hoverTr white">Back to search</button></a>
-
               <button id="btnAbc" class="mg1auto radius hoverTr white">Sort A - Z</button>
               <button id="btnRate" class="mg1auto radius hoverTr white">Sort by IMDB rating</button>
             </div>
@@ -142,7 +142,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
   <script>
-    // Initialize Firebase
+    // Initializing Firebase
     var config = {
       apiKey: "AIzaSyA7GNvPEIFYuJla-M0d41mIXmKMe1yXA4M",
       authDomain: "movie-time-1259d.firebaseapp.com",
