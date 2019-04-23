@@ -18,17 +18,21 @@ body {
   padding: 0.8em;
 }
 
+.container {
+  padding: 1em 1em 2em 1em;
+}
+
 .flex {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.nas {
+.header {
   margin: 2em auto 0 auto;
 }
 
-.contnaslov,
+.introContainer,
 .container {
   padding: 1em;
   background-color: rgba(68, 67, 60, 0.759);
@@ -53,21 +57,21 @@ h2 {
   margin-bottom: 1.5em;
 }
 
-.nas h1 {
+.header h1 {
   border: none;
 }
 
-.contnaslov h1,
-.contnaslov h2 {
+.introContainer h1,
+.introContainer h2 {
   width: auto;
 }
 
-.nas h1,
-.nas h2 {
+.header h1,
+.header h2 {
   background-color: rgba(40, 41, 28, 0.164);
 }
 
-.pitanje {
+.question {
   background-color: rgba(24, 23, 21, 0.755);
   color: white;
   border: 2px inset rgb(171, 169, 175);
@@ -109,23 +113,23 @@ label {
   margin-bottom: 0.5em;
 }
 
-label > input {
+label>input {
   visibility: hidden;
   position: absolute;
 }
 
-label > input + div,
+label>input+div,
 button,
 input[type="button"] {
   cursor: pointer;
 }
 
-label > input + div {
+label>input+div {
   font-size: 1.2em;
 }
 
-label > input:checked + div {
-  /* stil diva posle čekiranja */
+/* style question div if checked */
+label>input:checked+div {
   background-color: #5a5f689c;
   padding: 0.3em 0;
   border-radius: 6px;
@@ -137,34 +141,31 @@ label > input:checked + div {
   display: none;
 }
 
-.tacan {
+.correct {
   background-color: rgba(4, 88, 4, 0.897);
 }
 
-.tacanBorder {
+.correctBorder {
   border: 7px solid rgb(5, 148, 5);
 }
 
-.netacan {
+.incorrect {
   background-color: rgba(207, 3, 3, 0.863);
 }
 
-.netacanBorder {
-  border: 7px solid rgba(207, 3, 3, 0.863);
-}
-
-@media (min-width: 800px) {
+@media (min-width: 776px) {
   .container {
     width: 600px;
     margin: 0.5em auto 1em auto;
     max-height: 850px;
+    padding: 1em;
   }
 
-  .contnaslov {
+  .introContainer {
     margin: 15%;
   }
 
-  .nas {
+  .header {
     flex-direction: row;
     justify-content: space-evenly;
     width: 750px;
