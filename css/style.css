@@ -138,6 +138,10 @@ aside div form input {
   margin-top: 0.5em;
 }
 
+.search p {
+  color: gray;
+}
+
 .logged-in,
 .logged-out .more-info,
 .add-new,
@@ -305,14 +309,14 @@ input[type="reset"],
 
 .data input[type="button"],
 .data button,
-.buttons button,
 .alertSuccess {
   background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 86) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
 }
 
 .alert button,
 form button,
-form input[type="reset"] {
+form input[type="reset"],
+.buttons button {
   background: linear-gradient(to bottom, rgb(120, 119, 128) 0%, rgb(59, 58, 68) 0%, rgb(130, 135, 161) 0%, rgb(65, 62, 66) 49%, rgb(62, 59, 63) 50%, rgb(140, 140, 156) 100%);
 }
 

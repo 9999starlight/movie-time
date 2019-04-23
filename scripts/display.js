@@ -1,4 +1,4 @@
-
+// global selectors
 const container = document.querySelector('.container')
 const loginLink = document.querySelector('#loginLink')
 const signUpLink = document.querySelector('#signUpLink')
@@ -10,6 +10,7 @@ const accountDetails = document.querySelector('.account');
 const spinner = document.querySelector('#spinner');
 const listDiv = document.querySelector('.list');
 
+// show/hide spinner
 function showSpinner() {
   spinner.className = "show";
   setTimeout(() => {
@@ -33,7 +34,7 @@ document.addEventListener('keyup', function(e) {
 });
 */
 
-//alerts
+// alerts - selectors, openning and closing functions
 const alertWarn = document.querySelector('.alertWarn');
 const alertSuccess = document.querySelector('.alertSuccess');
 const warnInfo = document.querySelector('#warnInfo')
@@ -68,9 +69,10 @@ const openSignup = (e) => {
   close(loginFormM);
 }
 
-// listeners
 loginLink.addEventListener('click', openLogin);
 signUpLink.addEventListener('click', openSignup);
+
+// closing forms and alerts
 document.querySelector('#loginX').addEventListener('click', function () {
   close(loginFormM)
 });
@@ -104,6 +106,7 @@ function menuMobile(e) {
 }
 document.querySelector('.fa-bars').addEventListener('click', menuMobile)
 */
+
 // display links - depends on the user status from auth.onStateChanged function
 const displayLinks = (user) => {
   const loggedOutLinks = document.querySelectorAll('.logged-out');
@@ -125,8 +128,7 @@ const displayLinks = (user) => {
   }
 };
 
-// taking data from auth, check if user is logged, catching doc from firease
-// rendering movieList ul -  functions for sorting, saving and deleting list items
+/* taking data from auth, check if user is logged, catching doc from firebase; rendering movieList ul - functions for sorting, saving and deleting list items */
 const displayMovieList = (data) => {
   let user = firebase.auth().currentUser;
   if (data.length) {
@@ -160,7 +162,7 @@ const displayMovieList = (data) => {
     });
     movieList.innerHTML = output
 
-    // Sort list alfabetically
+    // Sorting list alfabetically
     const lis = movieList.querySelectorAll('.item');
     const sortByAbc = () => {
       movieList.innerHTML = ''
@@ -205,7 +207,7 @@ const displayMovieList = (data) => {
       })
     });
 
-    //SAVE COMMENT & rating CHANGES
+    //SAVE comment & rating changes
     const saveIcon = document.querySelectorAll('.fa-save')
     saveIcon.forEach(si => {
       si.addEventListener('click', (e) => {
