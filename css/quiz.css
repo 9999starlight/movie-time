@@ -10,12 +10,21 @@ body {
   background-color: #08032796;
   font-family: 'Source Sans Pro', Arial, sans-serif;
   justify-content: center;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .main-con,
 .container {
   box-sizing: border-box;
   padding: 0.8em;
+}
+
+.introContainer {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
 }
 
 .container {
@@ -43,18 +52,23 @@ body {
 }
 
 h1,
+h2,
+h3 {
+  color: whitesmoke;
+}
+
+h1,
 h2 {
   font-size: 2em;
   font-weight: 500;
   border-radius: 20px;
   width: 150px;
-  color: whitesmoke;
   padding: 0.5em;
 }
 
 h2 {
   font-size: 1.5em;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
 .header h1 {
@@ -102,6 +116,11 @@ input[type="button"] {
   padding: 1em 1.6em 1em 1.6em;
   background-color: rgba(28, 27, 31, 0.89);
   font-size: 1.4em;
+}
+
+.introContainer button:first-of-type {
+  font-size: 1.1em;
+  padding: 1em;
 }
 
 label {
@@ -159,10 +178,6 @@ label>input:checked+div {
     margin: 0.5em auto 1em auto;
     max-height: 850px;
     padding: 1em;
-  }
-
-  .introContainer {
-    margin: 15%;
   }
 
   .header {

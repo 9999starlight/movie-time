@@ -15,7 +15,7 @@ function quiz() {
   let questions = [];
   let currentQuestion = 0;
   let outcome = 0;
-  // fetch API data for questions
+  // fetch Open Trivia API data for questions
   fetch('https://opentdb.com/api.php?amount=20&category=11')
     .then(res => res.json())
     .then(data => {
@@ -25,8 +25,9 @@ function quiz() {
       createQuestions();
       document.querySelector('.mainContainer').classList.remove('none');
       document.querySelector('.mainContainer').classList.add('flex');
+
       function createQuestions() {
-        // condition to stop function; result; reset counter; empty array for new fetch
+        // stop function at the end; result; reset counter; empty array for new fetch
         if (currentQuestion >= questions.length) {
           theEnd();
           clearInterval(sInt);
@@ -61,27 +62,27 @@ function quiz() {
         container.innerHTML += questionList;
         container.innerHTML += `<button>Next question</button>`;
         document.querySelector('button').
-          addEventListener('click', answerCheck);
+        addEventListener('click', answerCheck);
       }
-      const odbrojOd = new Date().getTime() + 601000;
-      // setovanje vremena za quiz.
+      
+      // timer settings
+      const countFrom = new Date().getTime() + 601000;
       const sInt = setInterval(function () {
-        const sada = new Date().getTime();
-        const razlika = odbrojOd - sada; 
-        // Račun za minute and sekunde
-        let minuti = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
-        let sekunde = Math.floor((razlika % (1000 * 60)) / 1000);
-        sekunde < 10 ? sekunde = `0${sekunde}` : sekunde
-        minuti < 10 ? minuti = `0${minuti}` : minuti
-        if (razlika >= 0) {
-            tim.innerHTML = `${minuti} : ${sekunde}`
+        const currentTime = new Date().getTime();
+        const timeDifference = countFrom - currentTime;
+        // counting time difference and setting display
+        let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        seconds < 10 ? seconds = `0${seconds}` : seconds
+        minutes < 10 ? minutes = `0${minutes}` : minutes
+        if (timeDifference >= 0) {
+          tim.innerHTML = `${minutes} : ${seconds}`
+        } else {
+          clearInterval(sInt);
+          theEnd()
+          tim.innerHTML = "Time's up!";
         }
-        else {
-            clearInterval(sInt);
-            theEnd()
-            tim.innerHTML = "Time's up!";
-        }
-    }, 1000, createQuestions);
+      }, 1000, createQuestions);
 
       function answerCheck() {
         const options = document.querySelectorAll('input[name="options"]');
@@ -106,7 +107,7 @@ function quiz() {
           createQuestions();
         }, 2000);
       }
-
+      // display for the end of the quiz
       function theEnd() {
         const percentage = parseFloat((outcome * 100) / questions.length).toFixed(2);
         container.innerHTML = `<div class = 'question borderR'>You won ${outcome}
