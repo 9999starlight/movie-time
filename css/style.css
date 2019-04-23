@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-/*inherit border-box*/
 *,
 *:before,
 *:after {
@@ -38,10 +37,6 @@ body {
   width: 100%;
 }
 
-.bold {
-  font-weight: 700;
-}
-
 .center {
   align-items: center;
 }
@@ -50,32 +45,34 @@ body {
   margin: 1em auto;
 }
 
+.mg1 {
+  margin: 1em;
+}
+
+.white {
+  color: white;
+}
+
+.ctText {
+  text-align: center;
+}
+
+.shadow {
+  box-shadow: 3px 3px 6px rgb(168, 170, 174);
+}
+
 .container {
   min-height: 100vh;
   max-height: 100%;
 }
 
-.public {
-  box-shadow: 0px -15px 30px -5px #c986d7;
-  animation: shine 20s infinite;
+.p10 {
+  padding: 10px;
 }
 
-@keyframes shine {
-  0% {
-    box-shadow: 0px -15px 30px -5px #c986d7;
-  }
-
-  40% {
-    box-shadow: 0px -5px 55px -1px #c986d7;
-  }
-
-  75% {
-    box-shadow: 0px 5px 55px -1px #c986d7;
-  }
-
-  100% {
-    box-shadow: 0px -15px 30px -5px #c986d7;
-  }
+.public {
+  box-shadow: 0px -15px 30px -5px #14141415;
+  background: linear-gradient(90deg, rgba(70, 68, 68, 0) 0%, rgba(255, 255, 255, 0.048) 25%, rgba(255, 255, 255, 0.068) 75%, rgba(255, 255, 255, 0) 100%);
 }
 
 a {
@@ -83,8 +80,7 @@ a {
 }
 
 .private a,
-.private span,
-.list h1 {
+.private span {
   background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -92,31 +88,34 @@ a {
 }
 
 .public a {
-  color: white;
-  border: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-main {
-  margin-top: 2em;
+input,
+textarea,
+button {
+  border: none;
 }
 
 .content {
   width: 80%;
 }
 
+.content .film,
+.info-poster,
+.list {
+  background: radial-gradient(circle at top left, rgba(66, 65, 63, 0.833), rgba(26, 23, 20, 0.675));
+}
+
 .content .film {
-  /*
-  border: 2px inset; 
+
+  /*border: 2px inset; 
   border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
-  border-image-slice: 1;
-  */
+  border-image-slice: 1;*/
   border: 2px inset whitesmoke;
   padding: 0.5em;
-  text-align: center;
-  margin: 1em 0.5em;
   width: 220px;
-  height: 400px;
+  height: 420px;
 }
 
 .film img {
@@ -129,18 +128,18 @@ main {
 .search input[type="text"] {
   width: 200px;
   padding: 0.8em;
-  border: none;
   font-size: 1.1em;
   background: lightgrey;
+}
+
+.search p,
+.search input[type="text"],
+aside div form input {
   margin-top: 0.5em;
 }
 
-.shadow {
-  box-shadow: 3px 2px 5px rgb(124, 123, 123);
-}
-
-/* .logged-in, .logged-out */
-.more-info,
+.logged-in,
+.logged-out .more-info,
 .add-new,
 .login,
 .signup,
@@ -148,6 +147,13 @@ main {
 .list,
 .alert {
   display: none;
+}
+
+nav a,
+.private span {
+  display: block;
+  margin: 0 auto;
+  padding: 13px;
 }
 
 .more-info,
@@ -165,16 +171,13 @@ main {
   min-width: 95vw;
   max-height: 100vh;
   overflow: auto;
-  /*scroll*/
 }
-.add-new {
+
+.add-new,
+.alert {
   flex-direction: column;
 }
 
-.transparent {
-  background-color: transparent;
-  border: none;
-}
 .more-info .film {
   min-width: 95vw;
   animation-name: modalopen;
@@ -182,10 +185,9 @@ main {
 }
 
 .add-new form {
-  color: white;
+  padding: 1em;
   animation-name: fadein;
   animation-duration: 1s;
-  padding: 1em;
 }
 
 @keyframes fadein {
@@ -226,7 +228,7 @@ i.far,
 i.fa-edit {
   font-size: 30px;
   font-weight: bold;
-  padding: 0.5rem;
+  padding: 0.5em;
 }
 
 i.fa-save {
@@ -238,7 +240,8 @@ i.fa-trash-alt {
   margin: 10px;
 }
 
-i.fa-window-close {
+i.fa-window-close,
+i.fa-bars {
   color: #f0e6e6;
   position: absolute;
   top: 5px;
@@ -247,22 +250,11 @@ i.fa-window-close {
 
 .info-poster {
   width: 95%;
-  background: radial-gradient(circle at top left, rgba(66, 65, 63, 0.833), rgba(26, 23, 20, 0.675));
-  text-align: center;
 }
 
-.info-poster,
-.data,
-.alert,
-.error,
-li div textarea,
-li div input,
-.add-new form div  {
-  padding: 10px;
-}
-
-.data {
-  line-height: 2em;
+.content .film .data {
+  justify-content: space-evenly;
+  height: 20vh;
 }
 
 button {
@@ -280,7 +272,7 @@ aside {
 .login,
 .signup,
 .add-new {
-  background: linear-gradient(to bottom, rgba(77,71,82,1) 0%, rgba(201,195,219,1) 99%, rgba(216,208,239,1) 100%);
+  background: linear-gradient(to bottom, rgba(77, 71, 82, 1) 0%, rgba(201, 195, 219, 1) 99%, rgba(216, 208, 239, 1) 100%);
   box-shadow: 0 0 3px 2px rgba(189, 186, 186, 0.342);
   border-radius: 10px;
   z-index: 2;
@@ -296,8 +288,7 @@ aside {
 
 /*.container*/
 aside,
-aside div h2,
-.add-new h2 {
+aside div h2 {
   margin: 0 auto;
 }
 
@@ -305,23 +296,39 @@ aside div form label {
   margin-top: 20px;
 }
 
-aside div form button,
-.add-new form button,
-.film input,
-.alert button,
-.buttons button {
+button,
+input[type="reset"],
+.film input {
   padding: 10px 25px;
+  font-size: 1.1em;
 }
 
-aside div form input,
-.add-new form input {
+.data input[type="button"],
+.data button,
+.buttons button,
+.alertSuccess {
+  background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 86) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
+}
+
+.alert button,
+form button,
+form input[type="reset"] {
+  background: linear-gradient(to bottom, rgb(120, 119, 128) 0%, rgb(59, 58, 68) 0%, rgb(130, 135, 161) 0%, rgb(65, 62, 66) 49%, rgb(62, 59, 63) 50%, rgb(140, 140, 156) 100%);
+}
+
+.add-new form textarea,
+.add-new form input[type="number"],
+.signup form input,
+.login form input {
+  background-color: rgb(100, 94, 105);
+  padding: 5px;
+  font-size: 1.1em;
+}
+
+aside div form input {
   width: 180px;
   height: 22px;
   padding: 2px;
-  margin-top: 0.5em;
-}
-.add-new form input {
-  width: 80px;
 }
 
 .add-new form p {
@@ -340,10 +347,16 @@ ul {
 }
 
 .list h1 {
-  text-shadow: 2px 2px #378a3e;
+  font-family: "Metal Mania", Times, serif;
+  letter-spacing: 0.2em;
+  font-size: 2.3em;
+  color: #333333;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #18ff43, 0 0 30px #18FF74, 0 0 40px #18FF74, 0 0 55px #18FF7D, 0 0 75px #18ff74, 2px 2px 2px rgba(44, 206, 64, 0);
 }
 
+
 li {
+  width: 90%;
   border: 1px solid white;
   border-radius: 10px 40px 10px 40px;
   margin: 0.5rem;
@@ -353,7 +366,6 @@ li {
 
 li div {
   padding: 12px;
-  text-align: center;
   align-items: center;
 }
 
@@ -365,7 +377,6 @@ li div textarea,
 li div input {
   border: 1px solid rgba(109, 107, 107, 0.719);
   background: rgb(49, 49, 49);
-  color: white;
   outline: yellowgreen;
 }
 
@@ -375,10 +386,7 @@ li div textarea,
   width: 190px;
   height: 125px;
 }
-.add-new form textarea, .add-new form input[type="number"] {
-  background-color: rgb(100, 94, 105);
-  border: none;
-}
+
 #ratingLi {
   width: 50px;
   height: 18px;
@@ -387,7 +395,7 @@ li div textarea,
 
 /* spinner */
 #spinner {
-  visibility: hidden;
+  display: none;
   width: 80px;
   height: 80px;
   margin: 3em 0;
@@ -408,28 +416,21 @@ li div textarea,
 }
 
 #spinner.show {
-  visibility: visible;
+  display: block;
 }
 
 .alert {
   border: 2px inset rgb(84, 91, 84);
+  border-radius: 15px;
   z-index: 5;
   max-height: 300px;
   width: 200px;
   max-width: 300px;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
 }
 
 .alertWarn {
   background: rgba(109, 0, 25, 1);
-  background: linear-gradient(to bottom, rgba(109,0,25,1) 0%, rgba(143,2,34,1) 56%, rgba(38,5,5,1) 100%);
-}
-
-.alertSuccess {
-  background: rgba(98, 125, 77, 1);
-  background: linear-gradient(to bottom, rgba(31, 59, 8, 1) 0%, rgba(98, 125, 77, 1) 95%, rgba(98, 125, 77, 1) 100%);
+  background: linear-gradient(to bottom, rgba(109, 0, 25, 1) 0%, rgba(143, 2, 34, 1) 56%, rgba(38, 5, 5, 1) 100%);
 }
 
 .error {
@@ -439,7 +440,11 @@ li div textarea,
 
 @media (min-width: 768px) {
 
-  .row {
+  .info-poster,
+  .buttons,
+  .add-new form div,
+  li,
+  .content {
     flex-direction: row;
   }
 
@@ -452,27 +457,53 @@ li div textarea,
   }
 
   nav a,
-  nav span {
+  .private span {
     padding: 1.2em;
+    margin: 0;
+  }
+
+  i.fa-bars {
+    display: none;
+  }
+
+  .public,
+  .private {
+    flex-direction: row;
+  }
+
+  .public {
+    animation: shine 20s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      box-shadow: 0px -15px 30px -5px #c986d7;
+    }
+
+    40% {
+      box-shadow: 0px -5px 55px -1px #c986d7;
+    }
+
+    75% {
+      box-shadow: 0px 5px 55px -1px #c986d7;
+    }
+
+    100% {
+      box-shadow: 0px -15px 30px -5px #c986d7;
+    }
   }
 
   .public a {
-    width: 25%;
-    text-align: center;
+    width: 33.3%;
   }
 
   .private {
     justify-content: flex-end;
-    margin-right: 1em;
+    width: 98%;
   }
 
   .main-container {
     height: 100%;
-    margin-top: 1.2em;
-  }
-
-  main {
-    margin-top: 1.5em;
   }
 
   .search input[type=text] {
@@ -484,9 +515,13 @@ li div textarea,
   }
 
   .content {
-    justify-content: center;
     flex-wrap: wrap;
     /* max-width: 900px;*/
+  }
+
+  .content,
+  .alert {
+    justify-content: center;
   }
 
   .more-info,
@@ -497,12 +532,22 @@ li div textarea,
     font-size: 1em;
   }
 
+  .add-new form div {
+    padding: 0;
+  }
+
+  .add-new p {
+    margin: 0.6em;
+  }
+
+  .add-new span {
+    margin: 1em;
+  }
+
   .info-poster {
-    flex-direction: row;
     justify-content: space-around;
     min-width: 550px;
     max-width: 80%;
-    margin: 1em;
     padding: 2em;
     font-size: 1.2em;
   }
@@ -512,12 +557,7 @@ li div textarea,
   }
 
   .buttons {
-    flex-direction: row;
     justify-content: space-evenly;
-  }
-
-  .add-new form div {
-    flex-direction: row;
   }
 
   ul {
@@ -527,7 +567,6 @@ li div textarea,
 
   li {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -568,7 +607,7 @@ li div textarea,
 @media (min-width: 992px) {
   aside {
     order: 2;
-    margin-right: 1.5em;
+    margin-right: 2em;
   }
 
   .login,
@@ -585,7 +624,10 @@ li div textarea,
     padding: 5px;
   }
 
-  .container {
+  body,
+  .container,
+  .more-info,
+  .add-new {
     background-color: #333333;
   }
 
@@ -595,24 +637,23 @@ li div textarea,
 
   .content .film {
     width: 250px;
+
   }
 
   .more-info {
     max-width: 1000px;
-    /*bilo 900px*/
   }
 
   .more-info .film {
     min-width: 800px;
     max-width: 1000px;
-    /*bilo 850px*/
   }
 
   .info-poster {
     min-width: 700px;
   }
 
-  .list{
+  .list {
     max-width: 1100px;
   }
 }

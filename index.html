@@ -5,156 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Movies</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Metal+Mania" rel="stylesheet">
+  <link rel="stylesheet" href="css/intro.css">
+  <title>Movie Time</title>
 </head>
 
 <body>
-  <div class="container flex center fullWidth">
-    <nav class="flex center fullWidth" id="nav">
-      <div class="public flex row fullWidth">
-        <a href="index.html">Home</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="#">Galery</a>
-        <a href="#">Popular</a>
-      </div>
-      <div class="private flex row fullWidth">
-        <span class="account"></span>
-        <a href="#list" class="logged-in hoverTr">My List</a>
-        <a href="#" id="loginLink" class="logged-out hoverTr">Login</a>
-        <a href="#" id="signUpLink" class="logged-out hoverTr">Sign up</a>
-        <a href="#" id="logoutLink" class="logged-in hoverTr">Logout</a>
-      </div>
-    </nav>
-
-    <div class="main-container flex fullWidth">
-      <aside class="flex">
-        <div class="login relative flex center mg1auto">
-          <i class="fas fa-window-close block hoverTr" id="loginX"></i>
-          <h2>Login</h2>
-          <form id="login-form" class="flex">
-            <label for="login-email" class="block">Email</label>
-            <input type="email" id="login-email" class="radius block" placeholder="Enter your email" required />
-            <label for="login-password" class="block">Password</label>
-            <input type="password" id="login-password" class="radius block" placeholder="Enter your password"
-              required />
-            <button class="btn-logIn block radius hoverTr">Login</button>
-            <p class="error"></p>
-          </form>
-        </div>
-        <div class="signup relative flex center mg1auto">
-          <i class="fas fa-window-close block hoverTr" id="signupX"></i>
-          <h2>Sign up</h2>
-          <form id="signup-form" class="flex">
-            <label for="signup-email" class="block">Email address</label>
-            <input type="email" id="signup-email" class="radius block" required placeholder="Enter your email"
-              title="Enter email address in valid email form like: abc@abc.abc" />
-            <label for="signup-password" class="block">Choose password</label>
-            <input type="password" id="signup-password" class="radius block" placeholder="Enter your password" required
-              title="Enter at least 6 characters long password" />
-            <label for="shortComment" class="block">Alias/Comment</label>
-            <input type="text" id="shortComment" class="radius block" placeholder="Enter alias or comment" required
-              title="Enter comment max 25 characters" min="1" max="20" />
-            <button class="btn-signUp block radius hoverTr">Sign up</button>
-            <p class="error"></p>
-          </form>
-        </div>
-      </aside>
-      <main class="flex relative center fullWidth">
-        <div class="search flex center">
-          <p>Start typing to search</p>
-          <input type="text" id="search" class="radius shadow">
-        </div>
-        <div id="spinner"></div>
-        <div class="more-info shadow"></div>
-        <div class="main-content flex center">
-          <div class="content flex row center"></div>
-          <div class="list flex center shadow mg1auto">
-            <h1 class="mg1auto">MY LIST</h1>
-            <div class="buttons flex center fullWidth mg1auto">
-              <a href="#nav"><button class="mg1auto radius">Back to top</button></a>
-              <button id="btnAbc" class="mg1auto radius">Sort alfabetically</button>
-              <button id="btnRate" class="mg1auto radius">Sort by IMDB rating</button>
-              <button id="btnYear" class="mg1auto radius">Sort by year</button>
-            </div>
-            <ul id="list" class="flex center"></ul>
-          </div>
-        </div>
-      </main>
+  <div class="container">
+    <div class="videoDiv">
+      <video src="./video/filmstrip.mp4" autoplay="" loop="" muted></video>
     </div>
-
-    <div class="alert alertWarn center radius" id="warn">
-      <h4 id="warnInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto" id="okWarn">OK</button>
-    </div>
-    <div class="alert alertSuccess center radius" id="success">
-      <h4 id="succInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto" id="okSuccess">OK</button>
+    <div class="filter"></div>
+    <div class="textDiv">
+      <h1>Welcome to</h1>
+      <h1>Movie Time</h1>
+      <p>Search for your favorite movies or series and enjoy our quiz</p>
+      <p>Create your wathchlist with comments and ratings</p>
+      <p>Explore and have fun!</p>
+      <a href="search.html"><button>Explore</button></a>
     </div>
   </div>
-  <div id="add-new" class="add-new relative center radius">
-    <h2>Add to my list</h2>
-    <form id="create-form" class="create-form flex mg1auto">
-
-      <div class="flex"><span>Title:</span>
-        <p id="inputTitle" class="transparent"></p>
-      </div>
-      <div class="flex"><span>Type:</span>
-        <p id="inputType" class="transparent"></p>
-      </div>
-      <div class="flex"><span>Year:</span>
-        <p id="inputYear" class="transparent"></p>
-      </div>
-      <div class="flex"><span>Genre:</span>
-        <p id="inputGenre" class="transparent"></p>
-      </div>
-      <div class="flex"><span>IMDB rating:</span>
-        <p id="inputImdbRate" class="transparent"></p>
-      </div>
-      <div class="flex"><span>IMDB link:</span>
-        <p id="imdbLink" class="transparent"></p>
-      </div>
-      <div class="flex"><span>Movie ID:</span>
-        <p id="inputFilmId" class="transparent"></p>
-      </div>
-      <div class="flex"><span>My Rating:</span><input type="number" id="myRating" class="radius"
-          placeholder="Enter your rating" title="Enter number between 1 and 10" min="1" max="10"></div>
-      <div class="flex">
-      <span>Comment:</span>
-      <textarea id="comment" class="radius" placeholder="Add your comment here, up to 200 characters"
-        maxlength="200"></textarea>
-      </div>
-      <button class="btn-create radius hoverTr mg1auto">Add Movie to my list</button>
-      <input type="reset" class="btnCancel radius hoverTr mg1auto" id="cancelCreate" value="Cancel" />
-    </form>
-  </div>
-
-
-  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyA7GNvPEIFYuJla-M0d41mIXmKMe1yXA4M",
-      authDomain: "movie-time-1259d.firebaseapp.com",
-      databaseURL: "https://movie-time-1259d.firebaseio.com",
-      projectId: "movie-time-1259d"
-    };
-    firebase.initializeApp(config);
-    // auth and firestore references
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    // realtime firestore settings
-    db.settings({
-      timestampsInSnapshots: true
-    });
-  </script>
-  <script src="scripts/main.js"></script>
-  <script src="scripts/functions.js"></script>
-  <script src="scripts/display.js"></script>
 </body>
 
 </html>
