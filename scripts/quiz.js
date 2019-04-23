@@ -1,67 +1,70 @@
 window.addEventListener('load', intro);
 
 function intro() {
-  // sakrij sadržaj kviza
-  document.querySelector('.main-con').classList.add('none');
-  document.querySelector('#pokreniKviz').addEventListener('click', kviz);
+  // hide main quiz container; add listener for quiz start
+  document.querySelector('.mainContainer').classList.add('none');
+  document.querySelector('#startQuiz').addEventListener('click', quiz);
 }
 
-function kviz() {
-  document.querySelector('.contnaslov').classList.add('none'); // ukloni uvod
+function quiz() {
+  // hide intro
+  document.querySelector('.introContainer').classList.add('none');
+  // global selectors
   const container = document.querySelector('#container');
-  const tim = document.querySelector('#vreme');
-  let pitanja = [];
-  let trenutnoPitanje = 0; // brojač-pitanja
-  let zbir = 0; // brojač-zbir tačnih odgovora
-
+  const tim = document.querySelector('#countdown');
+  let questions = [];
+  let currentQuestion = 0;
+  let outcome = 0;
+  // fetch API data for questions
   fetch('https://opentdb.com/api.php?amount=20&category=11')
     .then(res => res.json())
     .then(data => {
       data.results.forEach(d => {
-        pitanja.push([d.question, d.correct_answer, d.incorrect_answers]);
+        questions.push([d.question, d.correct_answer, d.incorrect_answers]);
       });
-      napraviPitanja();
-      document.querySelector('.main-con').classList.remove('none');
-      document.querySelector('.main-con').classList.add('flex');
-      function napraviPitanja() {
-        // zaustavi kada završi niz pitanja, rezultat, reset brojača:
-        if (trenutnoPitanje >= pitanja.length) {
-          kraj();
+      createQuestions();
+      document.querySelector('.mainContainer').classList.remove('none');
+      document.querySelector('.mainContainer').classList.add('flex');
+      function createQuestions() {
+        // condition to stop function; result; reset counter; empty array for new fetch
+        if (currentQuestion >= questions.length) {
+          theEnd();
           clearInterval(sInt);
-          trenutnoPitanje = 0;
-          zbir = 0;
-          pitanja = [] // praznim niz za novi fetch data
-          return false; // zaustavljam funkciju
+          currentQuestion = 0;
+          outcome = 0;
+          questions = []
+          return false;
         }
-        // Pitanja, opcije, random sort opcija, prikaz
-        document.querySelector('#naslov').innerHTML = `${trenutnoPitanje +
-          1} / ${pitanja.length}`;
-        const pitanje = pitanja[trenutnoPitanje][0];
-        const sveOpcije = [];
-        sveOpcije.push(pitanja[trenutnoPitanje][2][0],
-          pitanja[trenutnoPitanje][2][1],
-          pitanja[trenutnoPitanje][2][2],
-          pitanja[trenutnoPitanje][1]);
-        sveOpcije.sort(() => Math.random() - 0.5);
-        container.innerHTML = ''; // prazan container za naredni krug
-        let listaPit = '';
-        sveOpcije.forEach(op => {
-          if (op !== undefined && op == pitanja[trenutnoPitanje][1]) {
-            listaPit += `<label><input type = 'radio' name = 'opcije' id = 't'
+        // questions, options, random sort of options, display
+        document.querySelector('#questionNumber').innerHTML = `${currentQuestion + 1} / ${questions.length}`;
+        const question = questions[currentQuestion][0];
+        const allOptions = [];
+        allOptions.push(questions[currentQuestion][2][0],
+          questions[currentQuestion][2][1],
+          questions[currentQuestion][2][2],
+          questions[currentQuestion][1]);
+        allOptions.sort(() => Math.random() - 0.5);
+        // clear container for next game; appending variable
+        container.innerHTML = '';
+        let questionList = '';
+        // display
+        allOptions.forEach(op => {
+          if (op !== undefined && op == questions[currentQuestion][1]) {
+            questionList += `<label><input type = 'radio' name = 'options' id = 't'
             value = '${op}'><div>${op}</div></label>`;
           } else if (op !== undefined) {
-            listaPit += `<label><input type = 'radio' name = 'opcije'
+            questionList += `<label><input type = 'radio' name = 'options'
             value = '${op}'><div>${op}</div></label>`;
           }
         })
-        container.innerHTML += `<div class = 'pitanje borderR'>${pitanje}<div>`;
-        container.innerHTML += listaPit;
+        container.innerHTML += `<div class = 'question borderR'>${question}<div>`;
+        container.innerHTML += questionList;
         container.innerHTML += `<button>Next question</button>`;
         document.querySelector('button').
-          addEventListener('click', proveriOdgovor);
+          addEventListener('click', answerCheck);
       }
       const odbrojOd = new Date().getTime() + 601000;
-      // setovanje vremena za kviz.
+      // setovanje vremena za quiz.
       const sInt = setInterval(function () {
         const sada = new Date().getTime();
         const razlika = odbrojOd - sada; 
@@ -75,40 +78,40 @@ function kviz() {
         }
         else {
             clearInterval(sInt);
-            kraj()
+            theEnd()
             tim.innerHTML = "Time's up!";
         }
-    }, 1000, napraviPitanja);
+    }, 1000, createQuestions);
 
-      function proveriOdgovor() {
-        const opcije = document.querySelectorAll('input[name="opcije"]');
-        opcije.forEach(function (op) {
+      function answerCheck() {
+        const options = document.querySelectorAll('input[name="options"]');
+        options.forEach(function (op) {
           let att = op.getAttribute('id');
           if (att === 't') {
-            op.parentNode.classList.add('tacanBorder');
+            op.parentNode.classList.add('correctBorder');
           }
           if (op.checked) {
             if (att === 't') {
-              zbir++;
-              op.parentNode.classList.add('tacan');
+              outcome++;
+              op.parentNode.classList.add('correct');
             } else {
-              op.parentNode.classList.add('netacan');
+              op.parentNode.classList.add('incorrect');
             }
           }
         });
-        console.log(zbir);
-        // Naredno pitanje. setTimeout da se prikaže tačnost odgovora
-        trenutnoPitanje++;
+        //console.log(outcome);
+        // Next question; setTimeout to show if question is correct
+        currentQuestion++;
         setTimeout(function () {
-          napraviPitanja();
+          createQuestions();
         }, 2000);
       }
 
-      function kraj() {
-        const procenat = parseFloat((zbir * 100) / pitanja.length).toFixed(2);
-        container.innerHTML = `<div class = 'pitanje borderR'>You won ${zbir}
-        of ${pitanja.length} points or ${procenat}%</div>`;
-        document.querySelector('#naslov').innerHTML = `Quiz is finished`;
+      function theEnd() {
+        const percentage = parseFloat((outcome * 100) / questions.length).toFixed(2);
+        container.innerHTML = `<div class = 'question borderR'>You won ${outcome}
+        of ${questions.length} points or ${percentage}%</div>`;
+        document.querySelector('#questionNumber').innerHTML = `Finished!`;
       }
     });
 }
