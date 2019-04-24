@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Metal+Mania" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
   <title>Movie Time search</title>
 </head>
 
@@ -20,17 +20,17 @@
   <div class="container flex center fullWidth">
     <nav class="center fullWidth none" id="nav">
       <!--<a href="#"><i class="fas fa-bars hoverTr"></i></a>-->
-      <div class="public flex row">
+      <div class="public flex fullWidth">
         <a href="index.html" class="white ctText">Home</a>
         <a href="search.html" class="white ctText">Search</a>
         <a href="quiz.html" class="white ctText">Quiz</a>
       </div>
       <div class="private flex row">
-        <span class="account logged-in"></span>
         <a href="#list" class="logged-in hoverTr">My List</a>
         <a href="#" id="loginLink" class="logged-out hoverTr">Login</a>
         <a href="#" id="signUpLink" class="logged-out hoverTr">Sign up</a>
         <a href="#" id="logoutLink" class="logged-in hoverTr">Logout</a>
+        <span class="account logged-in"></span>
       </div>
     </nav>
     <div class="main-container flex fullWidth">
@@ -72,7 +72,7 @@
           <p>Sign up to create your watchlist with comments and ratings</p>
         </div>
         <div class="search flex center mg1auto">
-          <input type="text" id="search" class="radius shadow">
+          <input type="text" id="search" class="radius shadow" autofocus>
           <p>Start typing to search</p>
         </div>
         <div id="loader"></div>
@@ -100,7 +100,6 @@
     </div>
   </div>
   <div id="add-new" class="add-new relative center radius">
-    <h2 class="mg1auto">Add to my list</h2>
     <form id="create-form" class="create-form flex mg1auto white">
       <div class="flex p10"><span>Title:</span>
         <p id="inputTitle"></p>

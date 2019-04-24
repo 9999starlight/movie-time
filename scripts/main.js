@@ -22,7 +22,7 @@ function movieSearch() {
       hideLoader()
       let lista = ''
       if (data.Search == undefined) {
-        lista = `<h3>Not found...</h3>`
+        lista = `<h3>...</h3>`
       } else {
         data.Search.forEach(film => {
           if (film.Poster == "N/A" || film.Poster.startsWith('http://'))
@@ -38,7 +38,10 @@ function movieSearch() {
         });
       }
       content.innerHTML = lista
-    })
+    }).catch(err => {
+      console.log(err.message);
+      content.innerHTML = `<h3>Request failed, please try again later!</h3>`;
+  });
   // empty array for new search
   if (search.value === '') {
     filmIDS = [];
@@ -71,7 +74,7 @@ function movieDetails(filmId) {
           imdbLink: `https://www.imdb.com/title/${data.imdbID}`
         }
         info = `<div class = 'film flex center'>
-        <div class = "info-poster flex shadow center radius ctText p10 mg1">
+        <div class = "info-poster flex shadow center radius ctText mg1">
         <a href = 'https://www.imdb.com/title/${data.imdbID}' target = '_blank'><img src = '${data.Poster}' alt = 'film poster' class = "block hoverTr" /></a>
         <div class = "data flex p10">
         <h2>${data.Title}</h2>
@@ -88,17 +91,20 @@ function movieDetails(filmId) {
        </div>
        </div>`
       } else {
-        info = "Not found..."
+        info = `<h3>...</h3>`
       }
       moreInfo.innerHTML += info
       open(moreInfo)
       close(main)
-      document.querySelector('.back').addEventListener('click', function(){closeModal(moreInfo)
-        , open(main);
+      document.querySelector('.back').addEventListener('click', function () {
+      closeModal(moreInfo), open(main);
       });
-       // enable listeners for buttons
+      // enable listeners for buttons
       action = false;
       document.querySelector('.addMovieBtn').addEventListener('click',
-      function(){addMovieToList(movie)})
+        function () { addMovieToList(movie) })
+    }).catch(err => {
+      console.log(err.message);
+      content.innerHTML = `<h3>Request failed, please try again later!</h3>`;
     })
 }

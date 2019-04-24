@@ -1,7 +1,5 @@
 // global selectors
 const container = document.querySelector('.container');
-const loginLink = document.querySelector('#loginLink');
-const signUpLink = document.querySelector('#signUpLink');
 const loginFormDiv = document.querySelector('.login');
 const signUpFormDiv = document.querySelector('.signup');
 const addNew = document.querySelector('.add-new');
@@ -19,7 +17,7 @@ function showLoader() {
   loader.className = "show";
   setTimeout(() => {
     loader.className = loader.className.replace("show", "");
-  }, 60000);
+  }, 30000);
 }
 
 function hideLoader() {
@@ -57,14 +55,14 @@ const openLogin = (e) => {
   open(loginFormDiv);
   close(signUpFormDiv);
 }
-loginLink.addEventListener('click', openLogin);
+document.querySelector('#loginLink').addEventListener('click', openLogin);
 
 const openSignup = (e) => {
   e.preventDefault();
   open(signUpFormDiv);
   close(loginFormDiv);
 }
-signUpLink.addEventListener('click', openSignup);
+document.querySelector('#signUpLink').addEventListener('click', openSignup);
 
 // closing forms and alerts
 document.querySelector('#loginX').addEventListener('click', function () {
@@ -86,20 +84,6 @@ const closeAddNew = () => {
   container.classList.remove('darken');
 }
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
-
-// hamburger menu
-/*
-function menuMobile(e) {
-  e.preventDefault()
-  const nav = document.querySelector("#nav");
-  if (nav.style.display == 'none') {
-    nav.style.display == 'block'
-  } else {
-    nav.style.display == 'none'
-  }
-}
-document.querySelector('.fa-bars').addEventListener('click', menuMobile)
-*/
 
 // display links - depends on the user status from auth.onStateChanged function
 const displayLinks = (user) => {
@@ -230,12 +214,3 @@ const displayMovieList = (data) => {
   }
 };
 // console.log(movieList)
-
-/*
-document.addEventListener('keyup', function(e) {
-  let keyCode = e.keyCode;
-  if (keyCode === 27) {
-    close(item)
-  }
-});
-*/
