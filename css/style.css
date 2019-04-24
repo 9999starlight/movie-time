@@ -397,8 +397,8 @@ li div textarea,
   margin: 0.5em;
 }
 
-/* spinner */
-#spinner {
+/* loader */
+#loader {
   display: none;
   width: 80px;
   height: 80px;
@@ -419,7 +419,7 @@ li div textarea,
   }
 }
 
-#spinner.show {
+#loader.show {
   display: block;
 }
 

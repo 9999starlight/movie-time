@@ -172,7 +172,7 @@ label>input:checked+div {
   background-color: rgba(207, 3, 3, 0.863);
 }
 
-@media (min-width: 776px) {
+@media (min-width: 768px) {
   .container {
     width: 600px;
     margin: 0.5em auto 1em auto;

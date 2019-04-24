@@ -1,44 +1,39 @@
 // global selectors
-const container = document.querySelector('.container')
-const loginLink = document.querySelector('#loginLink')
-const signUpLink = document.querySelector('#signUpLink')
-const loginFormM = document.querySelector('.login')
-const signUpFormM = document.querySelector('.signup')
-const addNew = document.querySelector('.add-new')
+const container = document.querySelector('.container');
+const loginLink = document.querySelector('#loginLink');
+const signUpLink = document.querySelector('#signUpLink');
+const loginFormDiv = document.querySelector('.login');
+const signUpFormDiv = document.querySelector('.signup');
+const addNew = document.querySelector('.add-new');
 const movieList = document.querySelector('#list');
 const accountDetails = document.querySelector('.account');
-const spinner = document.querySelector('#spinner');
+const loader = document.querySelector('#loader');
 const listDiv = document.querySelector('.list');
+const alertWarn = document.querySelector('.alertWarn');
+const alertSuccess = document.querySelector('.alertSuccess');
+const warnInfo = document.querySelector('#warnInfo');
+const succInfo = document.querySelector('#succInfo');
 
-// show/hide spinner
-function showSpinner() {
-  spinner.className = "show";
+// show or hide loader
+function showLoader() {
+  loader.className = "show";
   setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
+    loader.className = loader.className.replace("show", "");
   }, 60000);
 }
 
-function hideSpinner() {
-  spinner.className = spinner.className.replace("show", "");
+function hideLoader() {
+  loader.className = loader.className.replace("show", "");
 }
 
-// open and close functions
+// openning and closing functions and alerts
 const open = (item) => item.style.display = 'flex';
 const close = (item) => item.style.display = 'none';
-/*
-document.addEventListener('keyup', function(e) {
-  let keyCode = e.keyCode;
-  if (keyCode === 27) {
-    close(item)
-  }
-});
-*/
 
-// alerts - selectors, openning and closing functions
-const alertWarn = document.querySelector('.alertWarn');
-const alertSuccess = document.querySelector('.alertSuccess');
-const warnInfo = document.querySelector('#warnInfo')
-const succInfo = document.querySelector('#succInfo')
+const closeModal = (element) => {
+  element.innerHTML = ''
+  close(element)
+}
 
 function openWarn() {
   open(alertWarn);
@@ -59,25 +54,24 @@ function openSuccess() {
 // opening-closing login, signup & create forms
 const openLogin = (e) => {
   e.preventDefault();
-  open(loginFormM);
-  close(signUpFormM);
+  open(loginFormDiv);
+  close(signUpFormDiv);
 }
+loginLink.addEventListener('click', openLogin);
 
 const openSignup = (e) => {
   e.preventDefault();
-  open(signUpFormM);
-  close(loginFormM);
+  open(signUpFormDiv);
+  close(loginFormDiv);
 }
-
-loginLink.addEventListener('click', openLogin);
 signUpLink.addEventListener('click', openSignup);
 
 // closing forms and alerts
 document.querySelector('#loginX').addEventListener('click', function () {
-  close(loginFormM)
+  close(loginFormDiv)
 });
 document.querySelector('#signupX').addEventListener('click', function () {
-  close(signUpFormM)
+  close(signUpFormDiv)
 });
 
 document.querySelector('#okWarn').addEventListener('click', function () {
@@ -114,7 +108,7 @@ const displayLinks = (user) => {
   if (user) {
     db.collection('users').doc(user.uid).get().then(doc => {
       const detailsInfo = `
-        <div class = "flex">Logged in user: ${user.email}</div>
+        <div class = "flex">${user.email}</div>
       `;
       accountDetails.innerHTML = detailsInfo;
     });
@@ -122,7 +116,7 @@ const displayLinks = (user) => {
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else {
-    //accountDetails.innerHTML = '';
+    accountDetails.innerHTML = '';
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
   }
@@ -139,7 +133,10 @@ const displayMovieList = (data) => {
         const li = `
           <li id = '${doc.id}' class = "item">
             <div class="movieLiDiv flex ctText">
-            <h3>${film.title}</h3><h4>type: ${film.type}</h4><h4>year: ${film.year}</h4><h4>genre: ${film.genre}</h4>
+            <h3>${film.title}</h3>
+            <h4>type: ${film.type}</h4>
+            <h4>year: ${film.year}</h4>
+            <h4>genre: ${film.genre}</h4>
             </div>
             <div class="show-more ctText">
             <span>My rating:</span>
@@ -212,11 +209,11 @@ const displayMovieList = (data) => {
     saveIcon.forEach(si => {
       si.addEventListener('click', (e) => {
         let id = e.target.parentElement.parentElement.getAttribute('id');
-        let commentEdit = e.target.parentElement.previousElementSibling.childNodes[1]
-        let ratingLi = e.target.parentElement.previousElementSibling.previousElementSibling.childNodes[3]
-        let numTest = /^(?:[1-9]|0[1-9]|10)$/
+        let commentEdit = e.target.parentElement.previousElementSibling.childNodes[1];
+        let ratingLi = e.target.parentElement.previousElementSibling.previousElementSibling.childNodes[3];
+        let numTest = /^(?:[1-9]|0[1-9]|10)$/;
         if (!numTest.test(ratingLi.value)) {
-          openWarn()
+          openWarn();
           warnInfo.innerText = `Please enter rating between 1 and 10`
         } else {
           db.collection('movies').doc(id).update({
@@ -224,7 +221,7 @@ const displayMovieList = (data) => {
             myRating: ratingLi.value
           })
           openSuccess()
-          succInfo.innerText = `List item updated!`
+          succInfo.innerText = `List item updated!`;
         }
       })
     })
@@ -232,4 +229,13 @@ const displayMovieList = (data) => {
     movieList.innerHTML = '<h5 class="flex">Login to see your list</h5>';
   }
 };
-console.log(movieList)
+// console.log(movieList)
+
+/*
+document.addEventListener('keyup', function(e) {
+  let keyCode = e.keyCode;
+  if (keyCode === 27) {
+    close(item)
+  }
+});
+*/

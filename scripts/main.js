@@ -12,18 +12,14 @@ let action = false;
 const search = document.querySelector('#search')
 search.addEventListener('keyup', movieSearch)
 
-const closeModal = (element) => {
-  element.innerHTML = ''
-  close(element)
-}
 
-// fetch movies from search. show/hide spinner. Get movie ID for movieDetals()
+// fetch movies from search. show/hide loader. Get movie ID for movieDetals()
 function movieSearch() {
-  showSpinner()
+  showLoader()
   fetch(`${proxy}/http://www.omdbapi.com/?s=${search.value}&apikey=${key}`)
     .then((res) => res.json())
     .then((data) => {
-      hideSpinner()
+      hideLoader()
       let lista = ''
       if (data.Search == undefined) {
         lista = `<h3>Not found...</h3>`
@@ -51,7 +47,7 @@ function movieSearch() {
 
 // display movie details; find matching id and show movie details; store details in movie object literal
 function movieDetails(filmId) {
-  showSpinner()
+  showLoader()
   // disable listener for other info buttons to prevent multiple clicks
   if(action == true) return;
   action = true;
@@ -61,7 +57,7 @@ function movieDetails(filmId) {
   fetch(`${proxy}/http://www.omdbapi.com/?i=${filmId}&apikey=${key}`)
     .then((res) => res.json())
     .then((data) => {
-      hideSpinner()
+      hideLoader()
       if (data.Response !== "False") {
         if (data.Poster == "N/A" || data.Poster.startsWith('http://'))
           data.Poster = 'img/noimage.jpg'
@@ -97,7 +93,6 @@ function movieDetails(filmId) {
       moreInfo.innerHTML += info
       open(moreInfo)
       close(main)
-
       document.querySelector('.back').addEventListener('click', function(){closeModal(moreInfo)
         , open(main);
       });
