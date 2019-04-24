@@ -14,7 +14,7 @@ function quiz() {
   const tim = document.querySelector('#countdown');
   let questions = [];
   let currentQuestion = 0;
-  let outcome = 0;
+  let outcome = 0; 
   // fetch Open Trivia API data for questions
   fetch('https://opentdb.com/api.php?amount=20&category=11')
     .then(res => res.json())
@@ -60,9 +60,9 @@ function quiz() {
         })
         container.innerHTML += `<div class = 'question borderR'>${question}<div>`;
         container.innerHTML += questionList;
-        container.innerHTML += `<button>Next question</button>`;
-        document.querySelector('button').
-        addEventListener('click', answerCheck);
+        container.innerHTML += `<button id = "next">Next question</button>`;
+        document.querySelector('#next').
+          addEventListener('click', answerCheck);
       }
       
       // timer settings
