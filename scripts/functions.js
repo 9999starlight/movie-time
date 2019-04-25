@@ -36,7 +36,7 @@ function addMovieToList(movie) {
     if (!user) {
         alert('You have to login or signup to add movie to your list!')
     }
-    // check if movie has already added and display form
+    // proveri da ki je film već dodat:
     checkIds = true;
     const movieIds = document.querySelectorAll('.film-id');
     for (var i = 0; i < movieIds.length; i++) {
@@ -105,7 +105,7 @@ createForm.addEventListener('submit', saveNewMovie)
 
 // SIGNUP
 // hvatam FORMU u const gore
-// listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu i time bi nestao modal. 
+// listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu i nestaje modal 
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     // get user info. Hvatam polja upisane e-mail adrese i passworda. hvatam value iz input polja iz signup forme. Pasword mora biti minimum 6 karaktera da bi radio!
@@ -148,14 +148,14 @@ logout.addEventListener('click', (e) => {
 // const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // get user info. Iz dva inputa u formi hvatam podatke. const su lokalne u svojim funkcijama da ne zbrkam sa onim gore
+    // get user info. Iz dva inputa u formi hvatam podatke. const su lokalne u svojim funkcijama
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
 
     // log the user in. Opet auth const metod signIn....(parametri za login email i password). Isto kao i prethodni metodi async. cred za user info.
     auth.signInWithEmailAndPassword(email, password).then((cred) => {
         console.log(cred.user);
-        // close the signup modal & reset form.
+        // zatvori i reset
         close(loginFormM)
         loginForm.reset();
         // ukoliko je greška u unosu
