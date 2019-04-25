@@ -29,9 +29,9 @@ const open = (item) => item.style.display = 'flex';
 const close = (item) => item.style.display = 'none';
 
 const closeModal = (element) => {
-  element.innerHTML = ''
-  close(element)
-}
+  element.innerHTML = '';
+  close(element);
+};
 
 function openWarn() {
   open(alertWarn);
@@ -54,35 +54,35 @@ const openLogin = (e) => {
   e.preventDefault();
   open(loginFormDiv);
   close(signUpFormDiv);
-}
+};
 document.querySelector('#loginLink').addEventListener('click', openLogin);
 
 const openSignup = (e) => {
   e.preventDefault();
   open(signUpFormDiv);
   close(loginFormDiv);
-}
+};
 document.querySelector('#signUpLink').addEventListener('click', openSignup);
 
 // closing forms and alerts
 document.querySelector('#loginX').addEventListener('click', function () {
-  close(loginFormDiv)
+  close(loginFormDiv);
 });
 document.querySelector('#signupX').addEventListener('click', function () {
-  close(signUpFormDiv)
+  close(signUpFormDiv);
 });
 
 document.querySelector('#okWarn').addEventListener('click', function () {
-  close(alertWarn)
+  close(alertWarn);
 });
 document.querySelector('#okSuccess').addEventListener('click', function () {
-  close(alertSuccess)
+  close(alertSuccess);
 });
 
 const closeAddNew = () => {
   close(addNew);
   container.classList.remove('darken');
-}
+};
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
 
 // display links - depends on the user status from auth.onStateChanged function
@@ -106,7 +106,8 @@ const displayLinks = (user) => {
   }
 };
 
-/* taking data from auth, check if user is logged, catching doc from firebase; rendering movieList ul - functions for sorting, saving and deleting list items */
+/* taking data from auth, check if user is logged, catching doc from firebase;
+ rendering ul - functions for sorting, saving and deleting list items */
 const displayMovieList = (data) => {
   let user = firebase.auth().currentUser;
   if (data.length) {
@@ -124,13 +125,19 @@ const displayMovieList = (data) => {
             </div>
             <div class="show-more ctText">
             <span>My rating:</span>
-            <input type="number" value="${film.myRating}" id="ratingLi" class = "white p10" title="Enter number between 1 and 10" min="1" max="10" placeholder = "0">
+            <input type="number" value="${film.myRating}" id="ratingLi"
+            class = "white p10" title="Enter number between 1 and 10"
+            min="1" max="10" placeholder = "0">
             <h4>IMDB rating: <span>${film.imdbRate}</span></h4>
-            <a href = ${film.imdbLink} target = '_blank' class = "block hoverTr">IMDB details</a>
+            <a href = ${film.imdbLink} target = '_blank'
+            class = "block hoverTr">IMDB details</a>
             <h4 class = "film-id">${film.filmID}</h4>
             </div>
             <div class = "text flex ctText">
-            <textarea id = "commentLi" class = "white p10" placeholder = "Edit yor comment and click save icon to change it" title = "Edit yor comment and click save icon to change it" maxlength="200">${film.comment}</textarea>
+            <textarea id = "commentLi" class = "white p10"
+            placeholder = "Edit yor comment and click save icon to change it"
+            title = "Edit yor comment and click save icon to change it"
+            maxlength="200">${film.comment}</textarea>
             </div>
             <div class = "ctText">
             <i class="far fa-save hoverTr" title = "SAVE CHANGES"></i>
@@ -193,8 +200,10 @@ const displayMovieList = (data) => {
     saveIcon.forEach(si => {
       si.addEventListener('click', (e) => {
         let id = e.target.parentElement.parentElement.getAttribute('id');
-        let commentEdit = e.target.parentElement.previousElementSibling.childNodes[1];
-        let ratingLi = e.target.parentElement.previousElementSibling.previousElementSibling.childNodes[3];
+        let commentEdit =
+          e.target.parentElement.previousElementSibling.childNodes[1];
+        let ratingLi = e.target.parentElement.previousElementSibling
+          .previousElementSibling.childNodes[3];
         let numTest = /^(?:[1-9]|0[1-9]|10)$/;
         if (!numTest.test(ratingLi.value)) {
           openWarn();
@@ -213,4 +222,3 @@ const displayMovieList = (data) => {
     movieList.innerHTML = '<h5 class="flex">Login to see your list</h5>';
   }
 };
-// console.log(movieList)

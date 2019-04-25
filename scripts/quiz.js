@@ -1,20 +1,22 @@
 window.addEventListener('load', intro);
-
+// hide main quiz container; add listener for quiz start
 function intro() {
-  // hide main quiz container; add listener for quiz start
   document.querySelector('.mainContainer').classList.add('none');
   document.querySelector('#startQuiz').addEventListener('click', quiz);
 }
 
 function quiz() {
-  // hide intro
+  // hide intro; selectors; append question number and timer
   document.querySelector('.introContainer').classList.add('none');
-  // global selectors
   const container = document.querySelector('#container');
+  document.querySelector('.header').innerHTML = `
+  <h1 id="questionNumber" class="shadow"></h1>
+  <h1 id="countdown" class="shadow"></h1>`;
   const tim = document.querySelector('#countdown');
   let questions = [];
   let currentQuestion = 0;
-  let outcome = 0; 
+  let outcome = 0;
+
   // fetch Open Trivia API data for questions
   fetch('https://opentdb.com/api.php?amount=20&category=11')
     .then(res => res.json())
@@ -26,18 +28,20 @@ function quiz() {
       document.querySelector('.mainContainer').classList.remove('none');
       document.querySelector('.mainContainer').classList.add('flex');
 
+      /* stop function at the end of quiz; result; reset counter; empty array
+       for new fetch */
       function createQuestions() {
-        // stop function at the end; result; reset counter; empty array for new fetch
         if (currentQuestion >= questions.length) {
           theEnd();
           clearInterval(sInt);
           currentQuestion = 0;
           outcome = 0;
-          questions = []
+          questions = [];
           return false;
         }
-        // questions, options, random sort of options, display
-        document.querySelector('#questionNumber').innerHTML = `${currentQuestion + 1} / ${questions.length}`;
+        // questions, options, random sort for options, display
+        document.querySelector('#questionNumber').innerHTML =
+          `${currentQuestion + 1} / ${questions.length}`;
         const question = questions[currentQuestion][0];
         const allOptions = [];
         allOptions.push(questions[currentQuestion][2][0],
@@ -45,48 +49,47 @@ function quiz() {
           questions[currentQuestion][2][2],
           questions[currentQuestion][1]);
         allOptions.sort(() => Math.random() - 0.5);
-        // clear container for next game; appending variable
+        // clear container for the next game; appending variable; display
         container.innerHTML = '';
         let questionList = '';
-        // display
         allOptions.forEach(op => {
           if (op !== undefined && op == questions[currentQuestion][1]) {
-            questionList += `<label><input type = 'radio' name = 'options' id = 't'
-            value = '${op}'><div>${op}</div></label>`;
+            questionList += `<label><input type = 'radio' name = 'options'
+             id = 't' value = '${op}'><div>${op}</div></label>`;
           } else if (op !== undefined) {
             questionList += `<label><input type = 'radio' name = 'options'
             value = '${op}'><div>${op}</div></label>`;
           }
         })
-        container.innerHTML += `<div class = 'question borderR'>${question}<div>`;
+        container.innerHTML += `<div class = 'question borderR'>${question}
+        <div>`;
         container.innerHTML += questionList;
         container.innerHTML += `<button id = "next">Next question</button>`;
-        document.querySelector('#next').
-          addEventListener('click', answerCheck);
+        document.querySelector('#next').addEventListener('click', answerCheck);
       }
-      
-      // timer settings
+
+      // timer settings; counting time difference and setting display 601000
       const countFrom = new Date().getTime() + 601000;
       const sInt = setInterval(function () {
         const currentTime = new Date().getTime();
         const timeDifference = countFrom - currentTime;
-        // counting time difference and setting display
-        let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        let minutes =
+          Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
         seconds < 10 ? seconds = `0${seconds}` : seconds
         minutes < 10 ? minutes = `0${minutes}` : minutes
         if (timeDifference >= 0) {
-          tim.innerHTML = `${minutes} : ${seconds}`
+          tim.innerHTML = `${minutes} : ${seconds}`;
         } else {
           clearInterval(sInt);
-          theEnd()
+          theEnd();
           tim.innerHTML = "Time's up!";
         }
       }, 1000, createQuestions);
 
       function answerCheck() {
         const options = document.querySelectorAll('input[name="options"]');
-        options.forEach(function (op) {
+        options.forEach(op => {
           let att = op.getAttribute('id');
           if (att === 't') {
             op.parentNode.classList.add('correctBorder');
@@ -100,7 +103,7 @@ function quiz() {
             }
           }
         });
-        //console.log(outcome);
+        console.log(outcome);
         // Next question; setTimeout to show if question is correct
         currentQuestion++;
         setTimeout(function () {
@@ -109,9 +112,12 @@ function quiz() {
       }
       // display for the end of the quiz
       function theEnd() {
-        const percentage = parseFloat((outcome * 100) / questions.length).toFixed(2);
-        container.innerHTML = `<div class = 'question borderR'>You won ${outcome}
-        of ${questions.length} points or ${percentage}%</div>`;
+        const percentage =
+          parseFloat((outcome * 100) / questions.length).toFixed(2);
+        container.innerHTML =
+          `<div class = 'question borderR'>You won ${outcome}
+        of ${questions.length} points or ${percentage}%</div>
+        <a href="quiz.html">Play again</a>`;
         document.querySelector('#questionNumber').innerHTML = `Finished!`;
       }
     });

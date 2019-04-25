@@ -8,12 +8,14 @@ const inputFilmId = document.querySelector('#inputFilmId');
 const imdbLink = document.querySelector('#imdbLink');
 const myRating = document.querySelector('#myRating');
 const comment = document.querySelector('#comment');
-const loginForm = document.querySelector('#login-form')
+const loginForm = document.querySelector('#login-form');
 const signupForm = document.querySelector('#signup-form');
 const createForm = document.querySelector('#create-form');
 const logout = document.querySelector('#logoutLink');
 
-/* adding firebase auth functions: if user signed in call functions for display links and list. Empty array from displayMovieList() if user is signed out */
+/* adding firebase auth functions:
+if user signed in call functions for display links and list.
+Empty array from displayMovieList() if user is signed out */
 auth.onAuthStateChanged(user => {
     if (user) {
         db.collection('movies').onSnapshot(snapshot => {
@@ -24,14 +26,16 @@ auth.onAuthStateChanged(user => {
         displayLinks();
         displayMovieList([]);
     }
-})
+});
 
-/* adding movie to the list, display form for submit new movie if it's not already added */
+/* adding movie to the list;
+display form for submit new movie if it's not already added */
 function addMovieToList(movie) {
     let user = firebase.auth().currentUser;
     if (!user) {
-        openWarn()
-        warnInfo.innerText = `You have to login or signup to add movie to your list!`
+        openWarn();
+        warnInfo.innerText =
+            `You have to login or signup to add movie to your list!`;
     }
     // check if movie has already added; display annNew form
     let checkIds = true;
@@ -41,15 +45,16 @@ function addMovieToList(movie) {
             checkIds = false;
         }
     }
-    if (checkIds == false) { 
-        openWarn()
-        warnInfo.innerText = `You have already added that item to your list`
+    if (checkIds == false) {
+        openWarn();
+        warnInfo.innerText =
+            `You have already added that item to your list`;
         return;
     }
     checkIds = false;
     if (checkIds = true && user) {
-        open(addNew)
-        container.classList.add('darken')
+        open(addNew);
+        container.classList.add('darken');
         inputTitle.innerText = movie.title;
         inputType.innerText = movie.type;
         inputYear.innerText = movie.year;
@@ -57,10 +62,11 @@ function addMovieToList(movie) {
         inputImdbRate.innerText = movie.imdbRating;
         inputFilmId.innerText = movie.movieID;
         imdbLink.innerText = movie.imdbLink;
-    } 
+    }
     }
 
-// save new Movie - submit form to firebase db, reset form for new entry
+/* save new Movie - submit form to firebase db,
+ reset form for new entry */
 function saveNewMovie(e) {
     e.preventDefault();
     let user = firebase.auth().currentUser;
@@ -81,16 +87,20 @@ function saveNewMovie(e) {
             open(main);
             close(addNew);
             closeModal(moreInfo);
-            openSuccess()
-            succInfo.innerText = `Added to your list`
+            openSuccess();
+            succInfo.innerText = `Added to your list`;
         }).catch(err => {
             console.log(err.message);
         });
 }
-createForm.addEventListener('submit', saveNewMovie)
-   
-// SIGNUP - on submit; prevent refresh; get user info from input fields; 
-/* firebase createUser... method; users credentials to get user's token and generate user's id; add new user in user collection in Firebase. Errors, close and reset form */
+createForm.addEventListener('submit', saveNewMovie);
+
+/* SIGNUP - on submit;
+prevent refresh; get user info from input fields;
+firebase createUser... method;
+users credentials to get user's token and generate user's id;
+add new user in user collection in Firebase;
+Errors, close and reset form */
 function createNewUser(e) {
     e.preventDefault();
     const email = signupForm['signup-email'].value;
@@ -103,35 +113,37 @@ function createNewUser(e) {
     }).then(() => {
         close(signUpFormDiv)
         signupForm.reset();
-        signupForm.querySelector('.error').innerHTML = ''
+        signupForm.querySelector('.error').innerHTML = '';
     }).catch(err => {
         signupForm.querySelector('.error').innerHTML = err.message;
     });
 }
-signupForm.addEventListener('submit', createNewUser)
+signupForm.addEventListener('submit', createNewUser);
 
-// LOGOUT - prevent refresh; auth.signOut() Firebase method; close user's list
+/* LOGOUT - prevent refresh; auth.signOut() Firebase method;
+close user's list */
 function logoutUser(e) {
     e.preventDefault();
-    close(listDiv)
+    close(listDiv);
     auth.signOut().then(() => {
         console.log('user signed out');
     })
 }
-logout.addEventListener('click', logoutUser)
+logout.addEventListener('click', logoutUser);
 
-/* LOGIN - take values from form; check user's credentials; close and reset form; display error messages */
+/* LOGIN - take values from form; check user's credentials;
+close and reset form; display error messages */
 function loginUser(e) {
     e.preventDefault();
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
     auth.signInWithEmailAndPassword(email, password).then((cred) => {
         //console.log(cred.user);
-        close(loginFormDiv)
+        close(loginFormDiv);
         loginForm.reset();
         loginForm.querySelector('.error').innerHTML = '';
     }).catch(err => {
         loginForm.querySelector('.error').innerHTML = err.message;
     });
 }
-loginForm.addEventListener('submit', loginUser)
+loginForm.addEventListener('submit', loginUser);
