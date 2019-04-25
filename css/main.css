@@ -669,9 +669,3 @@ li div textarea,
     width: 80vw;
   }
 }
-
-@media (min-width: 1200px) {
-.list {
- width: 90%;
-}
-}
