@@ -55,7 +55,7 @@ const setupUI = (user) => {
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else { // ako nije logovan
-// clear account info u popup accountDetails
+// 
     accountDetails.innerHTML = '';
     // toggle user elements
     loggedInLinks.forEach(item => item.style.display = 'none');
