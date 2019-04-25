@@ -13,7 +13,7 @@ const loginForm = document.querySelector('#login-form')
 const signupForm = document.querySelector('#signup-form');
 const createForm = document.querySelector('#create-form');
 
-/*adding firebase auth*/
+/*firebase autentifikacija*/
 
 auth.onAuthStateChanged(user => {
     // kada je loged in
@@ -23,11 +23,11 @@ auth.onAuthStateChanged(user => {
             setupMovies(snapshot.docs);
             setupUI(user); // poziva funkciju iz display.js šta da prikaže od linkova
         }, err => console.log(err.message)); // da uhvati grešku u konzoli
-        //console.log('user logged in: ', user);
+        //console.log(user);
     } else { // kada nije logovan da bude prazan data array iz funkcije setUpmovies()
         setupUI(); // poziva funkciju iz display.js šta da prikaže od linkova, ovde bez parametra jer nije logovan
         setupMovies([]);
-        //console.log('user logged out');
+        //console.log('logged out');
     }
 })
 
@@ -80,7 +80,7 @@ createForm.addEventListener('submit', (e) => {
 
 // SIGNUP
 // hvatam FORMU u const gore
-// listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu i time bi nestao modal. 
+// listener na submit forme. Prevent default da se ne bi strana refresh jer je to po defaultu pa mi nestaje modal! 
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -96,7 +96,7 @@ signupForm.addEventListener('submit', (e) => {
             comm: signupForm['shortComment'].value
         });
     }).then(() => {
-        // close the signup modal & reset form. 
+        // zatvori signup i reset 
         close(signUpFormM)
         // resetovanje forme, čišćenje polja
         signupForm.reset();
@@ -124,14 +124,14 @@ logout.addEventListener('click', (e) => {
 // const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // get user info. Iz dva inputa u formi hvatam podatke. const su lokalne u svojim funkcijama da ne zbrkam sa onim gore
+    // get user info. Iz dva inputa u formi hvatam podatke. const su lokalne u svojim funkcijama
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
 
     // log the user in. Opet auth const metod signIn....(parametri za login email i password). Isto kao i prethodni metodi async. cred za user info.
     auth.signInWithEmailAndPassword(email, password).then((cred) => {
         console.log(cred.user);
-        // close the signup modal & reset form.
+        // zatvori modal i reset
         close(loginFormM)
         loginForm.reset();
         // ukoliko je greška u unosu
