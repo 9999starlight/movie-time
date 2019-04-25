@@ -91,19 +91,6 @@ const closeAddNew = () => {
 }
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
 
-// hamburger menu
-/*
-function menuMobile(e) {
-  e.preventDefault()
-  const nav = document.querySelector("#nav");
-  if (nav.style.display == 'none') {
-    nav.style.display == 'block'
-  } else {
-    nav.style.display == 'none'
-  }
-}
-document.querySelector('.fa-bars').addEventListener('click', menuMobile)
-*/
 // display links - depends on the user status from auth.onStateChanged function
 const displayLinks = (user) => {
   const loggedOutLinks = document.querySelectorAll('.logged-out');
