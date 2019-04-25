@@ -67,11 +67,11 @@ const setupUI = (user) => {
       `;
       accountDetails.innerHTML = detailsInfo;
     });
-    // toggle user UI elements. Za svaki item:
+    // linkovi. Za svaki item:
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else { // ako nije logovan
-// clear account info u popup accountDetails
+// 
     accountDetails.innerHTML = '';
     // toggle user elements
     loggedInLinks.forEach(item => item.style.display = 'none');
@@ -80,7 +80,7 @@ const setupUI = (user) => {
 };
 
 
-// SETUP MOVIES. uzima data koje dobija iz funkcije u auth.js i render ga u ul. Ovu funkciju bih morala verovatno da zovem da doda film iz api i da prikaže poruku ako user nije logovan.
+// SETUP MOVIES. uzima data koje dobija iz funkcije u auth.js i render ga u ul. Ovu funkciju zovem da doda film iz api i da prikaže poruku ako user nije logovan.
 
 // OVDE STAVITI DA SE PRIKAZUJU SAMO USERS'S LIST?
 
