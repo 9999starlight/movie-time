@@ -1,3 +1,5 @@
+/* UI functions & settings */
+
 // global selectors
 const container = document.querySelector('.container');
 const loginFormDiv = document.querySelector('.login');

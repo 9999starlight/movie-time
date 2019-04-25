@@ -1,3 +1,5 @@
+/* Functions for Firebase Firestore authentication */
+
 // global selectors
 const inputTitle = document.querySelector('#inputTitle');
 const inputType = document.querySelector('#inputType');

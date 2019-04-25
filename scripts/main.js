@@ -1,3 +1,5 @@
+/* Functions for fetching movie data from omdb api */
+
 // global selectors
 const key = '94c8d066';
 const proxy = 'https://cors-anywhere.herokuapp.com';
