@@ -11,7 +11,8 @@
   <meta name="author" content="sestakirena@gmail.com">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Metal+Mania" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Metal+Mania" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <title>Movie Time search</title>
 </head>
@@ -60,7 +61,7 @@
               required title="Enter at least 6 characters long password" />
             <label for="shortComment" class="block">Alias/Comment</label>
             <input type="text" id="shortComment" class="radius block white" placeholder="Enter alias or comment"
-              required title="Enter comment max 25 characters" min="1" max="20" />
+              required title="Enter comment max 25 characters" maxlength="20" />
             <button class="btn-signUp block radius hoverTr white">Sign up</button>
             <p class="error p10"></p>
           </form>
@@ -82,7 +83,7 @@
           <div class="list flex center shadow mg1auto">
             <h1 class="mg1auto">MY LIST</h1>
             <div class="buttons flex center fullWidth mg1auto">
-              <a href="#nav" class="mg1auto"><button class="mg1auto radius hoverTr white">Back to search</button></a>
+              <a href="#nav" class="mg1auto ctText radius hoverTr white aBtn">Back to search</a>
               <button id="btnAbc" class="mg1auto radius hoverTr white">Sort A - Z</button>
               <button id="btnRate" class="mg1auto radius hoverTr white">Sort by IMDB rating</button>
             </div>
@@ -91,12 +92,12 @@
         </div>
       </main>
     </div>
-
     <div class="alert alertWarn center ctText p10" id="warn">
-      <h4 id="warnInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto white" id="okWarn">OK</button>
+      <h4 id="warnInfo" class="mg1auto">o</h4>
+      <button class="radius hoverTr mg1auto white" id="okWarn">OK</button>
     </div>
     <div class="alert alertSuccess center ctText p10" id="success">
-      <h4 id="succInfo" class="mg1auto"></h4><button class="radius hoverTr mg1auto white" id="okSuccess">OK</button>
+      <h4 id="succInfo" class="mg1auto">o</h4><button class="radius hoverTr mg1auto white" id="okSuccess">OK</button>
     </div>
   </div>
   <div id="add-new" class="add-new relative center radius">
@@ -135,8 +136,6 @@
       <input type="reset" class="btnCancel radius hoverTr mg1auto white" id="cancelCreate" value="Cancel" />
     </form>
   </div>
-
-
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>

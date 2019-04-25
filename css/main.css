@@ -70,6 +70,15 @@ body {
   padding: 10px;
 }
 
+nav a,
+.private span {
+  /*
+  display: block;
+  margin: 0 auto;
+  */
+  padding: 13px;
+}
+
 .public,
 .private {
   flex-direction: row;
@@ -160,15 +169,6 @@ aside div form input {
 .list,
 .alert {
   display: none;
-}
-
-nav a,
-.private span {
-  /*
-  display: block;
-  margin: 0 auto;
-  */
-  padding: 13px;
 }
 
 .more-info,
@@ -287,7 +287,8 @@ aside div form label {
 
 button,
 input[type="reset"],
-.film input {
+.film input,
+.aBtn {
   padding: 10px 25px;
   font-size: 1.1em;
 }
@@ -301,11 +302,13 @@ input[type="reset"],
 .alert button,
 form button,
 form input[type="reset"],
-.buttons button {
+.buttons button,
+.buttons a {
   background: linear-gradient(to bottom, rgb(120, 119, 128) 0%, rgb(59, 58, 68) 0%, rgb(130, 135, 161) 0%, rgb(65, 62, 66) 49%, rgb(62, 59, 63) 50%, rgb(140, 140, 156) 100%);
 }
 
-.buttons button{
+.buttons button, 
+.buttons a {
   width: 155px;
 }
 
@@ -625,7 +628,6 @@ li div textarea,
   .signup {
     width: 220px;
     min-height: 300px;
-    max-height: 350px;
     padding: 20px;
   }
 
@@ -648,7 +650,6 @@ li div textarea,
 
   .content .film {
     width: 250px;
-
   }
 
   .more-info {
