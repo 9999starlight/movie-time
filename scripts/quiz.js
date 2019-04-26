@@ -10,8 +10,8 @@ function quiz() {
   document.querySelector('.introContainer').classList.add('none');
   const container = document.querySelector('#container');
   document.querySelector('.header').innerHTML = `
-  <h1 id="questionNumber" class="shadow"></h1>
-  <h1 id="countdown" class="shadow"></h1>`;
+  <h3 id="questionNumber" class="shadow"></h3>
+  <h3 id="countdown" class="shadow"></h3>`;
   const tim = document.querySelector('#countdown');
   let questions = [];
   let currentQuestion = 0;
