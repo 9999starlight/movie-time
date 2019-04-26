@@ -34,6 +34,11 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
+  width: 70vw;
+}
+
+.introContainer input {
+  width: 100px;
 }
 
 .container {
@@ -49,7 +54,10 @@ body {
 }
 
 .header {
-  margin: 2em auto 0 auto;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  margin: 1em auto;
 }
 
 .introContainer,
@@ -69,37 +77,23 @@ a {
 }
 
 h1,
-h2,
 h3 {
-  color: whitesmoke;
-}
-
-h1,
-h2 {
-  font-size: 2em;
   font-weight: 500;
   border-radius: 20px;
   width: 150px;
   padding: 0.5em;
+  color: whitesmoke;
 }
 
-h2 {
-  font-size: 1.5em;
-  margin-bottom: 1em;
-}
-
-.header h1 {
+.header h3 {
   border: none;
+  font-size: 1.5em;
+  background-color: rgba(40, 41, 28, 0.164);
 }
 
 .introContainer h1,
-.introContainer h2 {
+.introContainer h3 {
   width: auto;
-}
-
-.header h1,
-.header h2 {
-  background-color: rgba(40, 41, 28, 0.164);
 }
 
 .question {
@@ -130,16 +124,16 @@ a {
   margin-top: 1em;
 }
 
-.shadow {
-  box-shadow: 2px 4px 5px 0 rgba(51, 49, 49, 0.16), 2px 4px 10px 0 rgba(80, 82, 95, 0.12);
-}
-
 button,
 input[type="button"],
 a {
-  padding: 1em 1.6em 1em 1.6em;
+  padding: 1em 1.2em;
   background-color: rgba(28, 27, 31, 0.89);
   font-size: 1.4em;
+}
+
+.shadow {
+  box-shadow: 2px 4px 5px 0 rgba(51, 49, 49, 0.16), 2px 4px 10px 0 rgba(80, 82, 95, 0.12);
 }
 
 .introContainer a {
@@ -223,9 +217,11 @@ label>input:checked+div {
   }
 
   .header {
-    flex-direction: row;
-    justify-content: space-evenly;
     width: 750px;
+  }
+
+ .header h3 {
+    font-size: 2em;
   }
 
   .question {
