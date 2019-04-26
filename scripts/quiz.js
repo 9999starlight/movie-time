@@ -48,11 +48,11 @@ function quiz() {
           questions[currentQuestion][2][1],
           questions[currentQuestion][2][2],
           questions[currentQuestion][1]);
-        allOptions.sort(() => Math.random() - 0.5);
-        // clear container for the next game; appending variable; display
+        // clear container for the next round; appending variable; display
         container.innerHTML = '';
         let questionList = '';
-        allOptions.forEach(op => {
+        allOptions.sort(() => Math.random() - 0.5)
+          .forEach(op => {
           if (op !== undefined && op == questions[currentQuestion][1]) {
             questionList += `<label><input type = 'radio' name = 'options'
              id = 't' value = '${op}'><div>${op}</div></label>`;
@@ -108,7 +108,7 @@ function quiz() {
         currentQuestion++;
         setTimeout(function () {
           createQuestions();
-        }, 2000);
+        }, 1000);
       }
       // display for the end of the quiz
       function theEnd() {
