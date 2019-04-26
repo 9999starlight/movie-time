@@ -38,6 +38,8 @@ body {
 
 .container {
   padding: 1em 1em 2em 1em;
+  animation-name: delay;
+  animation-duration: 1s;
 }
 
 .flex {
