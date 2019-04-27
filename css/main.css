@@ -669,7 +669,7 @@ li div textarea,
 
 @media (min-width: 1200px) {
   .list {
-    width: 90%;
+    width: 70vw;
   }
 }
 
