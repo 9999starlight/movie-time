@@ -66,7 +66,7 @@ const openSignup = (e) => {
 };
 document.querySelector('#signUpLink').addEventListener('click', openSignup);
 
-// closing forms and alerts
+// closing forms and alerts listeners
 document.querySelector('#loginX').addEventListener('click', function () {
   close(loginFormDiv);
 });
@@ -99,17 +99,17 @@ const displayLinks = (user) => {
       accountDetails.innerHTML = detailsInfo;
     });
     open(listDiv)
-    loggedInLinks.forEach(item => item.style.display = 'block');
-    loggedOutLinks.forEach(item => item.style.display = 'none');
+    loggedInLinks.forEach(link => open(link));
+    loggedOutLinks.forEach(link => close(link));
   } else {
     accountDetails.innerHTML = '';
-    loggedInLinks.forEach(item => item.style.display = 'none');
-    loggedOutLinks.forEach(item => item.style.display = 'block');
+    loggedInLinks.forEach(link => close(link));
+    loggedOutLinks.forEach(link => open(link));
   }
 };
 
-/* taking data from auth, check if user is logged, catching doc from firebase;
- rendering ul - functions for sorting, saving and deleting list items */
+/* taking data from auth, check if user is logged, catching doc from firebase and render ul;
+functions for sorting, saving and deleting list items */
 const displayMovieList = (data) => {
   let user = firebase.auth().currentUser;
   if (data.length) {
@@ -150,12 +150,12 @@ const displayMovieList = (data) => {
         output += li;
       }
     });
-    movieList.innerHTML = output
+    movieList.innerHTML = output;
 
     // Sorting list alfabetically
     const lis = movieList.querySelectorAll('.item');
     const sortByAbc = () => {
-      movieList.innerHTML = ''
+      movieList.innerHTML = '';
       Array.prototype.map.call(lis, function (node) {
         return {
           node: node,
@@ -164,14 +164,14 @@ const displayMovieList = (data) => {
       }).sort((a, b) => {
         return a.titles.localeCompare(b.titles);
       }).forEach(item => {
-        movieList.appendChild(item.node)
-      })
+        movieList.appendChild(item.node);
+      });
     }
-    document.querySelector('#btnAbc').addEventListener('click', sortByAbc)
+    document.querySelector('#btnAbc').addEventListener('click', sortByAbc);
 
-    // SORT LIST BY IMDB RATING
+    // Sort list by imdb rating
     const sortByRating = () => {
-      movieList.innerHTML = ''
+      movieList.innerHTML = '';
       Array.prototype.map.call(lis, function (node) {
         return {
           node: node,
@@ -180,25 +180,25 @@ const displayMovieList = (data) => {
       }).sort((a, b) => {
         return b.rate.localeCompare(a.rate);
       }).forEach(item => {
-        movieList.appendChild(item.node)
-      })
+        movieList.appendChild(item.node);
+      });
     }
-    document.querySelector('#btnRate').addEventListener('click', sortByRating)
+    document.querySelector('#btnRate').addEventListener('click', sortByRating);
 
-    // delete movie function
-    const dlt = document.querySelectorAll('.fa-trash-alt')
+    // delete movie from the list and database
+    const dlt = document.querySelectorAll('.fa-trash-alt');
     dlt.forEach(dl => {
       dl.addEventListener('click', (e) => {
         //e.stopPropagation();
         let id = e.target.parentElement.parentElement.getAttribute('id');
         db.collection('movies').doc(id).delete();
-        openSuccess()
-        succInfo.innerText = `List item removed!`
+        openSuccess();
+        succInfo.innerText = `List item removed!`;
       })
     });
 
     //SAVE comment & rating changes
-    const saveIcon = document.querySelectorAll('.fa-save')
+    const saveIcon = document.querySelectorAll('.fa-save');
     saveIcon.forEach(si => {
       si.addEventListener('click', (e) => {
         let id = e.target.parentElement.parentElement.getAttribute('id');
@@ -209,7 +209,7 @@ const displayMovieList = (data) => {
         let numTest = /^(?:[1-9]|0[1-9]|10)$/;
         if (!numTest.test(ratingLi.value)) {
           openWarn();
-          warnInfo.innerText = `Please enter rating between 1 and 10`
+          warnInfo.innerText = `Please enter rating between 1 and 10`;
         } else {
           db.collection('movies').doc(id).update({
             comment: commentEdit.value,
@@ -218,9 +218,9 @@ const displayMovieList = (data) => {
           openSuccess()
           succInfo.innerText = `List item updated!`;
         }
-      })
-    })
+      });
+    });
   } else {
     movieList.innerHTML = '<h5 class="flex">Login to see your list</h5>';
   }
-};
+}

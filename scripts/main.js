@@ -60,9 +60,10 @@ function movieSearch() {
    store details in movie object literal */
 function movieDetails(filmId) {
   showLoader();
-  // disable listener for other info buttons to prevent multiple clicks
+  // disable listener for info buttons to prevent multiple clicks
   if (action == true) return;
   action = true;
+  
   for (let i = 0; i < filmIDS.length; i++) {
     if (filmIDS[i] == filmId) filmId = filmIDS[i]
   }
@@ -93,7 +94,7 @@ function movieDetails(filmId) {
         <h3>Year: ${data.Year}</h3>
         <h3>Type: ${data.Type}</h3>
         <h3>Genre: ${data.Genre}</h3>
-       <h3>IMDB Ratings: ${data.imdbRating}</h3>
+       <h3>IMDB Rating: ${data.imdbRating}</h3>
        <button class = 'addMovieBtn radius hoverTr white'>
        Add to watchlist</button>
        <button class = 'back radius hoverTr white'>

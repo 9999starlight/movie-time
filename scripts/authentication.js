@@ -39,7 +39,7 @@ function addMovieToList(movie) {
         warnInfo.innerText =
             `You have to login or signup to add movie to your list!`;
     }
-    // check if movie has already added; display annNew form
+    // check if movie has already added; display addNew form
     let checkIds = true;
     const movieIds = document.querySelectorAll('.film-id');
     for (var i = 0; i < movieIds.length; i++) {

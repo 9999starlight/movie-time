@@ -12,7 +12,7 @@ function quiz() {
   document.querySelector('.header').innerHTML = `
   <h3 id="questionNumber" class="shadow"></h3>
   <h3 id="countdown" class="shadow"></h3>`;
-  const tim = document.querySelector('#countdown');
+  const timer = document.querySelector('#countdown');
   let questions = [];
   let currentQuestion = 0;
   let outcome = 0;
@@ -79,11 +79,11 @@ function quiz() {
         seconds < 10 ? seconds = `0${seconds}` : seconds
         minutes < 10 ? minutes = `0${minutes}` : minutes
         if (timeDifference >= 0) {
-          tim.innerHTML = `${minutes} : ${seconds}`;
+          timer.innerHTML = `${minutes} : ${seconds}`;
         } else {
           clearInterval(sInt);
           theEnd();
-          tim.innerHTML = "Time's up!";
+          timer.innerHTML = "Time's up!";
         }
       }, 1000, createQuestions);
 
