@@ -5,8 +5,8 @@
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -24,6 +24,14 @@ body {
   min-height: 100vh;
 }
 
+.none {
+  display: none;
+}
+
+.shadow {
+  box-shadow: 2px 4px 5px 0 rgba(51, 49, 49, 0.16), 2px 4px 10px 0 rgba(80, 82, 95, 0.12);
+}
+
 .main-con,
 .container {
   padding: 0.8em;
@@ -35,10 +43,6 @@ body {
   transform: translate(-50%, -50%);
   position: fixed;
   width: 70vw;
-}
-
-.introContainer input {
-  width: 100px;
 }
 
 .container {
@@ -106,7 +110,8 @@ h3 {
   font-weight: 500;
 }
 
-.question, label {
+.question,
+label {
   animation-name: delay;
   animation-duration: 1.5s;
 }
@@ -132,41 +137,31 @@ a {
   font-size: 1.4em;
 }
 
-.shadow {
-  box-shadow: 2px 4px 5px 0 rgba(51, 49, 49, 0.16), 2px 4px 10px 0 rgba(80, 82, 95, 0.12);
-}
-
-.introContainer a {
-  font-size: 1.1em;
-  padding: 1em;
-}
-
 label {
   display: block;
-  min-width: 180px;
-  max-width: 250px;
+  width: 200px;
   padding: 0.6em 0.7em;
   margin-bottom: 0.5em;
 }
 
-label>input {
+label > input {
   visibility: hidden;
   position: absolute;
 }
 
-label>input+div,
+label > input + div,
 button,
 input[type="button"],
 a {
   cursor: pointer;
 }
 
-label>input+div {
+label > input + div {
   font-size: 1.2em;
 }
 
 /* style question div if checked */
-label>input:checked+div {
+label > input:checked + div {
   background-color: #5a5f689c;
   padding: 0.3em 0;
   border-radius: 6px;
@@ -174,8 +169,13 @@ label>input:checked+div {
   font-size: 1.4em;
 }
 
-.none {
-  display: none;
+.introContainer input {
+  width: 100px;
+}
+
+.introContainer a {
+  font-size: 1.1em;
+  padding: 1em;
 }
 
 .correct {
@@ -192,11 +192,11 @@ label>input:checked+div {
 
 @keyframes delay {
   from {
-    transform: scale(0)
+    transform: scale(0);
   }
 
   to {
-    transform: scale(1)
+    transform: scale(1);
   }
 
   from {
@@ -220,7 +220,7 @@ label>input:checked+div {
     width: 750px;
   }
 
- .header h3 {
+  .header h3 {
     font-size: 2em;
   }
 
@@ -229,7 +229,7 @@ label>input:checked+div {
   }
 
   label {
-    width: 350px;
+    width: 300px;
     font-size: 1.1em;
   }
 
