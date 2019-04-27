@@ -139,11 +139,7 @@ button {
   width: 200px;
   padding: 0.8em;
   font-size: 1.1em;
-  background: lightgrey;
-  background-image: url("../img/search-solid.svg");
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: 25px;
+  background: lightgray;
 }
 
 .search p,
