@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: #333333;
+  background-color: #333;
   font-family: 'Open Sans', Arial, sans-serif;
   color: white;
 }
@@ -70,13 +70,25 @@ body {
   padding: 10px;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav a,
 .private span {
-  /*
-  display: block;
-  margin: 0 auto;
-  */
   padding: 13px;
+}
+
+.private a,
+.private span {
+  background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.public a {
+  font-weight: 600;
 }
 
 .public,
@@ -90,24 +102,8 @@ nav a,
 }
 
 .public {
-  box-shadow: 0px -15px 30px -5px #c986d7;
+  box-shadow: 0 -15px 30px -5px #c986d7;
   background: linear-gradient(90deg, rgba(70, 68, 68, 0) 0%, rgba(255, 255, 255, 0.048) 25%, rgba(255, 255, 255, 0.068) 75%, rgba(255, 255, 255, 0) 100%);
-}
-
-a {
-  text-decoration: none;
-}
-
-.private a,
-.private span {
-  background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.public a {
-  font-weight: 600;
 }
 
 input,
@@ -127,9 +123,6 @@ button {
 }
 
 .content .film {
-  /*border: 2px inset; 
-  border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
-  border-image-slice: 1;*/
   border: 2px inset whitesmoke;
   padding: 0.5em;
   width: 210px;
@@ -138,7 +131,6 @@ button {
 
 .film img {
   max-height: 200px;
-  /*width: 100%;*/
   margin: 0.5 auto;
   max-width: 100%;
 }
@@ -147,7 +139,7 @@ button {
   width: 200px;
   padding: 0.8em;
   font-size: 1.1em;
-  background: lightgrey;   
+  background: lightgrey;
   background-image: url("../img/search-solid.svg");
   background-repeat: no-repeat;
   background-position: right;
@@ -186,7 +178,7 @@ aside div form input {
 
 .more-info,
 .add-new {
-  background-color: #333333;
+  background-color: #333;
   min-width: 95vw;
   max-height: 100vh;
   overflow: auto;
@@ -252,6 +244,12 @@ button {
   margin: 30px auto 0 auto;
 }
 
+button:focus,
+input[type="button"]:focus,
+a:focus {
+  outline: 0;
+}
+
 .data button {
   padding: 15px 40px;
   width: 160px;
@@ -279,7 +277,6 @@ aside {
   animation-duration: 1s;
 }
 
-/*.container*/
 aside,
 aside div h2 {
   margin: 0 auto;
@@ -297,12 +294,6 @@ input[type="reset"],
   font-size: 1.1em;
 }
 
-.data input[type="button"],
-.data button,
-.alertSuccess {
-  background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 61) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
-}
-
 .alert button,
 form button,
 form input[type="reset"],
@@ -311,7 +302,13 @@ form input[type="reset"],
   background: linear-gradient(to bottom, rgb(120, 119, 128) 0%, rgb(59, 58, 68) 0%, rgb(130, 135, 161) 0%, rgb(65, 62, 66) 49%, rgb(62, 59, 63) 50%, rgb(140, 140, 156) 100%);
 }
 
-.buttons button, 
+.data input[type="button"],
+.data button,
+.alertSuccess {
+  background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 61) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
+}
+
+.buttons button,
 .buttons a {
   width: 155px;
 }
@@ -336,7 +333,7 @@ aside div form input {
   font-weight: 900;
 }
 
-/*styling list*/
+/* styling list */
 .list {
   width: 98vw;
 }
@@ -350,10 +347,9 @@ ul {
   font-family: "Metal Mania", Times, serif;
   letter-spacing: 0.2em;
   font-size: 2.3em;
-  color: #333333;
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #18ff43, 0 0 30px #18FF74, 0 0 40px #18FF74, 0 0 55px #18FF7D, 0 0 75px #18ff74, 2px 2px 2px rgba(44, 206, 64, 0);
+  color: #333;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #18ff43, 0 0 30px #18ff74, 0 0 40px #18ff74, 0 0 55px #18ff7d, 0 0 75px #18ff74, 2px 2px 2px rgba(44, 206, 64, 0);
 }
-
 
 li {
   width: 90%;
@@ -439,11 +435,11 @@ li div textarea,
 
 @keyframes modalopen {
   from {
-    transform: scale(0)
+    transform: scale(0);
   }
 
   to {
-    transform: scale(1)
+    transform: scale(1);
   }
 
   from {
@@ -466,7 +462,6 @@ li div textarea,
 }
 
 @media (min-width: 768px) {
-
   .info-poster,
   .buttons,
   .add-new form div,
@@ -516,7 +511,6 @@ li div textarea,
 
   .content {
     flex-wrap: wrap;
-    /* max-width: 900px;*/
   }
 
   .content,
@@ -593,9 +587,9 @@ li div textarea,
 
   .public a:hover {
     background: linear-gradient(90deg, #ae96c74d 0%, #7bc7c366 25%, #80addc66 50%, #a37ec754 75%, #b277a566 100%);
-    text-shadow: 2px 2px 4px #000000;
-    mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
-    -webkit-mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    text-shadow: 2px 2px 4px #000;
+    mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #fff 25%, #fff 75%, rgba(255, 255, 255, 0) 100%);
+    -webkit-mask-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, #fff 25%, #fff 75%, rgba(255, 255, 255, 0) 100%);
   }
 
   .private a:hover {
@@ -604,19 +598,19 @@ li div textarea,
 
   @keyframes shine {
     0% {
-      box-shadow: 0px -15px 30px -5px #c986d7;
+      box-shadow: 0 -15px 30px -5px #c986d7;
     }
 
     40% {
-      box-shadow: 0px -5px 55px -1px #c986d7;
+      box-shadow: 0 -5px 55px -1px #c986d7;
     }
 
     75% {
-      box-shadow: 0px 5px 55px -1px #c986d7;
+      box-shadow: 0 5px 55px -1px #c986d7;
     }
 
     100% {
-      box-shadow: 0px -15px 30px -5px #c986d7;
+      box-shadow: 0 -15px 30px -5px #c986d7;
     }
   }
 }
@@ -644,7 +638,7 @@ li div textarea,
   .container,
   .more-info,
   .add-new {
-    background-color: #333333;
+    background-color: #333;
   }
 
   .main-container {
@@ -674,7 +668,11 @@ li div textarea,
 }
 
 @media (min-width: 1200px) {
-.list {
- width: 90%;
+  .list {
+    width: 90%;
+  }
 }
-}
+
+/* border: 2px inset;
+border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
+border-image-slice: 1; */
