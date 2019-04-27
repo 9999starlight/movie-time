@@ -58,7 +58,7 @@ body {
 }
 
 .shadow {
-  box-shadow: 3px 3px 6px rgb(168, 170, 174);
+  box-shadow: 3px 3px 6px rgba(150, 151, 152, 0.47);
 }
 
 .container {
@@ -147,7 +147,11 @@ button {
   width: 200px;
   padding: 0.8em;
   font-size: 1.1em;
-  background: lightgrey;
+  background: lightgrey;   
+  background-image: url("../img/search-solid.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 25px;
 }
 
 .search p,
@@ -296,7 +300,7 @@ input[type="reset"],
 .data input[type="button"],
 .data button,
 .alertSuccess {
-  background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 86) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
+  background: linear-gradient(to bottom, rgb(43, 181, 142) 0%, rgb(7, 84, 57) 52%, rgb(8, 86, 61) 54%, rgb(13, 105, 66) 70%, rgb(43, 181, 132) 100%);
 }
 
 .alert button,
@@ -406,7 +410,6 @@ li div textarea,
 }
 
 .alert {
-  border: 2px inset rgb(84, 91, 84);
   border-radius: 15px;
   z-index: 5;
   max-height: 300px;
