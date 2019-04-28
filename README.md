@@ -10,6 +10,7 @@ Front end - HTML5, CSS3, javaScript - no libraries or frameworks
 Back end - Firebase Firestore database - https://firebase.google.com/ - free plan limited to 1gb total stored data, simultaneous connections 100, 10gb/month bandwidth, document writes 20K/day, document reads 50k/day, document deletes 20k/day. 
 
 Code validation
+
 HTML5 & CSS validation - W3C validation service https://www.w3.org/
 javaScript validation - https://www.jslint.com/
 
