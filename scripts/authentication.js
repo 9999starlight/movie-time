@@ -18,9 +18,9 @@ const logout = document.querySelector('#logoutLink');
 /* adding firebase auth functions:
 if user signed in call functions for display links and list.
 Empty array from displayMovieList() if user is signed out */
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
     if (user) {
-        db.collection('movies').onSnapshot(snapshot => {
+        db.collection('movies').onSnapshot((snapshot) => {
             displayMovieList(snapshot.docs);
             displayLinks(user);
         }, err => console.log(err.message));
@@ -42,7 +42,7 @@ function addMovieToList(movie) {
     // check if movie has already added; display addNew form
     let checkIds = true;
     const movieIds = document.querySelectorAll('.film-id');
-    for (var i = 0; i < movieIds.length; i++) {
+    for (let i = 0; i < movieIds.length; i++) {
         if (movieIds[i].innerText == movie.movieID) {
             checkIds = false;
         }
@@ -65,7 +65,7 @@ function addMovieToList(movie) {
         inputFilmId.innerText = movie.movieID;
         imdbLink.innerText = movie.imdbLink;
     }
-    }
+}
 
 /* save new Movie - submit form to firebase db,
  reset form for new entry */
@@ -91,7 +91,7 @@ function saveNewMovie(e) {
             closeModal(moreInfo);
             openSuccess();
             succInfo.innerText = `Added to your list`;
-        }).catch(err => {
+        }).catch((err) => {
             console.log(err.message);
         });
 }
@@ -107,7 +107,7 @@ function createNewUser(e) {
     e.preventDefault();
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    auth.createUserWithEmailAndPassword(email, password).then((cred) => {
         //console.log(cred.user);
         return db.collection('users').doc(cred.user.uid).set({
             comm: signupForm['shortComment'].value
@@ -116,7 +116,7 @@ function createNewUser(e) {
         close(signUpFormDiv)
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = '';
-    }).catch(err => {
+    }).catch((err) => {
         signupForm.querySelector('.error').innerHTML = err.message;
     });
 }
@@ -144,7 +144,7 @@ function loginUser(e) {
         close(loginFormDiv);
         loginForm.reset();
         loginForm.querySelector('.error').innerHTML = '';
-    }).catch(err => {
+    }).catch((err) => {
         loginForm.querySelector('.error').innerHTML = err.message;
     });
 }

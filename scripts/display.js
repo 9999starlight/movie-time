@@ -92,7 +92,7 @@ const displayLinks = (user) => {
   const loggedOutLinks = document.querySelectorAll('.logged-out');
   const loggedInLinks = document.querySelectorAll('.logged-in');
   if (user) {
-    db.collection('users').doc(user.uid).get().then(doc => {
+    db.collection('users').doc(user.uid).get().then((doc) => {
       const detailsInfo = `
         <div class = "flex">${user.email}</div>
       `;
@@ -114,7 +114,7 @@ const displayMovieList = (data) => {
   let user = firebase.auth().currentUser;
   if (data.length) {
     let output = '';
-    data.forEach(doc => {
+    data.forEach((doc) => {
       const film = doc.data();
       if (film.usersid == user.uid) {
         const li = `
@@ -179,7 +179,7 @@ const displayMovieList = (data) => {
         };
       }).sort((a, b) => {
         return b.rate.localeCompare(a.rate);
-      }).forEach(item => {
+      }).forEach((item) => {
         movieList.appendChild(item.node);
       });
     }
@@ -187,7 +187,7 @@ const displayMovieList = (data) => {
 
     // delete movie from the list and database
     const dlt = document.querySelectorAll('.fa-trash-alt');
-    dlt.forEach(dl => {
+    dlt.forEach((dl) => {
       dl.addEventListener('click', (e) => {
         //e.stopPropagation();
         let id = e.target.parentElement.parentElement.getAttribute('id');
@@ -199,7 +199,7 @@ const displayMovieList = (data) => {
 
     //SAVE comment & rating changes
     const saveIcon = document.querySelectorAll('.fa-save');
-    saveIcon.forEach(si => {
+    saveIcon.forEach((si) => {
       si.addEventListener('click', (e) => {
         let id = e.target.parentElement.parentElement.getAttribute('id');
         let commentEdit =

@@ -14,7 +14,6 @@ let action = false;
 const search = document.querySelector('#search');
 search.addEventListener('keyup', movieSearch);
 
-
 // fetch movies from search. show/hide loader. Get movie ID for movieDetals()
 function movieSearch() {
   showLoader();
@@ -39,7 +38,7 @@ function movieSearch() {
           <h5><span>Year:</span> ${film.Year}</h5>
           <h5><span>Type:</span> ${film.Type}</h5>
           <input type = 'button' onclick = 'movieDetails("${filmId}")'
-          class = 'infoBtn radius hoverTr white' value = 'More Info'>
+          class = 'infoBtn radius hoverTr white btnFont' value = 'More Info'>
           </div></div>`
           filmIDS.push(film.imdbID)
         });
@@ -63,7 +62,6 @@ function movieDetails(filmId) {
   // disable listener for info buttons to prevent multiple clicks
   if (action == true) return;
   action = true;
-  
   for (let i = 0; i < filmIDS.length; i++) {
     if (filmIDS[i] == filmId) filmId = filmIDS[i]
   }
@@ -95,9 +93,9 @@ function movieDetails(filmId) {
         <h3>Type: ${data.Type}</h3>
         <h3>Genre: ${data.Genre}</h3>
        <h3>IMDB Rating: ${data.imdbRating}</h3>
-       <button class = 'addMovieBtn radius hoverTr white'>
+       <button class = 'addMovieBtn radius hoverTr white btnFont'>
        Add to watchlist</button>
-       <button class = 'back radius hoverTr white'>
+       <button class = 'back radius hoverTr white btnFont'>
        Back to search</button>
        </div>
        </div>
@@ -120,7 +118,7 @@ function movieDetails(filmId) {
         .addEventListener('click', function () {
         closeModal(moreInfo), open(main);
       });
-      // enable listeners for buttons
+      // enable listeners for info buttons, listener for addMovieToList
       action = false;
       document.querySelector('.addMovieBtn')
         .addEventListener('click', function () {

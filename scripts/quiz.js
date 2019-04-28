@@ -1,16 +1,16 @@
 function quiz() {
   // hide intro; selectors; append question number and timer
   const introContainer = document.querySelector('.introContainer');
-  introContainer.classList.remove('flex');
-  introContainer.classList.add('none');
   const container = document.querySelector('#container');
-  document.querySelector('.header').innerHTML = `
-  <h3 id="questionNumber" class="shadow"></h3>
-  <h3 id="countdown" class="shadow"></h3>`;
   const timer = document.querySelector('#countdown');
   let questions = [];
   let currentQuestion = 0;
   let outcome = 0;
+  introContainer.classList.remove('flex');
+  introContainer.classList.add('none');
+  document.querySelector('.header').innerHTML = `
+  <h3 id="questionNumber" class="shadow"></h3>
+  <h3 id="countdown" class="shadow"></h3>`;
 
   // fetch Open Trivia API data for questions
   fetch('https://opentdb.com/api.php?amount=20&category=11')
