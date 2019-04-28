@@ -9,6 +9,10 @@ Front end - HTML5, CSS3, javaScript - no libraries or frameworks
 
 Back end - Firebase Firestore database - https://firebase.google.com/ - free plan limited to 1gb total stored data, simultaneous connections 100, 10gb/month bandwidth, document writes 20K/day, document reads 50k/day, document deletes 20k/day. 
 
+Code validation
+HTML5 & CSS validation - W3C validation service https://www.w3.org/
+javaScript validation - https://www.jslint.com/
+
 Application description
 
 Search alows user to browse for movies, series or games by typing in search field. Click on “more info” button enables detailed info about actors, plot, etc. Only registred users can create, read, update and delete item on their list. 
@@ -23,5 +27,4 @@ User can sign up with an e-mail and password adding 20 characters max for alias 
 
 Quiz
 
-Movie trivia questions are fetched from Open Trivia Database API https://opentdb.com/ which doesn’t require api key. Open Trivia selects 20 random questions from their base with no duplication in one play. Every question values 1 point. If user clicks on field and then next question, if the answer is correct that field is colored green for 2 seconds and quiz continues to the next question. If answer is incorrect selected field is colored red and correct answer is bordered with green. Timer for quiz is set for 10 minutes. At the end user sees the score/percentage and have a choice to play again.
-
+Movie trivia questions are fetched from Open Trivia Database API https://opentdb.com/ which doesn’t require api key. Open Trivia selects 20 random questions from their base with no duplication in one play. Every question values 1 point. If user clicks on field and then next question, if the answer is correct that field is colored green for 1 second and quiz continues to the next question. If answer is incorrect selected field is colored red and correct answer is bordered with green. Timer for quiz is set for 10 minutes. At the end user sees the score/percentage and have a choice to play again.
