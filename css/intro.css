@@ -8,7 +8,7 @@ body {
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 1em;
   line-height: 1.2;
-  color: #333333;
+  color: #333;
   overflow-x: hidden;
 }
 
@@ -91,17 +91,17 @@ a.button {
 a.button:hover {
   transform: scale(1.1);
   transition: 0.5s;
-  box-shadow: 0px 0px 18px 0px rgba(217, 205, 230, 1);
+  box-shadow: 0 0 18px 0 rgba(217, 205, 230, 1);
   cursor: pointer;
 }
 
 @keyframes fadein {
   from {
-    transform: scale(0)
+    transform: scale(0);
   }
 
   to {
-    transform: scale(1)
+    transform: scale(1);
   }
 
   from {

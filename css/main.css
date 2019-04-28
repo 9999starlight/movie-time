@@ -57,6 +57,10 @@ body {
   text-align: center;
 }
 
+.btnFont {
+  font-size: 1.1em;
+}
+
 .shadow {
   box-shadow: 3px 3px 6px rgba(150, 151, 152, 0.47);
 }
@@ -85,6 +89,8 @@ nav a,
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* if there is no support for background-clip: text; */
+  color: rgb(12, 122, 71);
 }
 
 .public a {
@@ -130,15 +136,14 @@ button {
 }
 
 .film img {
-  max-height: 200px;
-  margin: 0.5 auto;
+  height: 200px;
+  margin: 0.2em auto;
   max-width: 100%;
 }
 
 .search input[type="text"] {
   width: 200px;
   padding: 0.8em;
-  font-size: 1.1em;
   background: lightgray;
 }
 
@@ -242,6 +247,7 @@ button {
 
 button:focus,
 input[type="button"]:focus,
+input[type="text"]:focus,
 a:focus {
   outline: 0;
 }
@@ -287,7 +293,6 @@ input[type="reset"],
 .film input,
 .aBtn {
   padding: 10px 25px;
-  font-size: 1.1em;
 }
 
 .alert button,
@@ -315,7 +320,6 @@ form input[type="reset"],
 .login form input {
   background-color: rgb(100, 94, 105);
   padding: 5px;
-  font-size: 1.1em;
 }
 
 aside div form input {
@@ -458,6 +462,7 @@ li div textarea,
 }
 
 @media (min-width: 768px) {
+
   .info-poster,
   .buttons,
   .add-new form div,
@@ -569,6 +574,8 @@ li div textarea,
   .alert {
     height: 200px;
     width: 350px;
+    animation-name: fadein;
+    animation-duration: 1s;
   }
 
   i:hover {
@@ -671,4 +678,5 @@ li div textarea,
 
 /* border: 2px inset;
 border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
-border-image-slice: 1; */
+border-image-slice: 1; 
+*/
