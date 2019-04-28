@@ -158,15 +158,14 @@ a {
 
 label > input + div {
   font-size: 1.2em;
+  padding: 0.3em 0;
 }
 
 /* style question div if checked */
 label > input:checked + div {
   background-color: #5a5f689c;
-  padding: 0.3em 0;
-  border-radius: 6px;
-  border: 1px inset rgba(255, 255, 255, 0.658);
-  font-size: 1.4em;
+  box-shadow: 0 0 2px white;
+  outline: 1px inset rgba(255, 255, 255, 0.658);
 }
 
 .introContainer input {
@@ -183,7 +182,7 @@ label > input:checked + div {
 }
 
 .correctBorder {
-  border: 7px solid rgb(5, 148, 5);
+  outline: 5px solid rgb(5, 148, 5);
 }
 
 .incorrect {
