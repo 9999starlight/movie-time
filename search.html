@@ -44,7 +44,7 @@
             <label for="login-password" class="block">Password</label>
             <input type="password" id="login-password" class="radius block white" placeholder="Enter your password"
               required />
-            <button class="btn-logIn block radius hoverTr white">Login</button>
+            <button class="btn-logIn block radius hoverTr white btnFont">Login</button>
             <p class="error p10"></p>
           </form>
         </div>
@@ -53,15 +53,15 @@
           <h2>Sign up</h2>
           <form id="signup-form" class="flex">
             <label for="signup-email" class="block">Email address</label>
-            <input type="email" id="signup-email" class="radius block white" required placeholder="Enter your email"
+            <input type="email" id="signup-email" class="radius block white btnFont" required placeholder="Enter your email"
               title="Enter email address in valid email form like: abc@abc.abc" />
             <label for="signup-password" class="block">Choose password</label>
-            <input type="password" id="signup-password" class="radius block white" placeholder="Enter your password"
+            <input type="password" id="signup-password" class="radius block white btnFont" placeholder="Enter your password"
               required title="Enter at least 6 characters long password" />
             <label for="shortComment" class="block">Alias/Comment</label>
-            <input type="text" id="shortComment" class="radius block white" placeholder="Enter alias or comment"
+            <input type="text" id="shortComment" class="radius block white btnFont" placeholder="Enter alias or comment"
               required title="Enter comment max 25 characters" maxlength="20" />
-            <button class="btn-signUp block radius hoverTr white">Sign up</button>
+            <button class="btn-signUp block radius hoverTr white btnFont">Sign up</button>
             <p class="error p10"></p>
           </form>
         </div>
@@ -72,7 +72,7 @@
           <p>Sign up to create your watchlist with comments and ratings</p>
         </div>
         <div class="search flex center mg1auto">
-          <input type="text" id="search" class="radius shadow" autofocus>
+          <input type="text" id="search" class="radius shadow btnFont" autofocus>
           <p>Start typing to search</p>
         </div>
         <div id="loader"></div>
@@ -82,9 +82,9 @@
           <div class="list flex center shadow mg1auto">
             <h1 class="mg1auto">MY LIST</h1>
             <div class="buttons flex center fullWidth mg1auto">
-              <a href="#nav" class="mg1auto ctText radius hoverTr white aBtn">Back to search</a>
-              <button id="btnAbc" class="mg1auto radius hoverTr white">Sort A - Z</button>
-              <button id="btnRate" class="mg1auto radius hoverTr white">Sort by IMDB rating</button>
+              <a href="#nav" class="mg1auto ctText radius hoverTr white aBtn btnFont">Back to search</a>
+              <button id="btnAbc" class="mg1auto radius hoverTr white btnFont">Sort A - Z</button>
+              <button id="btnRate" class="mg1auto radius hoverTr white btnFont">Sort by IMDB rating</button>
             </div>
             <ul id="list" class="flex center"></ul>
           </div>
@@ -93,10 +93,11 @@
     </div>
     <div class="alert alertWarn center ctText p10 shadow" id="warn">
       <h4 id="warnInfo" class="mg1auto">o</h4>
-      <button class="radius hoverTr mg1auto white" id="okWarn">OK</button>
+      <button class="radius hoverTr mg1auto white btnFont" id="okWarn">OK</button>
     </div>
     <div class="alert alertSuccess center ctText p10 shadow" id="success">
-      <h4 id="succInfo" class="mg1auto">o</h4><button class="radius hoverTr mg1auto white" id="okSuccess">OK</button>
+      <h4 id="succInfo" class="mg1auto">o</h4>
+      <button class="radius hoverTr mg1auto white btnFont" id="okSuccess">OK</button>
     </div>
   </div>
   <div id="add-new" class="add-new relative center radius">
@@ -124,15 +125,15 @@
       </div>
       <div class="flex p10">
         <span>My Rating:</span>
-        <input type="number" id="myRating" class="radius white p10 mg1" placeholder="Enter your rating"
+        <input type="number" id="myRating" class="radius white p10 mg1 btnFont" placeholder="Enter your rating"
           title="Enter number between 1 and 10" min="1" max="10"></div>
       <div class="flex p10">
         <span>Comment:</span>
-        <textarea id="comment" class="radius white p10 mg1" placeholder="Add your comment here, up to 200 characters"
+        <textarea id="comment" class="radius white p10 mg1 btnFont" placeholder="Add your comment here, up to 200 characters"
           maxlength="200"></textarea>
       </div>
-      <button class="btn-create radius hoverTr mg1auto white">Add Movie to my list</button>
-      <input type="reset" class="btnCancel radius hoverTr mg1auto white" id="cancelCreate" value="Cancel" />
+      <button class="btn-create radius hoverTr mg1auto white btnFont">Add Movie to my list</button>
+      <input type="reset" class="btnCancel radius hoverTr mg1auto white btnFont" id="cancelCreate" value="Cancel" />
     </form>
   </div>
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
