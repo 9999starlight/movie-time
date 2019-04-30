@@ -51,7 +51,7 @@ function openSuccess() {
   }, 4000);
 }
 
-// opening/closing login, signup & create forms
+// opening/closing login, signup & create forms, listeners
 const openLogin = (e) => {
   e.preventDefault();
   open(loginFormDiv);
@@ -80,7 +80,8 @@ document.querySelector('#okWarn').addEventListener('click', function () {
 document.querySelector('#okSuccess').addEventListener('click', function () {
   close(alertSuccess);
 });
-// cancel form submit
+
+// forms - cancel submit
 const closeAddNew = () => {
   close(addNew);
   container.classList.remove('darken');
@@ -105,12 +106,10 @@ const displayLinks = (user) => {
   const loggedInLinks = document.querySelectorAll('.logged-in');
   if (user) {
     db.collection('users').doc(user.uid).get().then((doc) => {
-      const detailsInfo = `
-        <div class = "flex">${user.email}</div>
-      `;
+      const detailsInfo = `<div class = "flex">${user.email}</div>`;
       accountDetails.innerHTML = detailsInfo;
     });
-    open(listDiv)
+    open(listDiv);
     loggedInLinks.forEach(link => open(link));
     loggedOutLinks.forEach(link => close(link));
   } else {
@@ -141,8 +140,8 @@ const displayMovieList = (data) => {
             <div class="show-more ctText">
             <span>My rating:</span>
             <input type="number" value="${film.myRating}" id="ratingLi"
-            class = "white p10" title="Enter number between 1 and 10"
-            min="1" max="10" placeholder = "0">
+            class = "white p10" title="Enter number between 1 and 10 and click save icon"
+            min="1" max="10">
             <h4>IMDB rating: <span>${film.imdbRate}</span></h4>
             <a href = ${film.imdbLink} target = '_blank'
             class = "block hoverTr">IMDB details</a>
@@ -150,8 +149,8 @@ const displayMovieList = (data) => {
             </div>
             <div class = "text flex ctText">
             <textarea id = "commentLi" class = "white p10"
-            placeholder = "Edit yor comment and click save icon to change it"
-            title = "Edit yor comment and click save icon to change it"
+            placeholder = "Edit yor comment and click save icon"
+            title = "Edit yor comment and click save icon"
             maxlength="200">${film.comment}</textarea>
             </div>
             <div class = "ctText">
@@ -198,11 +197,10 @@ const displayMovieList = (data) => {
     }
     document.querySelector('#btnRate').addEventListener('click', sortByRating);
 
-    // delete movie from the list and database
+    // delete item from the list and database
     const dlt = document.querySelectorAll('.fa-trash-alt');
     dlt.forEach((dl) => {
       dl.addEventListener('click', (e) => {
-        //e.stopPropagation();
         let id = e.target.parentElement.parentElement.getAttribute('id');
         db.collection('movies').doc(id).delete();
         openSuccess();
@@ -225,8 +223,8 @@ const displayMovieList = (data) => {
           warnInfo.innerText = `Please enter rating between 1 and 10`;
         } else {
           db.collection('movies').doc(id).update({
-            comment: commentEdit.value,
-            myRating: ratingLi.value
+            myRating: ratingLi.value,
+            comment: commentEdit.value
           })
           openSuccess()
           succInfo.innerText = `List item updated!`;

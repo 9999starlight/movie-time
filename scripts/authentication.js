@@ -29,14 +29,14 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-/* adding movie to the list; 
+/* adding movie to the list;
 display form for submit new movie if it's not already added */
 function addMovieToList(movie) {
     let user = firebase.auth().currentUser;
     if (!user) {
         openWarn();
         warnInfo.innerText =
-            `You have to login or signup to add movie to your list!`;
+            `Login or signup to add movie to your list!`;
     }
     // check if movie has already added; display addNew form
     let checkIds = true;
@@ -122,7 +122,8 @@ function logoutUser(e) {
     e.preventDefault();
     close(listDiv);
     auth.signOut().then(() => {
-        console.log('user signed out');
+        openSuccess();
+        succInfo.innerText = `Signed out`;
     })
 }
 logout.addEventListener('click', logoutUser);

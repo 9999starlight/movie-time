@@ -116,9 +116,9 @@ function movieDetails(filmId) {
       close(main);
       document.querySelector('.back')
         .addEventListener('click', function () {
-        closeModal(moreInfo), open(main);
-      });
-      // enable listeners for info buttons, listener for addMovieToList
+          closeModal(moreInfo), open(main);
+        });
+      // enable listeners for info buttons; listener for addMovieToList;
       action = false;
       document.querySelector('.addMovieBtn')
         .addEventListener('click', function () {
