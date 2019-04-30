@@ -326,6 +326,10 @@ input[type="password"],
   padding: 5px;
 }
 
+.add-new form input[type="number"] {
+  width: 50px;
+}
+
 .rst {
   max-width: 80px;
 }
@@ -336,9 +340,9 @@ aside div form input {
   padding: 2px;
 }
 
-.add-new form p {
-  font-size: 1.2em;
-  font-weight: 900;
+.add-new form .link {
+  font-size: 0.8em;
+  font-weight: 700;
 }
 
 /* styling list */
@@ -542,8 +546,10 @@ li div textarea,
     padding: 0;
   }
 
-  .add-new p {
+  .add-new form p,
+  .add-new form .link {
     margin: 0.6em;
+    font-size: 1.2em;
   }
 
   .add-new span {
