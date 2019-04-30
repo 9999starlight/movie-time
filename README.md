@@ -3,7 +3,7 @@ movie API search, quiz and list
 
 
 MOVIE TIME
-Application for searching and storing movies and tv series info in registred user's list with movie trivia questions quiz. Responsive design (flexbox) alows appropriate display for all devices like mobiles, tablets, monitors and TV sets.
+Application for searching and storing movies and tv series info in registred user's list with movie trivia questions quiz. Responsive design (flexbox) alows appropriate display for all devices like mobiles, tablets, monitors and TV sets. Optimized for Firefox and Chrome.
 
 Front end - HTML5, CSS3, javaScript - no libraries or frameworks
 
