@@ -74,6 +74,7 @@ body {
   padding: 10px;
 }
 
+/* nav, a */
 a {
   text-decoration: none;
 }
@@ -86,6 +87,7 @@ nav a,
 .private a,
 .private span {
   background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
+  /* background-clip: text; */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* if there is no support for background-clip: text; */
@@ -111,6 +113,7 @@ nav a,
   background: linear-gradient(90deg, rgba(70, 68, 68, 0) 0%, rgba(255, 255, 255, 0.048) 25%, rgba(255, 255, 255, 0.068) 75%, rgba(255, 255, 255, 0) 100%);
 }
 
+/* main content */
 input,
 textarea,
 button {
@@ -195,12 +198,6 @@ aside div form input {
   animation-duration: 1s;
 }
 
-.add-new form {
-  padding: 1em;
-  animation-name: fadein;
-  animation-duration: 1s;
-}
-
 .darken {
   background: linear-gradient(rgba(17, 17, 17, 0.833), rgba(20, 19, 17, 0.863));
   filter: blur(4px);
@@ -238,6 +235,13 @@ i.fa-bars {
 .content .film .data {
   justify-content: space-evenly;
   height: 50%;
+}
+
+/* forms & buttons */
+.add-new form {
+  padding: 1em;
+  animation-name: fadein;
+  animation-duration: 1s;
 }
 
 button {
@@ -288,7 +292,7 @@ aside div form label {
 }
 
 button,
-input[type="reset"],
+.add-new input[type="reset"],
 .film input,
 .aBtn {
   padding: 10px 25px;
@@ -315,10 +319,15 @@ form input[type="reset"],
 
 .add-new form textarea,
 .add-new form input[type="number"],
-.signup form input,
-.login form input {
+input[type="email"],
+input[type="password"],
+.signup form input[type="text"] {
   background-color: rgb(100, 94, 105);
   padding: 5px;
+}
+
+.rst {
+  max-width: 80px;
 }
 
 aside div form input {
@@ -366,6 +375,8 @@ li div {
 
 li div a {
   color: rgb(240, 240, 9);
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 li div textarea,
@@ -388,7 +399,7 @@ li div textarea,
   margin: 0.5em;
 }
 
-/* loader */
+/* loader, alerts, error */
 #loader {
   display: none;
   width: 80px;
@@ -422,6 +433,7 @@ li div textarea,
   color: #960e0e;
 }
 
+/* animation */
 @keyframes fadein {
   from {
     opacity: 0;
@@ -633,7 +645,6 @@ li div textarea,
   aside div input {
     width: 220px;
     height: 22px;
-    padding: 5px;
   }
 
   body,
@@ -674,8 +685,3 @@ li div textarea,
     width: 70vw;
   }
 }
-
-/* border: 2px inset;
-border-image: linear-gradient(to bottom, #11926150, #21641b38, #772f993a);
-border-image-slice: 1; 
-*/

@@ -100,6 +100,7 @@ h3 {
   width: auto;
 }
 
+/* styling questions and answer options */
 .question {
   background-color: rgba(24, 23, 21, 0.755);
   color: white;
@@ -187,6 +188,12 @@ label > input:checked + div {
 
 .incorrect {
   background-color: rgba(207, 3, 3, 0.863);
+}
+
+button:focus,
+input[type="button"]:focus,
+a:focus {
+  outline: 0;
 }
 
 @keyframes delay {
