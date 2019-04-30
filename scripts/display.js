@@ -51,7 +51,7 @@ function openSuccess() {
   }, 4000);
 }
 
-// opening-closing login, signup & create forms
+// opening/closing login, signup & create forms
 const openLogin = (e) => {
   e.preventDefault();
   open(loginFormDiv);
@@ -80,12 +80,24 @@ document.querySelector('#okWarn').addEventListener('click', function () {
 document.querySelector('#okSuccess').addEventListener('click', function () {
   close(alertSuccess);
 });
-
+// cancel form submit
 const closeAddNew = () => {
   close(addNew);
   container.classList.remove('darken');
 };
 document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
+
+const cancelSignUp = () => {
+  close(signUpFormDiv);
+  signupForm.reset();
+};
+document.querySelector('#cancelSignUp').addEventListener('click', cancelSignUp);
+
+const cancelLogin = () => {
+  close(loginFormDiv);
+  loginForm.reset();
+};
+document.querySelector('#cancelLogin').addEventListener('click', cancelLogin);
 
 // display links - depends on the user status from auth.onStateChanged function
 const displayLinks = (user) => {
@@ -108,7 +120,8 @@ const displayLinks = (user) => {
   }
 };
 
-/* taking data from auth, check if user is logged, catching doc from firebase and render ul;
+/* taking data from auth, check if user is logged in,
+catching doc from firebase and render ul;
 functions for sorting, saving and deleting list items */
 const displayMovieList = (data) => {
   let user = firebase.auth().currentUser;

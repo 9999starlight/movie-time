@@ -68,8 +68,7 @@ function quiz() {
       const sInt = setInterval(function () {
         const currentTime = new Date().getTime();
         const timeDifference = countFrom - currentTime;
-        let minutes =
-          Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
         seconds < 10 ? seconds = `0${seconds}` : seconds;
         minutes < 10 ? minutes = `0${minutes}` : minutes;
@@ -82,6 +81,7 @@ function quiz() {
         }
       }, 1000, createQuestions);
 
+      // check if answer is correct; outcome counter; display red or green;
       function answerCheck() {
         const options = document.querySelectorAll('input[name="options"]');
         options.forEach((op) => {
@@ -105,6 +105,7 @@ function quiz() {
           createQuestions();
         }, 1000);
       }
+
       // display for the end of the quiz
       function theEnd() {
         const percentage =
@@ -119,8 +120,7 @@ function quiz() {
       console.log(err.message);
       introContainer.classList.remove('none');
       introContainer.innerHTML +=
-        `<h1 class = "errorMessage">
-        Request failed, please try again later!</h1>`;
+        `<h1 class = "errorMessage">Request failed, please try again later!</h1>`;
     });
 }
 document.querySelector('#startQuiz').addEventListener('click', quiz);

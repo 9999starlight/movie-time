@@ -15,9 +15,8 @@ const signupForm = document.querySelector('#signup-form');
 const createForm = document.querySelector('#create-form');
 const logout = document.querySelector('#logoutLink');
 
-/* adding firebase auth functions:
-if user signed in call functions for display links and list.
-Empty array from displayMovieList() if user is signed out */
+/* adding firebase auth functions: if user signed in call functions for
+display links and list. Empty array from displayMovieList() if user sign out */
 auth.onAuthStateChanged((user) => {
     if (user) {
         db.collection('movies').onSnapshot((snapshot) => {
@@ -30,7 +29,7 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-/* adding movie to the list;
+/* adding movie to the list; 
 display form for submit new movie if it's not already added */
 function addMovieToList(movie) {
     let user = firebase.auth().currentUser;
@@ -67,8 +66,7 @@ function addMovieToList(movie) {
     }
 }
 
-/* save new Movie - submit form to firebase db,
- reset form for new entry */
+/* save new Movie - submit form to firebase db, reset form for new entry */
 function saveNewMovie(e) {
     e.preventDefault();
     let user = firebase.auth().currentUser;
@@ -97,23 +95,20 @@ function saveNewMovie(e) {
 }
 createForm.addEventListener('submit', saveNewMovie);
 
-/* SIGNUP - on submit;
-prevent refresh; get user info from input fields;
+/* SIGNUP - on submit; prevent refresh; get user info from input fields;
 firebase createUser... method;
 users credentials to get user's token and generate user's id;
-add new user in user collection in Firebase;
-Errors, close and reset form */
+add new user in user collection in Firebase; Errors, close and reset form */
 function createNewUser(e) {
     e.preventDefault();
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
     auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-        //console.log(cred.user);
         return db.collection('users').doc(cred.user.uid).set({
             comm: signupForm['shortComment'].value
         });
     }).then(() => {
-        close(signUpFormDiv)
+        close(signUpFormDiv);
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = '';
     }).catch((err) => {
@@ -122,8 +117,7 @@ function createNewUser(e) {
 }
 signupForm.addEventListener('submit', createNewUser);
 
-/* LOGOUT - prevent refresh; auth.signOut() Firebase method;
-close user's list */
+/* LOGOUT - prevent refresh; auth.signOut() Firebase method; close user's list */
 function logoutUser(e) {
     e.preventDefault();
     close(listDiv);
