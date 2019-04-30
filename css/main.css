@@ -182,7 +182,7 @@ aside div form input {
 .more-info,
 .add-new {
   background-color: #333;
-  min-width: 95vw;
+  max-width: 95vw;
   max-height: 100vh;
   overflow: auto;
 }
@@ -256,7 +256,7 @@ a:focus {
 }
 
 .data button {
-  padding: 15px 40px;
+  padding: 15px 30px;
   width: 160px;
   height: 25px;
 }
