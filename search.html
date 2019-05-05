@@ -45,9 +45,10 @@
               required />
             <label for="login-password" class="block">Password</label>
             <input type="password" id="login-password" class="radius block white btnFont"
-              placeholder="Enter your password" required />
+              placeholder="Enter your password" required minlength="6" />
             <button class="btn-logIn block radius hoverTr white btnFont">Login</button>
-            <input type="reset" class="rst block p10 mg1auto radius hoverTr white btnFont" id="cancelLogin" value="Cancel" />
+            <input type="reset" class="rst block p10 mg1auto radius hoverTr white btnFont" id="cancelLogin"
+              value="Cancel" />
             <p class="error p10"></p>
           </form>
         </div>
@@ -60,12 +61,14 @@
               placeholder="Enter your email" title="Enter email address in valid email form like: abc@abc.abc" />
             <label for="signup-password" class="block">Choose password</label>
             <input type="password" id="signup-password" class="radius block white btnFont"
-              placeholder="Enter your password" required title="Enter at least 6 characters long password" />
+              placeholder="Enter your password" required title="Enter at least 6 characters long password"
+              minlength="6" />
             <label for="shortComment" class="block">Alias/Comment</label>
             <input type="text" id="shortComment" class="radius block white btnFont" placeholder="Enter alias or comment"
-              required title="Enter comment max 25 characters" maxlength="20" />
+              required title="Enter comment max 25 characters" minlength="1" maxlength="20" />
             <button class="btn-signUp block radius hoverTr white btnFont">Sign up</button>
-            <input type="reset" class="rst p10 mg1auto block radius hoverTr white btnFont" id="cancelSignUp" value="Cancel" />
+            <input type="reset" class="rst p10 mg1auto block radius hoverTr white btnFont" id="cancelSignUp"
+              value="Cancel" />
             <p class="error p10"></p>
           </form>
         </div>
@@ -122,14 +125,15 @@
         <p id="inputImdbRate"></p>
       </div>
       <div class="flex p10"><span>IMDB link:</span>
-        <p id="imdbLink" class = "link"></p>
+        <p id="imdbLink" class="link"></p>
       </div>
       <div class="flex p10"><span>Movie ID:</span>
         <p id="inputFilmId"></p>
       </div>
       <div class="flex p10">
         <span>My Rating:</span>
-        <input type="number" id="myRating" class="radius white p10 mg1 btnFont" placeholder="Rate" title="Enter number between 1 and 10" min="1" max="10" value="1">
+        <input type="number" id="myRating" class="radius white p10 mg1 btnFont" placeholder="Rate"
+          title="Enter number between 1 and 10" min="1" max="10" value="1">
       </div>
       <div class="flex p10">
         <span>Comment:</span>
