@@ -70,28 +70,28 @@ function addMovieToList(movie) {
 function saveNewMovie(e) {
     e.preventDefault();
     let user = firebase.auth().currentUser;
-        db.collection('movies').add({
-            title: inputTitle.innerText,
-            type: inputType.innerText,
-            year: inputYear.innerText,
-            genre: inputGenre.innerText,
-            imdbRate: inputImdbRate.innerText,
-            filmID: inputFilmId.innerText,
-            myRating: myRating.value,
-            comment: comment.value,
-            imdbLink: imdbLink.innerText,
-            usersid: user.uid
-        }).then(() => {
-            createForm.reset();
-            container.classList.remove('darken');
-            open(main);
-            close(addNew);
-            closeModal(moreInfo);
-            openSuccess();
-            succInfo.innerText = `Added to your list`;
-        }).catch((err) => {
-            console.log(err.message);
-        });
+    db.collection('movies').add({
+        title: inputTitle.innerText,
+        type: inputType.innerText,
+        year: inputYear.innerText,
+        genre: inputGenre.innerText,
+        imdbRate: inputImdbRate.innerText,
+        filmID: inputFilmId.innerText,
+        myRating: myRating.value,
+        comment: comment.value,
+        imdbLink: imdbLink.innerText,
+        usersid: user.uid
+    }).then(() => {
+        createForm.reset();
+        container.classList.remove('darken');
+        open(main);
+        close(addNew);
+        closeModal(moreInfo);
+        openSuccess();
+        succInfo.innerText = `Added to your list`;
+    }).catch((err) => {
+        console.log(err.message);
+    });
 }
 createForm.addEventListener('submit', saveNewMovie);
 
@@ -103,17 +103,24 @@ function createNewUser(e) {
     e.preventDefault();
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
-    auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-        return db.collection('users').doc(cred.user.uid).set({
-            comm: signupForm['shortComment'].value
+    const regEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!regEmail.test(document.querySelector('#signup-email').value)) {
+        openWarn();
+        warnInfo.innerText = `You haven't entered valid e-mail, please try again!`;
+        return;
+    } else {
+        auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+            return db.collection('users').doc(cred.user.uid).set({
+                comm: signupForm['shortComment'].value
+            });
+        }).then(() => {
+            close(signUpFormDiv);
+            signupForm.reset();
+            signupForm.querySelector('.error').innerHTML = '';
+        }).catch((err) => {
+            signupForm.querySelector('.error').innerHTML = err.message;
         });
-    }).then(() => {
-        close(signUpFormDiv);
-        signupForm.reset();
-        signupForm.querySelector('.error').innerHTML = '';
-    }).catch((err) => {
-        signupForm.querySelector('.error').innerHTML = err.message;
-    });
+    }
 }
 signupForm.addEventListener('submit', createNewUser);
 
@@ -134,13 +141,20 @@ function loginUser(e) {
     e.preventDefault();
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
-    auth.signInWithEmailAndPassword(email, password).then((cred) => {
-        //console.log(cred.user);
-        close(loginFormDiv);
-        loginForm.reset();
-        loginForm.querySelector('.error').innerHTML = '';
-    }).catch((err) => {
-        loginForm.querySelector('.error').innerHTML = err.message;
-    });
+    const regEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!regEmail.test(document.querySelector('#login-email').value)) {
+        openWarn();
+        warnInfo.innerText = `You haven't entered valid e-mail, please try again!`;
+        return;
+    } else {
+        auth.signInWithEmailAndPassword(email, password).then((cred) => {
+            //console.log(cred.user);
+            close(loginFormDiv);
+            loginForm.reset();
+            loginForm.querySelector('.error').innerHTML = '';
+        }).catch((err) => {
+            loginForm.querySelector('.error').innerHTML = err.message;
+        });
+    }
 }
 loginForm.addEventListener('submit', loginUser);

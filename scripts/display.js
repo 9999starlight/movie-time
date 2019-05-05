@@ -91,12 +91,14 @@ document.querySelector('#cancelCreate').addEventListener('click', closeAddNew);
 const cancelSignUp = () => {
   close(signUpFormDiv);
   signupForm.reset();
+  signupForm.querySelector('.error').innerHTML = '';
 };
 document.querySelector('#cancelSignUp').addEventListener('click', cancelSignUp);
 
 const cancelLogin = () => {
   close(loginFormDiv);
   loginForm.reset();
+  loginForm.querySelector('.error').innerHTML = '';
 };
 document.querySelector('#cancelLogin').addEventListener('click', cancelLogin);
 
