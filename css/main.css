@@ -87,7 +87,7 @@ nav a,
 .private a,
 .private span {
   background: linear-gradient(330deg, #2fe03eb9 20%, #52e0e0ab 50%, #9952e09f 75%, #304d145d 100%);
-  /* background-clip: text; */
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* if there is no support for background-clip: text; */
