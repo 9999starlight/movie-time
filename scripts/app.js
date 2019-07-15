@@ -336,4 +336,4 @@ add new user in users collection in Firebase; Errors, close and reset form */
   view.signupForm.addEventListener('submit', createNewUser);
   view.loginForm.addEventListener('submit', loginUser);
 }
-app();
+window.addEventListener('load', app);
